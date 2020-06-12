@@ -1,4 +1,4 @@
-﻿namespace OrgSettings
+﻿namespace LinkeD365.OrgSettings
 {
     /// <summary>
     /// This class can help you to store settings for your plugin

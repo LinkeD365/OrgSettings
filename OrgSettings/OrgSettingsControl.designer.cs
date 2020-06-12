@@ -1,4 +1,4 @@
-﻿namespace OrgSettings
+﻿namespace LinkeD365.OrgSettings
 {
     partial class OrgSettingsControl
     {

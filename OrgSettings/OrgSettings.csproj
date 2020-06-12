@@ -132,7 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyPlugin.cs" />
+    <Compile Include="OrgSettings.cs" />
     <Compile Include="OrgSettings.DBUpdates.cs">
       <SubType>UserControl</SubType>
     </Compile>

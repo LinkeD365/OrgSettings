@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace OrgSettings
+namespace LinkeD365.OrgSettings
 {
     internal class OrgSettingsManager
     {

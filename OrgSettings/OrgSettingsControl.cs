@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
-namespace OrgSettings
+namespace LinkeD365.OrgSettings
 {
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
     {
