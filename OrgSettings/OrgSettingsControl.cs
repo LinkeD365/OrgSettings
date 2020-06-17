@@ -7,15 +7,19 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
+using XrmToolBox.Extensibility.Interfaces;
 
 namespace LinkeD365.OrgSettings
 {
-    public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
+    public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase, IGitHubPlugin
     {
         private List<OrgSetting> curOrgSettings;
-        private Settings mySettings;
         private List<OrgSetting> filteredList;
         private Guid orgGuid;
+
+        public string RepositoryName => "OrgSettings";
+
+        public string UserName => "CooksterC";
 
         public OrgSettingsControl()
         {
@@ -25,18 +29,6 @@ namespace LinkeD365.OrgSettings
         private void OrgSettingsControl_Load(object sender, EventArgs e)
         {
             ShowInfoNotification("NOTE: You should NOT change any setting without having a specific reason to do.\r\nPlease ensure you have a back up of the current settings prior to changing them, available in Manual tab", null);
-
-            // Loads or creates the settings for the plugin
-            if (!SettingsManager.Instance.TryLoad(GetType(), out mySettings))
-            {
-                mySettings = new Settings();
-
-                LogWarning("Settings not found => a new settings file has been created!");
-            }
-            else
-            {
-                LogInfo("Settings found and loaded");
-            }
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
@@ -62,29 +54,11 @@ namespace LinkeD365.OrgSettings
         }
 
         /// <summary>
-        /// This event occurs when the plugin is closed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MyPluginControl_OnCloseTool(object sender, EventArgs e)
-        {
-            // Before leaving, save the settings
-            SettingsManager.Instance.Save(GetType(), mySettings);
-        }
-
-        /// <summary>
         /// This event occurs when the connection has been updated in XrmToolBox
         /// </summary>
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
-
-            if (mySettings != null && detail != null)
-            {
-                mySettings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
-                LogInfo("Connection has changed to: {0}", detail.WebApplicationUrl);
-            }
-
             ExecuteMethod(LoadConfig);
         }
 
