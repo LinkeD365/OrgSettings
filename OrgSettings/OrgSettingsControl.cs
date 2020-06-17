@@ -7,14 +7,19 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
+using XrmToolBox.Extensibility.Interfaces;
 
 namespace LinkeD365.OrgSettings
 {
-    public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
+    public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase, IGitHubPlugin
     {
         private List<OrgSetting> curOrgSettings;
         private List<OrgSetting> filteredList;
         private Guid orgGuid;
+
+        public string RepositoryName => "OrgSettings";
+
+        public string UserName => "CooksterC";
 
         public OrgSettingsControl()
         {
