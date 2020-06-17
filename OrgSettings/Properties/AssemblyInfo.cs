@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OrgSettings")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("XrmToolBox utitlity for updating Org Settings")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("LinkeD365")]
 [assembly: AssemblyProduct("OrgSettings")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2020.164.0")]
-[assembly: AssemblyFileVersion("1.2020.164.0")]
+[assembly: AssemblyVersion("1.2020.169.0")]
+[assembly: AssemblyFileVersion("1.2020.169.0")]
