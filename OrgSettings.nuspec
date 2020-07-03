@@ -17,6 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="OrgSettings\bin\Release\ERDBuilder.dll" target="lib\net472\Plugins" />
+    <file src="OrgSettings\bin\Release\OrgSettings.dll" target="lib\net472\Plugins" />
   </files>
 </package>
