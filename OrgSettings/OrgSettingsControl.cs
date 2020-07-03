@@ -19,7 +19,7 @@ namespace LinkeD365.OrgSettings
 
         public string RepositoryName => "OrgSettings";
 
-        public string UserName => "CooksterC";
+        public string UserName => "LinkeD365";
 
         public OrgSettingsControl()
         {
