@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <orgSettings>
-  <orgSetting name="ActivateAdditionalRefreshOfWorkflowConditions" description="Redundant fix for what looks like an issue in a specific version" url=""> </orgSetting>
+  <orgSetting name="ActivateAdditionalRefreshOfWorkflowConditions" description="Redundant fix for what looks like an issue in a specific version" url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#ActivateAdditionalRefreshOfWorkflowConditions"> </orgSetting>
 </orgSettings>
