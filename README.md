@@ -2,6 +2,7 @@
 
 # Org Settings
 ![LinkeD365 Logo](https://linked365.blog/wp-content/uploads/2020/03/smallIcon-e1594136641897.png)
+
 This tool is for use in [XrmToolBox](https://www.xrmtoolbox.com/) and borrows heavily from [Sean McNellis](https://github.com/seanmcne/OrgDbOrgSettings/) original tool, particularly it has a link to read his XML file on load of the application.
 
 Please use the XrmToolBox tool to get the latest version.
