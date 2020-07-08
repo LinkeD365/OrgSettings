@@ -2,6 +2,7 @@
 <package>
   <metadata>
     <id>LinkeD365.OrgSettings</id>
+    <title>Org Settings Updater</title>
     <version>$version$</version>
     <authors>LinkeD365</authors>
     <owners>LinkeD365</owners>
