@@ -73,6 +73,12 @@ namespace LinkeD365.OrgSettings
         {
             return 363513814 + EqualityComparer<string>.Default.GetHashCode(name);
         }
+
+        [Browsable(false)]
+        public string linkeD365Url { get; set; }
+
+        [Browsable(false)]
+        public string linkeD365Description { get; set; }
     }
 
     internal class orgSettngComparer : IComparer<OrgSetting>

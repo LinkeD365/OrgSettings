@@ -3,8 +3,11 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
@@ -13,17 +16,24 @@ namespace LinkeD365.OrgSettings
 {
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase, IGitHubPlugin
     {
-        private List<OrgSetting> curOrgSettings;
-        private List<OrgSetting> filteredList;
-        private Guid orgGuid;
-
+        private AppInsights ai;
         public string RepositoryName => "OrgSettings";
+        private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
+
+        private const string aiKey = "cc383234-dfdb-429a-a970-d17847361df3";
 
         public string UserName => "LinkeD365";
+        private List<OrgSetting> curOrgSettings;
+        private List<OrgSetting> filteredList;
+        private DataView dv;
+        private Guid orgGuid;
+        private TabControl hidden = new TabControl();
 
         public OrgSettingsControl()
         {
             InitializeComponent();
+            ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly());
+            ai.WriteEvent("Control Loaded");
         }
 
         private void OrgSettingsControl_Load(object sender, EventArgs e)
@@ -40,6 +50,7 @@ namespace LinkeD365.OrgSettings
         {
             // The ExecuteMethod method handles connecting to an
             // organization if XrmToolBox is not yet connected
+            txtSearch.Text = string.Empty;
             ExecuteMethod(LoadConfig);
         }
 
@@ -129,10 +140,35 @@ namespace LinkeD365.OrgSettings
             }
         }
 
+        /// <summary>
+        /// Set all the labels etc that are static
+        /// 07-07-20 added LinkeD365 desscription
+        /// </summary>
+        /// <param name="selectedOS"></param>
         private void SetConfigLabels(OrgSetting selectedOS)
         {
             grpAttribute.Text = selectedOS.name;
             webDescription.DocumentText = @"<body style=""font-family:verdana"">" + selectedOS.description + "</body>";
+
+            if (string.IsNullOrEmpty(selectedOS.linkeD365Description))
+            {
+                ai.WriteEvent("No LinkeD365 for " + selectedOS.name);
+                if (tabLinkeD365.Parent != hidden) hidden.TabPages.Add(tabLinkeD365);
+                linkLinkeD365.Visible = false;
+                lblLinkedD365URL.Visible = false;
+            }
+            else
+            {
+                if (tabLinkeD365.Parent != tabWeb) tabWeb.TabPages.Add(tabLinkeD365);
+
+                linkLinkeD365.Visible = true;
+                lblLinkedD365URL.Visible = true;
+
+                webLinkeD365.DocumentText = @"<body style=""font-family:verdana"">" + selectedOS.linkeD365Description + "</body>";
+                linkLinkeD365.Text = selectedOS.name;
+                linkLinkeD365.Tag = selectedOS.linkeD365Url;
+            }
+
             txtCurrentValue.Text = selectedOS.currentSetting;
             linkURL.Text = selectedOS.urlTitle;
             linkURL.Tag = selectedOS.url;
@@ -338,7 +374,8 @@ namespace LinkeD365.OrgSettings
         /// <param name="e"></param>
         private void linkURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(linkURL.Tag.ToString());
+            LinkLabel ll = sender as LinkLabel;
+            Process.Start(ll.Tag.ToString());
         }
 
         /// <summary>
@@ -350,14 +387,8 @@ namespace LinkeD365.OrgSettings
         {
             OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
             curOS.newSetting = numberNew.Value.ToString();
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1)
-            {
-                curOrgSettings.Add(curOS);
-            }
-            else
-            {
-                curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
-            }
+            if (curOrgSettings.FindIndex(os => curOS == os) == -1) curOrgSettings.Add(curOS);
+            else curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
 
             gvSettings.Update();
             gvSettings.Refresh();
@@ -367,14 +398,8 @@ namespace LinkeD365.OrgSettings
         {
             OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
             curOS.newSetting = txtStringValue.Text.ToString();
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1)
-            {
-                curOrgSettings.Add(curOS);
-            }
-            else
-            {
-                curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
-            }
+            if (curOrgSettings.FindIndex(os => curOS == os) == -1) curOrgSettings.Add(curOS);
+            else curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
 
             gvSettings.Update();
             gvSettings.Refresh();
@@ -407,6 +432,13 @@ namespace LinkeD365.OrgSettings
             if (MessageBox.Show("Are you sure you want to remove " + grpAttribute.Text +
                 " from your conifguration?", "Remove Config?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 ExecuteMethod(RemoveConfig);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            gvSettings.DataSource = null;
+
+            gvSettings.DataSource = filteredList.Where(os => os.name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
         }
     }
 }

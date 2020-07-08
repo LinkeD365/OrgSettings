@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -46,6 +47,7 @@ namespace LinkeD365.OrgSettings
 
         private void UpdateConfig()
         {
+            ai.WriteEvent("Updating Config", curOrgSettings.Count(os => !String.IsNullOrEmpty(os.newSetting)));
             string updateString = "<orgSettings>";
             foreach (OrgSetting os in curOrgSettings)
             {
@@ -81,6 +83,9 @@ namespace LinkeD365.OrgSettings
             ExecuteMethod(LoadConfig);
         }
 
+        /// <summary>
+        /// Retrieves Sean McNellis file & displays. If file from LinkeD365 contains descirption, adds this
+        /// </summary>
         private void LoadConfig()
         {
             WorkAsync(new WorkAsyncInfo
@@ -145,6 +150,27 @@ namespace LinkeD365.OrgSettings
                                           newSetting = ""
                                       });
 
+                    try
+                    {
+                        string xmlLinkeD365 = new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
+
+                        XmlDocument linkeD365XML = new XmlDocument();
+                        linkeD365XML.LoadXml(xmlLinkeD365);
+
+                        foreach (XmlNode childNode in linkeD365XML.SelectSingleNode("orgSettings").ChildNodes)
+                        {
+                            OrgSetting orgSetting = fullList.Find(os => os.name == childNode.Attributes["name"].Value);
+                            if (orgSetting != null)
+                            {
+                                orgSetting.linkeD365Description = childNode.Attributes["description"].Value;
+                                orgSetting.linkeD365Url = childNode.Attributes["url"].Value;
+                            }
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        LogError("Can not retrieve LinkeD365 data", err.Message);
+                    }
                     filteredList = new List<OrgSetting>();
                     //int[] orgVersion = ConnectionDetail.OrganizationVersion.Split('.').Select(int.Parse).ToArray();
                     double orgVersion = double.Parse(string.Join("", ConnectionDetail.OrganizationVersion.Split('.').Select(ov => int.Parse(ov).ToString("D6"))));
@@ -156,6 +182,7 @@ namespace LinkeD365.OrgSettings
                         if (min <= orgVersion && max >= orgVersion) filteredList.Add(os);
                     }
 
+                    gvSettings.DataSource = null;
                     gvSettings.DataSource = filteredList;
 
                     InitGridView();

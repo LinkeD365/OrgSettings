@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,18 +66,28 @@
             this.btnCopyCurrent = new System.Windows.Forms.Button();
             this.txtOverride = new System.Windows.Forms.TextBox();
             this.splitMainLower = new System.Windows.Forms.SplitContainer();
+            this.lblTypeValue = new System.Windows.Forms.Label();
+            this.lblType = new System.Windows.Forms.Label();
+            this.lblMax = new System.Windows.Forms.Label();
+            this.lblMaxVersion = new System.Windows.Forms.Label();
+            this.lblMin = new System.Windows.Forms.Label();
+            this.lblMinVersion = new System.Windows.Forms.Label();
             this.lblDefaultValue = new System.Windows.Forms.Label();
             this.lblDefault = new System.Windows.Forms.Label();
             this.lblUrl = new System.Windows.Forms.Label();
             this.linkURL = new System.Windows.Forms.LinkLabel();
+            this.tabWeb = new System.Windows.Forms.TabControl();
+            this.tabMSDescription = new System.Windows.Forms.TabPage();
             this.webDescription = new System.Windows.Forms.WebBrowser();
+            this.tabLinkeD365 = new System.Windows.Forms.TabPage();
+            this.webLinkeD365 = new System.Windows.Forms.WebBrowser();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lblMin = new System.Windows.Forms.Label();
-            this.lblMinVersion = new System.Windows.Forms.Label();
-            this.lblMax = new System.Windows.Forms.Label();
-            this.lblMaxVersion = new System.Windows.Forms.Label();
-            this.lblTypeValue = new System.Windows.Forms.Label();
-            this.lblType = new System.Windows.Forms.Label();
+            this.lblLinkedD365URL = new System.Windows.Forms.Label();
+            this.linkLinkeD365 = new System.Windows.Forms.LinkLabel();
+            this.splitSettings = new System.Windows.Forms.SplitContainer();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.splitSearch = new System.Windows.Forms.SplitContainer();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -112,6 +122,17 @@
             this.splitMainLower.Panel1.SuspendLayout();
             this.splitMainLower.Panel2.SuspendLayout();
             this.splitMainLower.SuspendLayout();
+            this.tabWeb.SuspendLayout();
+            this.tabMSDescription.SuspendLayout();
+            this.tabLinkeD365.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).BeginInit();
+            this.splitSettings.Panel1.SuspendLayout();
+            this.splitSettings.Panel2.SuspendLayout();
+            this.splitSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).BeginInit();
+            this.splitSearch.Panel1.SuspendLayout();
+            this.splitSearch.Panel2.SuspendLayout();
+            this.splitSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -164,30 +185,30 @@
             // 
             this.gvSettings.AllowUserToAddRows = false;
             this.gvSettings.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.gvSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.gvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle9;
             this.gvSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvSettings.Location = new System.Drawing.Point(0, 0);
             this.gvSettings.Name = "gvSettings";
-            this.gvSettings.Size = new System.Drawing.Size(596, 706);
+            this.gvSettings.Size = new System.Drawing.Size(596, 682);
             this.gvSettings.TabIndex = 5;
             this.gvSettings.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gvSettings_CellFormatting);
             this.gvSettings.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gvSettings_ColumnHeaderMouseClick);
@@ -202,7 +223,7 @@
             // 
             // splitMain.Panel1
             // 
-            this.splitMain.Panel1.Controls.Add(this.gvSettings);
+            this.splitMain.Panel1.Controls.Add(this.splitSettings);
             // 
             // splitMain.Panel2
             // 
@@ -226,7 +247,7 @@
             // 
             this.splitMainRight.Panel2.Controls.Add(this.splitMainLower);
             this.splitMainRight.Size = new System.Drawing.Size(530, 706);
-            this.splitMainRight.SplitterDistance = 376;
+            this.splitMainRight.SplitterDistance = 259;
             this.splitMainRight.TabIndex = 1;
             // 
             // tabGrpMain
@@ -237,7 +258,7 @@
             this.tabGrpMain.Location = new System.Drawing.Point(0, 0);
             this.tabGrpMain.Name = "tabGrpMain";
             this.tabGrpMain.SelectedIndex = 0;
-            this.tabGrpMain.Size = new System.Drawing.Size(530, 376);
+            this.tabGrpMain.Size = new System.Drawing.Size(530, 259);
             this.tabGrpMain.TabIndex = 7;
             // 
             // tabSet
@@ -246,7 +267,7 @@
             this.tabSet.Location = new System.Drawing.Point(4, 22);
             this.tabSet.Name = "tabSet";
             this.tabSet.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSet.Size = new System.Drawing.Size(522, 350);
+            this.tabSet.Size = new System.Drawing.Size(522, 233);
             this.tabSet.TabIndex = 0;
             this.tabSet.Text = "Set";
             this.tabSet.UseVisualStyleBackColor = true;
@@ -262,7 +283,7 @@
             this.grpAttribute.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpAttribute.Location = new System.Drawing.Point(3, 3);
             this.grpAttribute.Name = "grpAttribute";
-            this.grpAttribute.Size = new System.Drawing.Size(516, 344);
+            this.grpAttribute.Size = new System.Drawing.Size(516, 227);
             this.grpAttribute.TabIndex = 2;
             this.grpAttribute.TabStop = false;
             this.grpAttribute.Text = "Select an Attribute";
@@ -421,7 +442,7 @@
             this.tabManual.Location = new System.Drawing.Point(4, 22);
             this.tabManual.Name = "tabManual";
             this.tabManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManual.Size = new System.Drawing.Size(522, 350);
+            this.tabManual.Size = new System.Drawing.Size(522, 233);
             this.tabManual.TabIndex = 1;
             this.tabManual.Text = "Manual";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -440,8 +461,8 @@
             // splitManual.Panel2
             // 
             this.splitManual.Panel2.Controls.Add(this.splitManualEditor);
-            this.splitManual.Size = new System.Drawing.Size(516, 344);
-            this.splitManual.SplitterDistance = 168;
+            this.splitManual.Size = new System.Drawing.Size(516, 227);
+            this.splitManual.SplitterDistance = 110;
             this.splitManual.TabIndex = 0;
             // 
             // groupBox1
@@ -450,7 +471,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(516, 168);
+            this.groupBox1.Size = new System.Drawing.Size(516, 110);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Config";
@@ -462,7 +483,7 @@
             this.txtCurrentXml.Multiline = true;
             this.txtCurrentXml.Name = "txtCurrentXml";
             this.txtCurrentXml.ReadOnly = true;
-            this.txtCurrentXml.Size = new System.Drawing.Size(510, 149);
+            this.txtCurrentXml.Size = new System.Drawing.Size(510, 91);
             this.txtCurrentXml.TabIndex = 0;
             // 
             // splitManualEditor
@@ -482,7 +503,7 @@
             // splitManualEditor.Panel2
             // 
             this.splitManualEditor.Panel2.Controls.Add(this.txtOverride);
-            this.splitManualEditor.Size = new System.Drawing.Size(516, 172);
+            this.splitManualEditor.Size = new System.Drawing.Size(516, 113);
             this.splitManualEditor.SplitterDistance = 43;
             this.splitManualEditor.TabIndex = 2;
             // 
@@ -512,7 +533,7 @@
             this.txtOverride.Location = new System.Drawing.Point(0, 0);
             this.txtOverride.Multiline = true;
             this.txtOverride.Name = "txtOverride";
-            this.txtOverride.Size = new System.Drawing.Size(516, 125);
+            this.txtOverride.Size = new System.Drawing.Size(516, 66);
             this.txtOverride.TabIndex = 1;
             // 
             // splitMainLower
@@ -525,6 +546,8 @@
             // 
             // splitMainLower.Panel1
             // 
+            this.splitMainLower.Panel1.Controls.Add(this.lblLinkedD365URL);
+            this.splitMainLower.Panel1.Controls.Add(this.linkLinkeD365);
             this.splitMainLower.Panel1.Controls.Add(this.lblTypeValue);
             this.splitMainLower.Panel1.Controls.Add(this.lblType);
             this.splitMainLower.Panel1.Controls.Add(this.lblMax);
@@ -538,9 +561,66 @@
             // 
             // splitMainLower.Panel2
             // 
-            this.splitMainLower.Panel2.Controls.Add(this.webDescription);
-            this.splitMainLower.Size = new System.Drawing.Size(530, 326);
+            this.splitMainLower.Panel2.Controls.Add(this.tabWeb);
+            this.splitMainLower.Size = new System.Drawing.Size(530, 443);
             this.splitMainLower.TabIndex = 1;
+            // 
+            // lblTypeValue
+            // 
+            this.lblTypeValue.AutoSize = true;
+            this.lblTypeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTypeValue.Location = new System.Drawing.Point(63, 28);
+            this.lblTypeValue.Name = "lblTypeValue";
+            this.lblTypeValue.Size = new System.Drawing.Size(56, 13);
+            this.lblTypeValue.TabIndex = 9;
+            this.lblTypeValue.Text = "Default: ";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(13, 28);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(37, 13);
+            this.lblType.TabIndex = 8;
+            this.lblType.Text = "Type: ";
+            // 
+            // lblMax
+            // 
+            this.lblMax.AutoSize = true;
+            this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMax.Location = new System.Drawing.Point(220, 27);
+            this.lblMax.Name = "lblMax";
+            this.lblMax.Size = new System.Drawing.Size(56, 13);
+            this.lblMax.TabIndex = 7;
+            this.lblMax.Text = "Default: ";
+            // 
+            // lblMaxVersion
+            // 
+            this.lblMaxVersion.AutoSize = true;
+            this.lblMaxVersion.Location = new System.Drawing.Point(149, 27);
+            this.lblMaxVersion.Name = "lblMaxVersion";
+            this.lblMaxVersion.Size = new System.Drawing.Size(74, 13);
+            this.lblMaxVersion.TabIndex = 6;
+            this.lblMaxVersion.Text = "Max Version:  ";
+            // 
+            // lblMin
+            // 
+            this.lblMin.AutoSize = true;
+            this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMin.Location = new System.Drawing.Point(220, 9);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.Size = new System.Drawing.Size(56, 13);
+            this.lblMin.TabIndex = 5;
+            this.lblMin.Text = "Default: ";
+            // 
+            // lblMinVersion
+            // 
+            this.lblMinVersion.AutoSize = true;
+            this.lblMinVersion.Location = new System.Drawing.Point(149, 9);
+            this.lblMinVersion.Name = "lblMinVersion";
+            this.lblMinVersion.Size = new System.Drawing.Size(71, 13);
+            this.lblMinVersion.TabIndex = 4;
+            this.lblMinVersion.Text = "Min Version:  ";
             // 
             // lblDefaultValue
             // 
@@ -564,7 +644,7 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(406, 22);
+            this.lblUrl.Location = new System.Drawing.Point(406, 7);
             this.lblUrl.Name = "lblUrl";
             this.lblUrl.Size = new System.Drawing.Size(35, 13);
             this.lblUrl.TabIndex = 1;
@@ -573,7 +653,7 @@
             // linkURL
             // 
             this.linkURL.AutoSize = true;
-            this.linkURL.Location = new System.Drawing.Point(444, 22);
+            this.linkURL.Location = new System.Drawing.Point(444, 7);
             this.linkURL.Name = "linkURL";
             this.linkURL.Size = new System.Drawing.Size(55, 13);
             this.linkURL.TabIndex = 0;
@@ -581,76 +661,139 @@
             this.linkURL.Text = "linkLabel1";
             this.linkURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkURL_LinkClicked);
             // 
+            // tabWeb
+            // 
+            this.tabWeb.Controls.Add(this.tabMSDescription);
+            this.tabWeb.Controls.Add(this.tabLinkeD365);
+            this.tabWeb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabWeb.Location = new System.Drawing.Point(0, 0);
+            this.tabWeb.Name = "tabWeb";
+            this.tabWeb.SelectedIndex = 0;
+            this.tabWeb.Size = new System.Drawing.Size(530, 389);
+            this.tabWeb.TabIndex = 1;
+            // 
+            // tabMSDescription
+            // 
+            this.tabMSDescription.Controls.Add(this.webDescription);
+            this.tabMSDescription.Location = new System.Drawing.Point(4, 22);
+            this.tabMSDescription.Name = "tabMSDescription";
+            this.tabMSDescription.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMSDescription.Size = new System.Drawing.Size(522, 363);
+            this.tabMSDescription.TabIndex = 0;
+            this.tabMSDescription.Text = "MS Description";
+            this.tabMSDescription.UseVisualStyleBackColor = true;
+            // 
             // webDescription
             // 
             this.webDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webDescription.Location = new System.Drawing.Point(0, 0);
+            this.webDescription.Location = new System.Drawing.Point(3, 3);
             this.webDescription.MinimumSize = new System.Drawing.Size(20, 20);
             this.webDescription.Name = "webDescription";
-            this.webDescription.Size = new System.Drawing.Size(530, 272);
+            this.webDescription.Size = new System.Drawing.Size(516, 357);
             this.webDescription.TabIndex = 0;
+            // 
+            // tabLinkeD365
+            // 
+            this.tabLinkeD365.Controls.Add(this.webLinkeD365);
+            this.tabLinkeD365.Location = new System.Drawing.Point(4, 22);
+            this.tabLinkeD365.Name = "tabLinkeD365";
+            this.tabLinkeD365.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLinkeD365.Size = new System.Drawing.Size(522, 363);
+            this.tabLinkeD365.TabIndex = 1;
+            this.tabLinkeD365.Text = "LinkeD365 Description";
+            this.tabLinkeD365.UseVisualStyleBackColor = true;
+            // 
+            // webLinkeD365
+            // 
+            this.webLinkeD365.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webLinkeD365.Location = new System.Drawing.Point(3, 3);
+            this.webLinkeD365.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webLinkeD365.Name = "webLinkeD365";
+            this.webLinkeD365.Size = new System.Drawing.Size(516, 357);
+            this.webLinkeD365.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // lblMin
+            // lblLinkedD365URL
             // 
-            this.lblMin.AutoSize = true;
-            this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMin.Location = new System.Drawing.Point(220, 9);
-            this.lblMin.Name = "lblMin";
-            this.lblMin.Size = new System.Drawing.Size(56, 13);
-            this.lblMin.TabIndex = 5;
-            this.lblMin.Text = "Default: ";
+            this.lblLinkedD365URL.AutoSize = true;
+            this.lblLinkedD365URL.Location = new System.Drawing.Point(351, 28);
+            this.lblLinkedD365URL.Name = "lblLinkedD365URL";
+            this.lblLinkedD365URL.Size = new System.Drawing.Size(87, 13);
+            this.lblLinkedD365URL.TabIndex = 11;
+            this.lblLinkedD365URL.Text = "LinkeD365 URL:";
             // 
-            // lblMinVersion
+            // linkLinkeD365
             // 
-            this.lblMinVersion.AutoSize = true;
-            this.lblMinVersion.Location = new System.Drawing.Point(149, 9);
-            this.lblMinVersion.Name = "lblMinVersion";
-            this.lblMinVersion.Size = new System.Drawing.Size(71, 13);
-            this.lblMinVersion.TabIndex = 4;
-            this.lblMinVersion.Text = "Min Version:  ";
+            this.linkLinkeD365.AutoSize = true;
+            this.linkLinkeD365.Location = new System.Drawing.Point(444, 27);
+            this.linkLinkeD365.Name = "linkLinkeD365";
+            this.linkLinkeD365.Size = new System.Drawing.Size(55, 13);
+            this.linkLinkeD365.TabIndex = 10;
+            this.linkLinkeD365.TabStop = true;
+            this.linkLinkeD365.Text = "linkLabel1";
+            this.linkLinkeD365.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkURL_LinkClicked);
             // 
-            // lblMax
+            // splitSettings
             // 
-            this.lblMax.AutoSize = true;
-            this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMax.Location = new System.Drawing.Point(220, 27);
-            this.lblMax.Name = "lblMax";
-            this.lblMax.Size = new System.Drawing.Size(56, 13);
-            this.lblMax.TabIndex = 7;
-            this.lblMax.Text = "Default: ";
+            this.splitSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitSettings.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitSettings.IsSplitterFixed = true;
+            this.splitSettings.Location = new System.Drawing.Point(0, 0);
+            this.splitSettings.Name = "splitSettings";
+            this.splitSettings.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // lblMaxVersion
+            // splitSettings.Panel1
             // 
-            this.lblMaxVersion.AutoSize = true;
-            this.lblMaxVersion.Location = new System.Drawing.Point(149, 27);
-            this.lblMaxVersion.Name = "lblMaxVersion";
-            this.lblMaxVersion.Size = new System.Drawing.Size(74, 13);
-            this.lblMaxVersion.TabIndex = 6;
-            this.lblMaxVersion.Text = "Max Version:  ";
+            this.splitSettings.Panel1.Controls.Add(this.splitSearch);
+            this.splitSettings.Panel1MinSize = 20;
             // 
-            // lblTypeValue
+            // splitSettings.Panel2
             // 
-            this.lblTypeValue.AutoSize = true;
-            this.lblTypeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeValue.Location = new System.Drawing.Point(63, 28);
-            this.lblTypeValue.Name = "lblTypeValue";
-            this.lblTypeValue.Size = new System.Drawing.Size(56, 13);
-            this.lblTypeValue.TabIndex = 9;
-            this.lblTypeValue.Text = "Default: ";
+            this.splitSettings.Panel2.Controls.Add(this.gvSettings);
+            this.splitSettings.Size = new System.Drawing.Size(596, 706);
+            this.splitSettings.SplitterDistance = 20;
+            this.splitSettings.TabIndex = 6;
             // 
-            // lblType
+            // lblSearch
             // 
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(13, 28);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(37, 13);
-            this.lblType.TabIndex = 8;
-            this.lblType.Text = "Type: ";
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(14, 3);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search";
+            // 
+            // splitSearch
+            // 
+            this.splitSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitSearch.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitSearch.IsSplitterFixed = true;
+            this.splitSearch.Location = new System.Drawing.Point(0, 0);
+            this.splitSearch.Name = "splitSearch";
+            // 
+            // splitSearch.Panel1
+            // 
+            this.splitSearch.Panel1.Controls.Add(this.lblSearch);
+            // 
+            // splitSearch.Panel2
+            // 
+            this.splitSearch.Panel2.Controls.Add(this.txtSearch);
+            this.splitSearch.Size = new System.Drawing.Size(596, 20);
+            this.splitSearch.SplitterDistance = 60;
+            this.splitSearch.TabIndex = 1;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearch.Location = new System.Drawing.Point(0, 0);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(532, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // OrgSettingsControl
             // 
@@ -703,6 +846,19 @@
             this.splitMainLower.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMainLower)).EndInit();
             this.splitMainLower.ResumeLayout(false);
+            this.tabWeb.ResumeLayout(false);
+            this.tabMSDescription.ResumeLayout(false);
+            this.tabLinkeD365.ResumeLayout(false);
+            this.splitSettings.Panel1.ResumeLayout(false);
+            this.splitSettings.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).EndInit();
+            this.splitSettings.ResumeLayout(false);
+            this.splitSearch.Panel1.ResumeLayout(false);
+            this.splitSearch.Panel1.PerformLayout();
+            this.splitSearch.Panel2.ResumeLayout(false);
+            this.splitSearch.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).EndInit();
+            this.splitSearch.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -755,5 +911,15 @@
         private System.Windows.Forms.Label lblMaxVersion;
         private System.Windows.Forms.Label lblMin;
         private System.Windows.Forms.Label lblMinVersion;
+        private System.Windows.Forms.TabControl tabWeb;
+        private System.Windows.Forms.TabPage tabMSDescription;
+        private System.Windows.Forms.TabPage tabLinkeD365;
+        private System.Windows.Forms.WebBrowser webLinkeD365;
+        private System.Windows.Forms.Label lblLinkedD365URL;
+        private System.Windows.Forms.LinkLabel linkLinkeD365;
+        private System.Windows.Forms.SplitContainer splitSettings;
+        private System.Windows.Forms.SplitContainer splitSearch;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

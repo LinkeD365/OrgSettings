@@ -9,7 +9,12 @@
     <projectUrl>https://github.com/LinkeD365/OrgSettings</projectUrl>
     <iconUrl>https://linked365.blog/wp-content/uploads/2020/03/smallIcon.png</iconUrl>
     <description>A XrmToolBox tool to configure D365 Org Settings</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>
+      #2 Encorporated LinkeD365 descriptions of settings, if available
+      #4 added Search functionality
+
+      Added App Insights
+    </releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>XrmToolBox Plugins OrgSettings</tags>
     <dependencies>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orgSettings>
+  <orgSetting name="ActivateAdditionalRefreshOfWorkflowConditions" description="Redundant fix for what looks like an issue in a specific version" url=""> </orgSetting>
+</orgSettings>
