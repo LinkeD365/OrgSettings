@@ -152,10 +152,15 @@ namespace LinkeD365.OrgSettings
 
                     try
                     {
-                        string xmlLinkeD365 = new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
+#if DEBUG
 
                         XmlDocument linkeD365XML = new XmlDocument();
+                        linkeD365XML.Load("E:\\OrgSettings\\LinkeD65OrgSettings.xml");
+#else
+                        string xmlLinkeD365 = new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
+                        XmlDocument linkeD365XML = new XmlDocument();
                         linkeD365XML.LoadXml(xmlLinkeD365);
+#endif
 
                         foreach (XmlNode childNode in linkeD365XML.SelectSingleNode("orgSettings").ChildNodes)
                         {

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -39,6 +39,10 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.gvSettings = new System.Windows.Forms.DataGridView();
             this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.splitSettings = new System.Windows.Forms.SplitContainer();
+            this.splitSearch = new System.Windows.Forms.SplitContainer();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.splitMainRight = new System.Windows.Forms.SplitContainer();
             this.tabGrpMain = new System.Windows.Forms.TabControl();
             this.tabSet = new System.Windows.Forms.TabPage();
@@ -66,6 +70,8 @@
             this.btnCopyCurrent = new System.Windows.Forms.Button();
             this.txtOverride = new System.Windows.Forms.TextBox();
             this.splitMainLower = new System.Windows.Forms.SplitContainer();
+            this.lblLinkedD365URL = new System.Windows.Forms.Label();
+            this.linkLinkeD365 = new System.Windows.Forms.LinkLabel();
             this.lblTypeValue = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.lblMax = new System.Windows.Forms.Label();
@@ -82,18 +88,20 @@
             this.tabLinkeD365 = new System.Windows.Forms.TabPage();
             this.webLinkeD365 = new System.Windows.Forms.WebBrowser();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lblLinkedD365URL = new System.Windows.Forms.Label();
-            this.linkLinkeD365 = new System.Windows.Forms.LinkLabel();
-            this.splitSettings = new System.Windows.Forms.SplitContainer();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.splitSearch = new System.Windows.Forms.SplitContainer();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
             this.splitMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).BeginInit();
+            this.splitSettings.Panel1.SuspendLayout();
+            this.splitSettings.Panel2.SuspendLayout();
+            this.splitSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).BeginInit();
+            this.splitSearch.Panel1.SuspendLayout();
+            this.splitSearch.Panel2.SuspendLayout();
+            this.splitSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainRight)).BeginInit();
             this.splitMainRight.Panel1.SuspendLayout();
             this.splitMainRight.Panel2.SuspendLayout();
@@ -125,14 +133,6 @@
             this.tabWeb.SuspendLayout();
             this.tabMSDescription.SuspendLayout();
             this.tabLinkeD365.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).BeginInit();
-            this.splitSettings.Panel1.SuspendLayout();
-            this.splitSettings.Panel2.SuspendLayout();
-            this.splitSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).BeginInit();
-            this.splitSearch.Panel1.SuspendLayout();
-            this.splitSearch.Panel2.SuspendLayout();
-            this.splitSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -185,30 +185,30 @@
             // 
             this.gvSettings.AllowUserToAddRows = false;
             this.gvSettings.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle3;
             this.gvSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvSettings.Location = new System.Drawing.Point(0, 0);
             this.gvSettings.Name = "gvSettings";
-            this.gvSettings.Size = new System.Drawing.Size(596, 682);
+            this.gvSettings.Size = new System.Drawing.Size(596, 677);
             this.gvSettings.TabIndex = 5;
             this.gvSettings.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gvSettings_CellFormatting);
             this.gvSettings.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gvSettings_ColumnHeaderMouseClick);
@@ -231,6 +231,64 @@
             this.splitMain.Size = new System.Drawing.Size(1130, 706);
             this.splitMain.SplitterDistance = 596;
             this.splitMain.TabIndex = 6;
+            // 
+            // splitSettings
+            // 
+            this.splitSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitSettings.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitSettings.IsSplitterFixed = true;
+            this.splitSettings.Location = new System.Drawing.Point(0, 0);
+            this.splitSettings.Name = "splitSettings";
+            this.splitSettings.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitSettings.Panel1
+            // 
+            this.splitSettings.Panel1.Controls.Add(this.splitSearch);
+            this.splitSettings.Panel1MinSize = 20;
+            // 
+            // splitSettings.Panel2
+            // 
+            this.splitSettings.Panel2.Controls.Add(this.gvSettings);
+            this.splitSettings.Size = new System.Drawing.Size(596, 706);
+            this.splitSettings.SplitterDistance = 25;
+            this.splitSettings.TabIndex = 6;
+            // 
+            // splitSearch
+            // 
+            this.splitSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitSearch.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitSearch.IsSplitterFixed = true;
+            this.splitSearch.Location = new System.Drawing.Point(0, 0);
+            this.splitSearch.Name = "splitSearch";
+            // 
+            // splitSearch.Panel1
+            // 
+            this.splitSearch.Panel1.Controls.Add(this.lblSearch);
+            // 
+            // splitSearch.Panel2
+            // 
+            this.splitSearch.Panel2.Controls.Add(this.txtSearch);
+            this.splitSearch.Size = new System.Drawing.Size(596, 25);
+            this.splitSearch.SplitterDistance = 60;
+            this.splitSearch.TabIndex = 1;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(14, 3);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearch.Location = new System.Drawing.Point(0, 0);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(532, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // splitMainRight
             // 
@@ -565,6 +623,26 @@
             this.splitMainLower.Size = new System.Drawing.Size(530, 443);
             this.splitMainLower.TabIndex = 1;
             // 
+            // lblLinkedD365URL
+            // 
+            this.lblLinkedD365URL.AutoSize = true;
+            this.lblLinkedD365URL.Location = new System.Drawing.Point(351, 28);
+            this.lblLinkedD365URL.Name = "lblLinkedD365URL";
+            this.lblLinkedD365URL.Size = new System.Drawing.Size(87, 13);
+            this.lblLinkedD365URL.TabIndex = 11;
+            this.lblLinkedD365URL.Text = "LinkeD365 URL:";
+            // 
+            // linkLinkeD365
+            // 
+            this.linkLinkeD365.AutoSize = true;
+            this.linkLinkeD365.Location = new System.Drawing.Point(444, 27);
+            this.linkLinkeD365.Name = "linkLinkeD365";
+            this.linkLinkeD365.Size = new System.Drawing.Size(55, 13);
+            this.linkLinkeD365.TabIndex = 10;
+            this.linkLinkeD365.TabStop = true;
+            this.linkLinkeD365.Text = "linkLabel1";
+            this.linkLinkeD365.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkURL_LinkClicked);
+            // 
             // lblTypeValue
             // 
             this.lblTypeValue.AutoSize = true;
@@ -717,84 +795,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // lblLinkedD365URL
-            // 
-            this.lblLinkedD365URL.AutoSize = true;
-            this.lblLinkedD365URL.Location = new System.Drawing.Point(351, 28);
-            this.lblLinkedD365URL.Name = "lblLinkedD365URL";
-            this.lblLinkedD365URL.Size = new System.Drawing.Size(87, 13);
-            this.lblLinkedD365URL.TabIndex = 11;
-            this.lblLinkedD365URL.Text = "LinkeD365 URL:";
-            // 
-            // linkLinkeD365
-            // 
-            this.linkLinkeD365.AutoSize = true;
-            this.linkLinkeD365.Location = new System.Drawing.Point(444, 27);
-            this.linkLinkeD365.Name = "linkLinkeD365";
-            this.linkLinkeD365.Size = new System.Drawing.Size(55, 13);
-            this.linkLinkeD365.TabIndex = 10;
-            this.linkLinkeD365.TabStop = true;
-            this.linkLinkeD365.Text = "linkLabel1";
-            this.linkLinkeD365.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkURL_LinkClicked);
-            // 
-            // splitSettings
-            // 
-            this.splitSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitSettings.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitSettings.IsSplitterFixed = true;
-            this.splitSettings.Location = new System.Drawing.Point(0, 0);
-            this.splitSettings.Name = "splitSettings";
-            this.splitSettings.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitSettings.Panel1
-            // 
-            this.splitSettings.Panel1.Controls.Add(this.splitSearch);
-            this.splitSettings.Panel1MinSize = 20;
-            // 
-            // splitSettings.Panel2
-            // 
-            this.splitSettings.Panel2.Controls.Add(this.gvSettings);
-            this.splitSettings.Size = new System.Drawing.Size(596, 706);
-            this.splitSettings.SplitterDistance = 20;
-            this.splitSettings.TabIndex = 6;
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(14, 3);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(41, 13);
-            this.lblSearch.TabIndex = 0;
-            this.lblSearch.Text = "Search";
-            // 
-            // splitSearch
-            // 
-            this.splitSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitSearch.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitSearch.IsSplitterFixed = true;
-            this.splitSearch.Location = new System.Drawing.Point(0, 0);
-            this.splitSearch.Name = "splitSearch";
-            // 
-            // splitSearch.Panel1
-            // 
-            this.splitSearch.Panel1.Controls.Add(this.lblSearch);
-            // 
-            // splitSearch.Panel2
-            // 
-            this.splitSearch.Panel2.Controls.Add(this.txtSearch);
-            this.splitSearch.Size = new System.Drawing.Size(596, 20);
-            this.splitSearch.SplitterDistance = 60;
-            this.splitSearch.TabIndex = 1;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearch.Location = new System.Drawing.Point(0, 0);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(532, 20);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
             // OrgSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -811,6 +811,16 @@
             this.splitMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
             this.splitMain.ResumeLayout(false);
+            this.splitSettings.Panel1.ResumeLayout(false);
+            this.splitSettings.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).EndInit();
+            this.splitSettings.ResumeLayout(false);
+            this.splitSearch.Panel1.ResumeLayout(false);
+            this.splitSearch.Panel1.PerformLayout();
+            this.splitSearch.Panel2.ResumeLayout(false);
+            this.splitSearch.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).EndInit();
+            this.splitSearch.ResumeLayout(false);
             this.splitMainRight.Panel1.ResumeLayout(false);
             this.splitMainRight.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMainRight)).EndInit();
@@ -849,16 +859,6 @@
             this.tabWeb.ResumeLayout(false);
             this.tabMSDescription.ResumeLayout(false);
             this.tabLinkeD365.ResumeLayout(false);
-            this.splitSettings.Panel1.ResumeLayout(false);
-            this.splitSettings.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitSettings)).EndInit();
-            this.splitSettings.ResumeLayout(false);
-            this.splitSearch.Panel1.ResumeLayout(false);
-            this.splitSearch.Panel1.PerformLayout();
-            this.splitSearch.Panel2.ResumeLayout(false);
-            this.splitSearch.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).EndInit();
-            this.splitSearch.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
