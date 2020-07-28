@@ -33,4 +33,21 @@
           &lt;img src=&quot;https://i2.wp.com/linked365.blog/wp-content/uploads/2020/07/image-23.png&quot; style=&quot;width:300px;&quot; &gt;"
         url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#EnableActivitiesFeatures">
   </orgSetting>
+  <orgSetting name="SecuritySettingForEmail"
+              description="&lt;p&gt;The majority of emails that a user receives and hence sync to D365 contain HTML to some degree, whether it is simple formatting or full on marketing emails.&lt;/p&gt;
+              &lt;p&gt;In all scenarios, the interface presents a stripped down version of the email, but formatting etc will be lost.&lt;/p&gt;
+              &lt;p&gt;There is a risk when these are displayed in all their glory in D365, that parts of the email could be nefarious, including scripts etc that could include phishing or other attacks. Microsoft by default warns the user that this is the case, but allows the user to click through to the content, putting the decision in the users' hands. &lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/09/image-90.png&quot; style=&quot;width:300px;&quot; &gt;
+              &lt;p&gt;If you change the setting to 2, the link to the full content is removed&lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/09/image-91.png&quot; style=&quot;max-width: 100%;height: auto;&quot; &gt;
+              &lt;p&gt;Changing the setting to 3 removes the message and always shows the full version of the email&lt;/p&gt;"
+    url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#SecuritySettingForEmail">
+  </orgSetting>
+  <orgSetting name="ClientDisableTrackingForReplyForwardEmails"
+            description="&lt;p&gt;When a user receives a reply to an email that has already been tracked, the reply will also be tracked by default. This is great for keeping the chains of emails all within D365. Unfortunately, this may lead to conversations being tracked that shouldn't and give visibility to sensitive conversations - a manager receiving an email that was a complaint about a particular email that their report sent for example.&lt;/p&gt;
+            &lt;p&gt;Whilst this is mostly a training exercise, it can be quite embarrassing and this setting stops that. It does mean that you could lose out on a part of a conversation and rely on the user to track a response separately.&lt;/p&gt;
+            &lt;p&gt;This settings, as noted, only works with D365 for Outlook not the App for Outlook. &lt;/p&gt;"
+            url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#ClientDisableTrackingForReplyForwardEmails">
+
+  </orgSetting>
 </orgSettings>
