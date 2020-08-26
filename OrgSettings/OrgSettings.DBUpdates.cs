@@ -155,7 +155,7 @@ namespace LinkeD365.OrgSettings
 #if DEBUG
 
                         XmlDocument linkeD365XML = new XmlDocument();
-                        linkeD365XML.Load("E:\\OrgSettings\\LinkeD65OrgSettings.xml");
+                        linkeD365XML.Load("E:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
 #else
                         string xmlLinkeD365 = new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
                         XmlDocument linkeD365XML = new XmlDocument();

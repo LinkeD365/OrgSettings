@@ -48,6 +48,36 @@
             &lt;p&gt;Whilst this is mostly a training exercise, it can be quite embarrassing and this setting stops that. It does mean that you could lose out on a part of a conversation and rely on the user to track a response separately.&lt;/p&gt;
             &lt;p&gt;This settings, as noted, only works with D365 for Outlook not the App for Outlook. &lt;/p&gt;"
             url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#ClientDisableTrackingForReplyForwardEmails">
-
   </orgSetting>
+  <orgSetting name="ReassignAllExtendedTimeout"
+            description="&lt;p&gt;If you have a security model that relies on a cascade of ownership, when a parent owner is changed, this ownership is also done for children and children of children etc. &lt;/p&gt;
+            &lt;p&gt;This can be a time-consuming process which you can increase the time-out for, possibly temporarily if you have an occasion that required it, though the default 15 minutes is a very long time.&lt;/p&gt;"
+            url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#ReassignAllExtendedTimeout">
+  </orgSetting>
+  <orgSetting name ="GrantFullAccessForMergeToMasterOwner"
+              description ="&lt;p&gt;Another one of those security options that most people don't know about. I would hazard to guess that most people don't know that the owner of a subordinate record in a merge has the new master shared with them. Mark Carrington has a great explanation of this setting and the next in his blog &lt;a href=&quot;https://markcarrington.dev/2019/08/31/msdyn365-internals-merge-permissions/&quot; target=&quot;_blank&quot;&gt;here.&lt;/a&gt;  &lt;/p&gt;
+              &lt;p&gt;The default setting puts a row in the Share table for the original owner, even if it is same as the new owner, which is useful in a lot of cases, but also could break your security model if the owner changes again.&lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/10/image-45.png&quot; style=&quot;width:300px;&quot; &gt;
+              &lt;p&gt;With the setting put to false, the original owner does not have the record shared with them&lt;/p&gt;
+              &lt;img src=&quot;https://i1.wp.com/linked365.blog/wp-content/uploads/2019/10/image-44.png&quot; style=&quot;width:300px;&quot; &gt;"
+              url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#GrantFullAccessForMergeToMasterOwner">
+  </orgSetting>
+  <orgSetting name="EnableBulkReparent" description="I am not sure this is relevant any more. I assume this is for where you have large datasets and on premise, that could (with cascading) lead to large data changes for each ownership change, but with my environment, I did not notice any change between the two options." url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#EnableBulkReparent"> </orgSetting>
+  <orgSetting name="MaximumChildUsersCountLimitBeforeUsingJoinForHSM" description="&lt;p&gt;As mentioned, hierarchical security model gives your manager (or managers manager etc) the same access to your data that you have. As a manager with lots of reports, this can cause performance problems, so limiting the maximum unions it makes when deciding on your access makes sense. After this number is reached, an outer join will be used to improve performance..&lt;/p&gt;
+              &lt;p&gt;&lt;/p&gt;"
+  url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#MaximumChildUsersCountLimitBeforeUsingJoinForHSM">
+  </orgSetting>
+  <orgSetting name="HierarchyLevelForHierarchyFeature" description="&lt;p&gt;Another security tweak. There are 2 security models that may be in use in your instance, namely managerial or positional security.&lt;/p&gt;
+              &lt;p&gt;Both can take into account a number of managers above you who have the same access to records that you do, which is traditionally 3, and anything above this can cause performance issues. As you can set the hierarchy level on the hierarchy configuration, this setting is now redundant I think, as any change you make to the org setting is not reflected in the setting on the Hierarchy setting screen.&lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/11/image.png&quot; style=&quot;width:300px;&quot; &gt;"
+
+  url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#HierarchyLevelForHierarchyFeature"> </orgSetting>
+  <orgSetting name="ActivityConvertDlgCampaignUnchecked" description="&lt;p&gt;When you convert activity to an opportunity, you have the option to populate a related campaign and also record a closed campaign response. This setting implies that you can default the Record a closed campaign response to true, forcing the selection of a campaign, but in my environment, it isn't working.&lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/10/image-39.png&quot; style=&quot;width:300px;&quot; &gt;"
+  url="https://linked365.blog/2019/11/03/d365-org-db-settings-other/#ActivityConvertDlgCampaignUnchecked"> </orgSetting>
+  <orgSetting name="ActivityRollupChildRecordLimit" description="&lt;p&gt;This is a new one on me. Activities roll up. You put an email against a contact, the email is available on the account the contact is associated with. This applies to custom entities as well, if you configure the relationship correctly. Inogic has a great post on it &lt;a href=&quot;https://www.inogic.com/blog/2017/01/configure-rollup-view-for-activities-with-dynamics-crm365/&quot; target=&quot;_blank&quot;&gt;here.&lt;/a&gt;  &lt;/p&gt;
+              &lt;p&gt; This setting must have come about to limit this as the numbers where getting too big for some. I have not got the data to do this one justice unfortunately.&lt;/p&gt;"
+  url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#ActivityRollupChildRecordLimit"> </orgSetting>
+  <orgSetting name="AddressBookMaterializedViewsEnabled" description="&lt;p&gt;The description doesnt tie up with the title, and when you google it, this setting revolves around a previous setting, Disable MAPI cache, that was around in CRM 2011 and helped improve performance. Not a lot more I can say.&lt;/p&gt;"
+  url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#AddressBookMaterializedViewsEnabled"> </orgSetting>
 </orgSettings>
