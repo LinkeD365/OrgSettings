@@ -11,7 +11,7 @@
     <iconUrl>https://linked365.blog/wp-content/uploads/2020/03/smallIcon.png</iconUrl>
     <description>A XrmToolBox tool to configure D365 Org Settings in your Dataflex Pro environment</description>
     <releaseNotes>
-      Added settings to LinkeD365 version and allowed for Dev vs production useage
+      #1 Added multi environments
     </releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>XrmToolBox Plugins OrgSettings</tags>

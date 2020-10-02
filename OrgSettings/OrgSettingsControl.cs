@@ -16,24 +16,32 @@ namespace LinkeD365.OrgSettings
 {
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase, IGitHubPlugin
     {
-        private AppInsights ai;
+        private readonly AppInsights _ai;
         public string RepositoryName => "OrgSettings";
-        private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
+        private const string AiEndpoint = "https://dc.services.visualstudio.com/v2/track";
 
-        private const string aiKey = "cc383234-dfdb-429a-a970-d17847361df3";
+        private const string AiKey = "cc383234-dfdb-429a-a970-d17847361df3";
 
         public string UserName => "LinkeD365";
-        private List<OrgSetting> curOrgSettings;
-        private List<OrgSetting> filteredList;
-        private DataView dv;
-        private Guid orgGuid;
-        private TabControl hidden = new TabControl();
+        private List<OrgSetting> _primaryOrgSettings = new List<OrgSetting>();
+        private List<OrgSetting> _secondaryOrgSettings = new List<OrgSetting>();
+        private List<OrgSetting> _filteredList = new List<OrgSetting>();
+
+        private List<OrgSetting> _fullList = new List<OrgSetting>();
+        private DataView _dv;
+        private Guid _orgGuid;
+        private TabControl _hidden = new TabControl();
+
+        private bool SecondarySetting
+        {
+            get => AdditionalConnectionDetails.Any();
+        }
 
         public OrgSettingsControl()
         {
             InitializeComponent();
-            ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly());
-            ai.WriteEvent("Control Loaded");
+            _ai = new AppInsights(AiEndpoint, AiKey, Assembly.GetExecutingAssembly());
+            _ai.WriteEvent("Control Loaded");
         }
 
         private void OrgSettingsControl_Load(object sender, EventArgs e)
@@ -48,20 +56,34 @@ namespace LinkeD365.OrgSettings
 
         private void tsbSample_Click(object sender, EventArgs e)
         {
+            btnConnectSecondary.Enabled = false;
             // The ExecuteMethod method handles connecting to an
             // organization if XrmToolBox is not yet connected
             txtSearch.Text = string.Empty;
-            ExecuteMethod(LoadConfig);
+            if (AdditionalConnectionDetails.Any()) RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
+            ExecuteMethod(LoadSingleConfig);
+            // LoadSingleConfig();
         }
 
         private void InitGridView()
         {
-            // gvSettings.AutoResizeRowHeadersWidth = DataGridViewAutoSizeColumnMode.AllCells;
-            //foreach(DataGridViewColumn gvCol in gvSettings.Columns)
-            //{
-            //    gvCol.SortMode = DataGridViewColumnSortMode.Automatic;
-            //}
-            //gvSettings.Columns["description"].Visible = false;
+            gvSettings.Columns["secondaryCurrentSetting"].Visible = AdditionalConnectionDetails.Any();
+            gvSettings.Columns["secondaryNewSetting"].Visible = AdditionalConnectionDetails.Any();
+
+            gvSettings.Columns["currentSetting"].HeaderText =
+                ConnectionDetail.ConnectionName + " Current";
+
+            gvSettings.Columns["newSetting"].HeaderText =
+                ConnectionDetail.ConnectionName + " New";
+            if (AdditionalConnectionDetails.Any())
+            {
+                gvSettings.Columns["secondaryCurrentSetting"].HeaderText =
+                    AdditionalConnectionDetails[0].ConnectionName + " Current";
+
+                gvSettings.Columns["secondaryNewSetting"].HeaderText =
+                    AdditionalConnectionDetails[0].ConnectionName + " New";
+            }
+
         }
 
         /// <summary>
@@ -69,13 +91,44 @@ namespace LinkeD365.OrgSettings
         /// </summary>
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
+
             base.UpdateConnection(newService, detail, actionName, parameter);
-            ExecuteMethod(LoadConfig);
+            if (ConnectionDetail != null)
+            {
+                btnConnectSecondary.Enabled = true;
+                btnSave.Text = "Commit to " + ConnectionDetail.ConnectionName;
+            }
+
         }
 
-        protected override void ConnectionDetailsUpdated(NotifyCollectionChangedEventArgs e)
+        protected override void ConnectionDetailsUpdated(NotifyCollectionChangedEventArgs args)
         {
-            throw new NotImplementedException();
+            if (args.Action == NotifyCollectionChangedAction.Add || args.Action == NotifyCollectionChangedAction.Replace)
+            {
+
+
+                LoadConfig(AdditionalConnectionDetails[0], _secondaryOrgSettings, true);
+                UpdateGroups();
+                btnSecondaryCommit.Text = "Commit to " + AdditionalConnectionDetails[0].ConnectionName;
+                btnSecondaryCommit.Enabled = true;
+                btnClone.Enabled = true;
+
+            }
+
+            else
+            {
+                btnSecondaryCommit.Text = "Secondary Commit";
+                btnSecondaryCommit.Enabled = false;
+                btnClone.Enabled = false;
+
+            }
+
+
+        }
+
+        private void UpdateGroups()
+        {
+            splitSet.Panel2Collapsed = !AdditionalConnectionDetails.Any();
         }
 
         /// <summary>
@@ -85,57 +138,80 @@ namespace LinkeD365.OrgSettings
         /// <param name="e"></param>
         private void gvSettings_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            OrgSetting selectedOS = (OrgSetting)gvSettings.Rows[e.RowIndex].DataBoundItem;
-            SetConfigLabels(selectedOS);
+            OrgSetting selectedOs = (OrgSetting)gvSettings.Rows[e.RowIndex].DataBoundItem;
+            SetConfigLabels(selectedOs);
 
-            switch (selectedOS.type)
+            switch (selectedOs.Type)
             {
                 case "Boolean":
-                    populateBool(selectedOS);
+                    PopulateBool(selectedOs);
 
                     break;
 
                 case "Number":
-                    if (selectedOS.minValue == "0" && selectedOS.maxValue == "1") // Treat like a boolean
-                        populateBool(selectedOS);
+                    if (selectedOs.MinValue == "0" && selectedOs.MaxValue == "1") // Treat like a boolean
+                        PopulateBool(selectedOs);
                     else
                     {
                         grpNumber.Visible = true;
                         // remove event to prevent pop of setting on entry
                         numberNew.ValueChanged -= numberNew_ValueChanged;
 
-                        if (string.IsNullOrEmpty(selectedOS.minValue)) numberNew.Minimum = int.MinValue;
-                        else numberNew.Minimum = int.Parse(selectedOS.minValue);
+                        if (string.IsNullOrEmpty(selectedOs.MinValue)) numberNew.Minimum = int.MinValue;
+                        else numberNew.Minimum = int.Parse(selectedOs.MinValue);
 
-                        if (string.IsNullOrEmpty(selectedOS.maxValue)) numberNew.Maximum = int.MaxValue;
-                        else numberNew.Maximum = int.Parse(selectedOS.maxValue);
+                        if (string.IsNullOrEmpty(selectedOs.MaxValue)) numberNew.Maximum = int.MaxValue;
+                        else numberNew.Maximum = int.Parse(selectedOs.MaxValue);
 
-                        if (string.IsNullOrEmpty(selectedOS.newSetting)) numberNew.Value = numberNew.Minimum;
-                        else numberNew.Value = decimal.Parse(selectedOS.newSetting);
+                        if (string.IsNullOrEmpty(selectedOs.NewSetting)) numberNew.Value = numberNew.Minimum;
+                        else numberNew.Value = decimal.Parse(selectedOs.NewSetting);
 
                         numberNew.ValueChanged += numberNew_ValueChanged;
 
-                        lblMinNumber.Text = "Min: " + numberNew.Minimum.ToString();
-                        lblMaxNumber.Text = "Max: " + numberNew.Maximum.ToString();
+                        lblMinNumber.Text = "Min: " + numberNew.Minimum;
+                        lblMaxNumber.Text = "Max: " + numberNew.Maximum;
+
+                        if (SecondarySetting)
+                        {
+                            grpSecNumber.Visible = true;
+                            // remove event to prevent pop of setting on entry
+                            numberSecNew.ValueChanged -= numberNew_ValueChanged;
+
+                            if (string.IsNullOrEmpty(selectedOs.MinValue)) numberSecNew.Minimum = int.MinValue;
+                            else numberSecNew.Minimum = int.Parse(selectedOs.MinValue);
+
+                            if (string.IsNullOrEmpty(selectedOs.MaxValue)) numberSecNew.Maximum = int.MaxValue;
+                            else numberSecNew.Maximum = int.Parse(selectedOs.MaxValue);
+
+                            if (string.IsNullOrEmpty(selectedOs.SecondaryNewSetting)) numberSecNew.Value = numberSecNew.Minimum;
+                            else numberSecNew.Value = decimal.Parse(selectedOs.SecondaryNewSetting);
+
+                            numberSecNew.ValueChanged += numberNew_ValueChanged;
+
+                            lblSecMinNumber.Text = "Min: " + numberNew.Minimum;
+                            lblSecMaxNumber.Text = "Max: " + numberNew.Maximum;
+                        }
                     }
                     break;
 
                 case "Double":
 
                     grpDouble.Visible = true;
-                    if (!string.IsNullOrEmpty(selectedOS.newSetting))
-                        decimalNewValue.Value = (decimal.Parse(selectedOS.newSetting));
-                    else decimalNewValue.Value = 0;
 
+                    decimalNewValue.Value = !string.IsNullOrEmpty(selectedOs.NewSetting) ? decimal.Parse(selectedOs.NewSetting) : 0;
+                    if (SecondarySetting)
+                    {
+                        grpSecDouble.Visible = true;
+
+                        decimalSecNewValue.Value = !string.IsNullOrEmpty(selectedOs.SecondaryNewSetting) ? decimal.Parse(selectedOs.SecondaryNewSetting) : 0;
+                    }
                     break;
 
                 case "String":
 
                     grpString.Visible = true;
+                    grpSecString.Visible = SecondarySetting;
 
-                    break;
-
-                default:
                     break;
             }
         }
@@ -144,16 +220,19 @@ namespace LinkeD365.OrgSettings
         /// Set all the labels etc that are static
         /// 07-07-20 added LinkeD365 desscription
         /// </summary>
-        /// <param name="selectedOS"></param>
-        private void SetConfigLabels(OrgSetting selectedOS)
+        /// <param name="selectedOs"></param>
+        private void SetConfigLabels(OrgSetting selectedOs)
         {
-            grpAttribute.Text = selectedOS.name;
-            webDescription.DocumentText = @"<body style=""font-family:verdana"">" + selectedOS.description + "</body>";
+            grpAttribute.Text = ConnectionDetail.ConnectionName + " " + selectedOs.Name;
+            if (SecondarySetting)
+                grpSecAttribute.Text = AdditionalConnectionDetails[0].ConnectionName + " " + selectedOs.Name;
+            grpAttribute.Tag = selectedOs.Name;
+            webDescription.DocumentText = @"<body style=""font-family:verdana"">" + selectedOs.Description + "</body>";
 
-            if (string.IsNullOrEmpty(selectedOS.linkeD365Description))
+            if (string.IsNullOrEmpty(selectedOs.LinkeD365Description))
             {
-                ai.WriteEvent("No LinkeD365 for " + selectedOS.name);
-                if (tabLinkeD365.Parent != hidden) hidden.TabPages.Add(tabLinkeD365);
+                _ai.WriteEvent("No LinkeD365 for " + selectedOs.Name);
+                if (tabLinkeD365.Parent != _hidden) _hidden.TabPages.Add(tabLinkeD365);
                 linkLinkeD365.Visible = false;
                 lblLinkedD365URL.Visible = false;
             }
@@ -164,47 +243,75 @@ namespace LinkeD365.OrgSettings
                 linkLinkeD365.Visible = true;
                 lblLinkedD365URL.Visible = true;
 
-                webLinkeD365.DocumentText = @"<body style=""font-family:verdana"">" + selectedOS.linkeD365Description + "</body>";
-                linkLinkeD365.Text = selectedOS.name;
-                linkLinkeD365.Tag = selectedOS.linkeD365Url;
+                webLinkeD365.DocumentText = @"<body style=""font-family:verdana"">" + selectedOs.LinkeD365Description + "</body>";
+                linkLinkeD365.Text = selectedOs.Name;
+                linkLinkeD365.Tag = selectedOs.LinkeD365Url;
             }
 
-            txtCurrentValue.Text = selectedOS.currentSetting;
-            linkURL.Text = selectedOS.urlTitle;
-            linkURL.Tag = selectedOS.url;
-            lblDefaultValue.Text = selectedOS.defaultValue;
+            txtCurrentValue.Text = selectedOs.CurrentSetting;
+            txtSecCurrentValue.Text = selectedOs.SecondaryCurrentSetting;
 
-            lblMin.Text = selectedOS.minVersion;
-            lblMax.Text = selectedOS.maxVersion;
-            lblTypeValue.Text = selectedOS.type;
+            linkURL.Text = selectedOs.UrlTitle;
+            linkURL.Tag = selectedOs.Url;
+            lblDefaultValue.Text = selectedOs.DefaultValue;
 
-            btnRemove.Visible = !string.IsNullOrEmpty(selectedOS.currentSetting);
+            lblMin.Text = selectedOs.MinVersion;
+            lblMax.Text = selectedOs.MaxVersion;
+            lblTypeValue.Text = selectedOs.Type;
+
+            btnRemove.Visible = !string.IsNullOrEmpty(selectedOs.CurrentSetting);
+            btnSecRemove.Visible = !string.IsNullOrEmpty(selectedOs.SecondaryCurrentSetting);
 
             grpBool.Visible = false;
             grpNumber.Visible = false;
             grpDouble.Visible = false;
             grpString.Visible = false;
+
+            grpSecBool.Visible = false;
+            grpSecNumber.Visible = false;
+            grpSecDouble.Visible = false;
+            grpSecString.Visible = false;
         }
 
-        private void populateBool(OrgSetting selectedOS)
+        private void PopulateBool(OrgSetting selectedOs)
         {
             grpBool.Visible = true;
-            grpNumber.Visible = false;
 
-            if (selectedOS.newSetting == "")
+            if (string.IsNullOrEmpty(selectedOs.NewSetting))
             {
                 radioFalse.Checked = false;
                 radioTrue.Checked = false;
             }
-            else if (selectedOS.newSetting.ToLower() == "true" || selectedOS.newSetting == "1")
+            else if (selectedOs.NewSetting.ToLower() == "true" || selectedOs.NewSetting == "1")
             {
                 radioFalse.Checked = false;
                 radioTrue.Checked = true;
             }
-            else if (selectedOS.newSetting.ToLower() == "false" || selectedOS.newSetting == "0")
+            else if (selectedOs.NewSetting.ToLower() == "false" || selectedOs.NewSetting == "0")
             {
                 radioFalse.Checked = true;
                 radioTrue.Checked = false;
+            }
+
+            if (SecondarySetting)
+            {
+                grpSecBool.Visible = true;
+
+                if (string.IsNullOrEmpty(selectedOs.SecondaryNewSetting))
+                {
+                    radioSecNo.Checked = false;
+                    radioSecTrue.Checked = false;
+                }
+                else if (selectedOs.SecondaryNewSetting.ToLower() == "true" || selectedOs.SecondaryNewSetting == "1")
+                {
+                    radioSecNo.Checked = false;
+                    radioSecTrue.Checked = true;
+                }
+                else if (selectedOs.SecondaryNewSetting.ToLower() == "false" || selectedOs.SecondaryNewSetting == "0")
+                {
+                    radioSecNo.Checked = true;
+                    radioSecTrue.Checked = false;
+                }
             }
         }
 
@@ -216,10 +323,43 @@ namespace LinkeD365.OrgSettings
         private void gvSettings_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             OrgSetting os = (OrgSetting)gvSettings.Rows[e.RowIndex].DataBoundItem;
-            if (string.IsNullOrEmpty(os.newSetting))
+            switch (e.ColumnIndex)
             {
-                if (!string.IsNullOrEmpty(os.currentSetting))
+                case 0:
+                    if (string.IsNullOrEmpty(os.NewSetting) && string.IsNullOrEmpty(os.SecondaryNewSetting))
+                    {
+                        if (!string.IsNullOrEmpty(os.CurrentSetting) || !string.IsNullOrEmpty(os.SecondaryCurrentSetting))
+                        {
+
+                            e.CellStyle.BackColor = Color.LightGreen;
+                        }
+                    }
+                    else
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                    }
+
+                    return;
+                case 1:
+                    if (!string.IsNullOrEmpty(os.CurrentSetting)) e.CellStyle.BackColor = Color.LightGreen;
+                    return;
+                case 2:
+                    if (!string.IsNullOrEmpty(os.NewSetting)) e.CellStyle.BackColor = Color.Red;
+                    return;
+                case 3:
+                    if (!string.IsNullOrEmpty(os.SecondaryCurrentSetting)) e.CellStyle.BackColor = Color.LightGreen;
+                    return;
+                case 4:
+                    if (!string.IsNullOrEmpty(os.SecondaryNewSetting)) e.CellStyle.BackColor = Color.Red;
+                    return;
+
+
+            }
+            if (string.IsNullOrEmpty(os.NewSetting))
+            {
+                if (!string.IsNullOrEmpty(os.CurrentSetting))
                 {
+
                     e.CellStyle.BackColor = Color.LightGreen;
                 }
             }
@@ -245,26 +385,46 @@ namespace LinkeD365.OrgSettings
                 return;
             }
 
-            OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
-            if (curOS.type == "Number")
+            OrgSetting curOs = _filteredList.Find(os => os.Name == grpAttribute.Tag.ToString());
+
+
+            if (radioButton.Name == radioFalse.Name || radioButton.Name == radioTrue.Name)
             {
-                curOS.newSetting = radioButton.Text == "True" ? "1" : "0";
-            }
-            else
-            {
-                curOS.newSetting = radioButton.Text.ToLower();
+                if (curOs.Type == "Number")
+                    curOs.NewSetting = radioButton.Text == "True" ? "1" : "0";
+                else
+                    curOs.NewSetting = radioButton.Text.ToLower();
+
+                if (_primaryOrgSettings.FindIndex(os => curOs.Name == os.Name) == -1)
+                    _primaryOrgSettings.Add(curOs);
+                else
+                    _primaryOrgSettings.Find(os => curOs.Name == os.Name).NewSetting = curOs.NewSetting;
+
             }
 
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1)
-            {
-                curOrgSettings.Add(curOS);
-            }
             else
             {
-                curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
+                if (curOs.Type == "Number")
+                {
+                    curOs.SecondaryNewSetting = radioButton.Text == "True" ? "1" : "0";
+                }
+                else
+                {
+                    curOs.SecondaryNewSetting = radioButton.Text.ToLower();
+                }
+
+                if (_secondaryOrgSettings.FindIndex(os => curOs.Name == os.Name) == -1)
+                {
+                    _secondaryOrgSettings.Add(new OrgSetting()
+                    { Name = curOs.Name, NewSetting = curOs.SecondaryNewSetting });
+                }
+                else
+                {
+                    _secondaryOrgSettings.Find(os => curOs.Name == os.Name).NewSetting = curOs.SecondaryNewSetting;
+                }
+
             }
 
-            filteredList.Find(os => curOS == os).newSetting = curOS.newSetting;
             gvSettings.Update();
             gvSettings.Refresh();
         }
@@ -278,11 +438,11 @@ namespace LinkeD365.OrgSettings
         {
             //get the current column details
             string strColumnName = gvSettings.Columns[e.ColumnIndex].Name;
-            SortOrder strSortOrder = getSortOrder(e.ColumnIndex);
+            SortOrder strSortOrder = GetSortOrder(e.ColumnIndex);
 
-            filteredList.Sort(new orgSettngComparer(strColumnName, strSortOrder));
+            _filteredList.Sort(new OrgSettngComparer(strColumnName, strSortOrder));
             gvSettings.DataSource = null;
-            gvSettings.DataSource = filteredList;
+            gvSettings.DataSource = _filteredList;
             // customizeDataGridView();
             gvSettings.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = strSortOrder;
         }
@@ -293,7 +453,7 @@ namespace LinkeD365.OrgSettings
         /// </summary>
         /// <param name="columnIndex"></param>
         /// <returns>SortOrder of the current column</returns>
-        private SortOrder getSortOrder(int columnIndex)
+        private SortOrder GetSortOrder(int columnIndex)
         {
             if (gvSettings.Columns[columnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
                 gvSettings.Columns[columnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
@@ -315,12 +475,12 @@ namespace LinkeD365.OrgSettings
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (curOrgSettings == null || curOrgSettings.FindIndex(os => !String.IsNullOrEmpty(os.newSetting)) == -1) return;
+            if (_primaryOrgSettings == null || _primaryOrgSettings.FindIndex(os => !String.IsNullOrEmpty(os.NewSetting)) == -1) return;
 
             if (MessageBox.Show("Commit " +
-                curOrgSettings.FindAll(os => !String.IsNullOrEmpty(os.newSetting)).Count.ToString() + " changes to your Org Settings?",
+                _primaryOrgSettings.FindAll(os => !String.IsNullOrEmpty(os.NewSetting)).Count + " changes to your Org Settings?",
                 "Commit Changes?", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-            ExecuteMethod(UpdateConfig);
+            UpdateConfig(ConnectionDetail, _primaryOrgSettings);
         }
 
         /// <summary>
@@ -364,7 +524,7 @@ namespace LinkeD365.OrgSettings
                 return;
             }
 
-            UpdateManualComplete();
+            UpdateManualComplete(ConnectionDetail);
         }
 
         /// <summary>
@@ -385,10 +545,25 @@ namespace LinkeD365.OrgSettings
         /// <param name="e"></param>
         private void numberNew_ValueChanged(object sender, EventArgs e)
         {
-            OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
-            curOS.newSetting = numberNew.Value.ToString();
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1) curOrgSettings.Add(curOS);
-            else curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
+            OrgSetting curOs = _filteredList.Find(os => os.Name == grpAttribute.Tag.ToString());
+
+
+            var upDown = sender as NumericUpDown;
+
+
+            if (upDown.Name == numberNew.Name)
+            {
+                curOs.NewSetting = upDown.Value.ToString();
+                if (_primaryOrgSettings.FindIndex(os => curOs == os) == -1) _primaryOrgSettings.Add(curOs);
+                else _primaryOrgSettings.Find(os => curOs == os).NewSetting = curOs.NewSetting;
+            }
+            else
+            {
+                curOs.SecondaryNewSetting = upDown.Value.ToString();
+                if (_secondaryOrgSettings.FindIndex(os => curOs == os) == -1) _secondaryOrgSettings.Add(new OrgSetting { Name = curOs.Name, NewSetting = curOs.SecondaryNewSetting });
+
+                else _secondaryOrgSettings.Find(os => curOs == os).NewSetting = curOs.SecondaryNewSetting;
+            }
 
             gvSettings.Update();
             gvSettings.Refresh();
@@ -396,10 +571,24 @@ namespace LinkeD365.OrgSettings
 
         private void txtStringValue_TextChanged(object sender, EventArgs e)
         {
-            OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
-            curOS.newSetting = txtStringValue.Text.ToString();
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1) curOrgSettings.Add(curOS);
-            else curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
+            var txtBox = sender as TextBox;
+            OrgSetting curOs = _filteredList.Find(os => os.Name == grpAttribute.Tag.ToString());
+
+            if (txtBox.Name == txtStringValue.Name)
+            {
+                curOs.NewSetting = txtBox.Text;
+                // curOS.newSetting = txtStringValue.Text;
+                if (_primaryOrgSettings.FindIndex(os => curOs == os) == -1) _primaryOrgSettings.Add(curOs);
+                else _primaryOrgSettings.Find(os => curOs == os).NewSetting = curOs.NewSetting;
+            }
+            else
+            {
+                curOs.SecondaryNewSetting = txtBox.Text;
+                if (_secondaryOrgSettings.FindIndex(os => curOs == os) == -1)
+                    _secondaryOrgSettings.Add(new OrgSetting { Name = curOs.Name, NewSetting = curOs.SecondaryNewSetting });
+                else _secondaryOrgSettings.Find(os => curOs == os).NewSetting = curOs.SecondaryNewSetting;
+            }
+
 
             gvSettings.Update();
             gvSettings.Refresh();
@@ -407,16 +596,33 @@ namespace LinkeD365.OrgSettings
 
         private void decimalNewValue_ValueChanged(object sender, EventArgs e)
         {
-            OrgSetting curOS = filteredList.Find(os => os.name == grpAttribute.Text);
-            curOS.newSetting = decimalNewValue.Value.ToString("#.00");
-            //    decimalNewValue.Text.ToString();
-            if (curOrgSettings.FindIndex(os => curOS == os) == -1)
+            OrgSetting curOs = _filteredList.Find(os => os.Name == grpAttribute.Tag.ToString());
+            var upDown = sender as NumericUpDown;
+            if (((NumericUpDown)sender).Name == decimalNewValue.Name)
             {
-                curOrgSettings.Add(curOS);
+                curOs.NewSetting = upDown.Value.ToString("#.00");
+                //    decimalNewValue.Text.ToString();
+                if (_primaryOrgSettings.FindIndex(os => curOs == os) == -1)
+                {
+                    _primaryOrgSettings.Add(curOs);
+                }
+                else
+                {
+                    _primaryOrgSettings.Find(os => curOs == os).NewSetting = curOs.NewSetting;
+                }
             }
             else
             {
-                curOrgSettings.Find(os => curOS == os).newSetting = curOS.newSetting;
+                curOs.SecondaryNewSetting = upDown.Value.ToString("#.00");
+                //    decimalNewValue.Text.ToString();
+                if (_secondaryOrgSettings.FindIndex(os => curOs == os) != -1)
+                {
+                    _secondaryOrgSettings.Find(os => curOs == os).SecondaryNewSetting = curOs.SecondaryNewSetting;
+                }
+                else
+                {
+                    _secondaryOrgSettings.Add(new OrgSetting { Name = curOs.Name, NewSetting = curOs.SecondaryNewSetting });
+                }
             }
 
             gvSettings.Update();
@@ -429,16 +635,76 @@ namespace LinkeD365.OrgSettings
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            string environment = ((Button)sender).Name == "btnRemove" ? ConnectionDetail.ConnectionName : AdditionalConnectionDetails[0].ConnectionName;
             if (MessageBox.Show("Are you sure you want to remove " + grpAttribute.Text +
-                " from your conifguration?", "Remove Config?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                ExecuteMethod(RemoveConfig);
+                                " from " + environment + " configuration?", "Remove Config?",
+                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            if (((Button)sender).Name == "btnRemove") RemoveConfig(ConnectionDetail, _primaryOrgSettings);
+            else RemoveConfig(AdditionalConnectionDetails[0], _secondaryOrgSettings);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             gvSettings.DataSource = null;
+            gvSettings.DataSource = _filteredList.Where(os => os.Name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
 
-            gvSettings.DataSource = filteredList.Where(os => os.name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+            InitGridView();
+            //gvSecondary.DataSource = null;
+            //gvSecondary.DataSource = filteredList.Where(os => os.name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+
+        }
+
+        private void btnConnectSecondary_Click(object sender, EventArgs e)
+        {
+            btnSecondaryCommit.Enabled = false;
+            if (AdditionalConnectionDetails.Any()) RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
+            AddAdditionalOrganization();
+
+        }
+
+        private void btnSecondaryCommit_Click(object sender, EventArgs e)
+        {
+            if (_secondaryOrgSettings == null || _secondaryOrgSettings.FindIndex(os => !String.IsNullOrEmpty(os.NewSetting)) == -1) return;
+
+            if (MessageBox.Show("Commit " +
+                                _secondaryOrgSettings.FindAll(os => !String.IsNullOrEmpty(os.NewSetting)).Count + " changes to your Org Settings for " + AdditionalConnectionDetails[0].ConnectionName + "?",
+                "Commit Changes?", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            UpdateConfig(AdditionalConnectionDetails[0], _secondaryOrgSettings);
+        }
+
+        private void btnClone_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                    "Copy org settings from " + ConnectionDetail.ConnectionName + " to " +
+                    AdditionalConnectionDetails[0].ConnectionName + "?", "Clone Org Settings?", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) !=
+                DialogResult.Yes) return;
+            //var removeList = secondaryOrgSettings.Where(os => !primaryOrgSettings.Contains(os));
+            //foreach (var removeOs in removeList)
+            //{
+            //    secondaryOrgSettings.Remove(removeOs);
+            //}
+
+            foreach (OrgSetting removeOs in _secondaryOrgSettings.Where(os => !_primaryOrgSettings.Contains(os)))
+            {
+                _fullList.Find(os => os.Name == removeOs.Name).SecondaryNewSetting = string.Empty;
+            }
+
+            _secondaryOrgSettings.RemoveAll(os => !_primaryOrgSettings.Contains(os));
+            foreach (var primOs in _primaryOrgSettings)
+            {
+                _fullList.Find(os => primOs.Name == os.Name).SecondaryNewSetting = string.IsNullOrEmpty(primOs.NewSetting) ? primOs.CurrentSetting : primOs.NewSetting;
+                if (_secondaryOrgSettings.FindIndex(os => primOs == os) != -1)
+                {
+                    _secondaryOrgSettings.Find(os => primOs == os).NewSetting = string.IsNullOrEmpty(primOs.NewSetting) ? primOs.CurrentSetting : primOs.NewSetting;
+                }
+                else _secondaryOrgSettings.Add(new OrgSetting { Name = primOs.Name, NewSetting = string.IsNullOrEmpty(primOs.NewSetting) ? primOs.CurrentSetting : primOs.NewSetting });
+                
+            }
+
+            gvSettings.DataSource = _fullList;
+            InitGridView();
         }
     }
 }

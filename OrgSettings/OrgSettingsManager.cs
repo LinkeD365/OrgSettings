@@ -12,42 +12,46 @@ namespace LinkeD365.OrgSettings
     public class OrgSetting : IEquatable<OrgSetting>
     {
         [DisplayName(@"Setting Name")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public string currentSetting { get; set; }
+        public string CurrentSetting { get; set; }
 
-        public string newSetting { get; set; }
+        public string NewSetting { get; set; }
+
+        public string SecondaryCurrentSetting { get; set; }
+
+        public string SecondaryNewSetting { get; set; }
 
         [Browsable(false)]
         [DisplayName("Description")]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Browsable(false)]
-        public string minVersion { get; set; }
+        public string MinVersion { get; set; }
 
         [Browsable(false)]
-        public string maxVersion { get; set; }
+        public string MaxVersion { get; set; }
 
         [Browsable(false)]
-        public bool orgAttribute { get; set; }
+        public bool OrgAttribute { get; set; }
 
         [Browsable(false)]
-        public string minValue { get; set; }
+        public string MinValue { get; set; }
 
         [Browsable(false)]
-        public string maxValue { get; set; }
+        public string MaxValue { get; set; }
 
         [Browsable(false)]
-        public string defaultValue { get; set; }
+        public string DefaultValue { get; set; }
 
         [Browsable(false)]
-        public string type { get; set; }
+        public string Type { get; set; }
 
         [Browsable(false)]
-        public string url { get; set; }
+        public string Url { get; set; }
 
         [Browsable(false)]
-        public string urlTitle { get; set; }
+        public string UrlTitle { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -56,45 +60,43 @@ namespace LinkeD365.OrgSettings
             {
                 return false;
             }
-            else
-            {
-                OrgSetting os = (OrgSetting)obj;
-                return (name == os.name);
-            }
+
+            OrgSetting os = (OrgSetting)obj;
+            return (Name == os.Name);
         }
 
         public bool Equals(OrgSetting other)
         {
             return other != null &&
-                   name == other.name;
+                   Name == other.Name;
         }
 
         public override int GetHashCode()
         {
-            return 363513814 + EqualityComparer<string>.Default.GetHashCode(name);
+            return 363513814 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
 
         [Browsable(false)]
-        public string linkeD365Url { get; set; }
+        public string LinkeD365Url { get; set; }
 
         [Browsable(false)]
-        public string linkeD365Description { get; set; }
+        public string LinkeD365Description { get; set; }
     }
 
-    internal class orgSettngComparer : IComparer<OrgSetting>
+    internal class OrgSettngComparer : IComparer<OrgSetting>
     {
-        private string colName = string.Empty; // specifies the member name to be sorted
-        private SortOrder sortOrder = SortOrder.None; // Specifies the SortOrder.
+        private string _colName = string.Empty; // specifies the member name to be sorted
+        private SortOrder _sortOrder = SortOrder.None; // Specifies the SortOrder.
 
         /// <summary>
         /// constructor to set the sort column and sort order.
         /// </summary>
         /// <param name="columnName"></param>
         /// <param name="sortingOrder"></param>
-        public orgSettngComparer(string columnName, SortOrder sortingOrder)
+        public OrgSettngComparer(string columnName, SortOrder sortingOrder)
         {
-            colName = columnName;
-            sortOrder = sortingOrder;
+            _colName = columnName;
+            _sortOrder = sortingOrder;
         }
 
         /// <summary>
@@ -106,55 +108,90 @@ namespace LinkeD365.OrgSettings
         /// <returns></returns>
         public int Compare(OrgSetting os1, OrgSetting os2)
         {
-            int returnValue = 1;
-            switch (colName)
+            int returnValue;
+            switch (_colName)
             {
                 case "name":
-                    if (sortOrder == SortOrder.Ascending)
+                    if (_sortOrder == SortOrder.Ascending)
                     {
-                        returnValue = os1.name.CompareTo(os2.name);
+                        return  os1.Name.CompareTo(os2.Name);
                     }
                     else
                     {
-                        returnValue = os2.name.CompareTo(os1.name);
+                        return  os2.Name.CompareTo(os1.Name);
                     }
 
                     break;
-
                 case "currentSetting":
-                    if (sortOrder == SortOrder.Ascending)
+                    if (_sortOrder == SortOrder.Ascending)
                     {
-                        returnValue = os1.currentSetting.CompareTo(os2.currentSetting);
+                        return  String.Compare(os1.CurrentSetting, os2.CurrentSetting, StringComparison.Ordinal);
                     }
                     else
                     {
-                        returnValue = os2.currentSetting.CompareTo(os1.currentSetting);
+                        if (os2?.CurrentSetting != null) return os2.CurrentSetting.CompareTo(os1.CurrentSetting);
+                        if (os1?.CurrentSetting == null) return 0;
+
                     }
                     break;
 
                 case "newSetting":
-                    if (sortOrder == SortOrder.Ascending)
+                    if (_sortOrder == SortOrder.Ascending)
                     {
-                        returnValue = os1.newSetting.CompareTo(os2.newSetting);
+                        if (os1?.NewSetting != null) return  os1.NewSetting.CompareTo(os2.NewSetting);
+                        if (os2?.NewSetting == null) return 0;
                     }
                     else
                     {
-                        returnValue = os2.newSetting.CompareTo(os1.newSetting);
+                        if (os2?.NewSetting != null) return  os2.NewSetting.CompareTo(os1.NewSetting);
+                        if (os1?.NewSetting == null) return 0;
+                    }
+                    break;
+                case "secondaryCurrentSetting":
+                    if (_sortOrder == SortOrder.Ascending)
+                    {
+                        if (os1?.SecondaryCurrentSetting != null)
+                            return os1.SecondaryCurrentSetting.CompareTo(os2.SecondaryCurrentSetting);
+                        if (os2?.NewSetting == null) return 0;
+
+                    }
+                    else
+                    {
+                        if (os2?.SecondaryCurrentSetting != null)
+                            return os2.SecondaryCurrentSetting.CompareTo(os1.SecondaryCurrentSetting);
+                        if ( os1?.NewSetting == null) return 0;
+
+                    }
+                    break;
+                case "secondaryNewSetting":
+                    if (_sortOrder == SortOrder.Ascending)
+                    {
+                        if (os1?.SecondaryNewSetting != null)
+                            return os1.SecondaryNewSetting.CompareTo(os2.SecondaryNewSetting);
+                        if (os2 != null && os2.NewSetting == null) return 0;
+
+                    }
+                    else
+                    {
+                        if (os2?.SecondaryNewSetting != null)
+                            return os2.SecondaryNewSetting.CompareTo(os1.SecondaryNewSetting);
+                        if (os1?.NewSetting == null) return 0;
+
                     }
                     break;
 
                 default:
-                    if (sortOrder == SortOrder.Ascending)
+                    if (_sortOrder == SortOrder.Ascending)
                     {
-                        returnValue = os1.name.CompareTo(os2.name);
+                        return os1.Name.CompareTo(os2.Name);
                     }
                     else
                     {
-                        returnValue = os2.name.CompareTo(os1.name);
+                        return os2.Name.CompareTo(os1.Name);
                     }
                     break;
             }
-            return returnValue;
+            return 1;
         }
     }
 }

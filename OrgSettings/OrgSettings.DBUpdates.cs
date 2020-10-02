@@ -7,32 +7,36 @@ using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml;
+using McTools.Xrm.Connection;
 using XrmToolBox.Extensibility;
 
 namespace LinkeD365.OrgSettings
 {
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
     {
-        private void RemoveConfig()
+        private XmlDocument _smneXml;
+
+        private XmlDocument _linkeD365Xml;
+        private void RemoveConfig(ConnectionDetail connection, List<OrgSetting> curOrgSettings)
         {
-            var removeOs = curOrgSettings.Single(os => os.name == grpAttribute.Text);
+            var removeOs = curOrgSettings.Single(os => os.Name == grpAttribute.Tag.ToString());
             curOrgSettings.Remove(removeOs);
 
-            ExecuteMethod(ClearConfig);
+            ClearConfig(connection);
+            UpdateConfig(connection, curOrgSettings);
 
-            ExecuteMethod(UpdateConfig);
         }
 
-        private void ClearConfig()
+        private void ClearConfig(ConnectionDetail connection)
         {
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Clearing Config",
                 Work = (worker, args) =>
                 {
-                    Entity orgEntity = new Entity("organization", orgGuid);
+                    Entity orgEntity = new Entity("organization", _orgGuid);
                     orgEntity["orgdborgsettings"] = string.Empty;
-                    Service.Update(orgEntity);
+                    connection.ServiceClient.Update(orgEntity);
                 },
                 PostWorkCallBack = (args) =>
                 {
@@ -45,17 +49,17 @@ namespace LinkeD365.OrgSettings
             });
         }
 
-        private void UpdateConfig()
+        private void UpdateConfig(ConnectionDetail connection, List<OrgSetting> curOrgSettings)
         {
-            ai.WriteEvent("Updating Config", curOrgSettings.Count(os => !String.IsNullOrEmpty(os.newSetting)));
+            _ai.WriteEvent("Updating Config", curOrgSettings.Count(os => !String.IsNullOrEmpty(os.NewSetting)));
             string updateString = "<orgSettings>";
             foreach (OrgSetting os in curOrgSettings)
             {
-                updateString += "<" + os.name + ">" +
-                    (String.IsNullOrEmpty(os.newSetting)
-                    ? os.currentSetting
-                    : os.newSetting)
-                    + "</" + os.name + ">";
+                updateString += "<" + os.Name + ">" +
+                    (String.IsNullOrEmpty(os.NewSetting)
+                    ? os.CurrentSetting
+                    : os.NewSetting)
+                    + "</" + os.Name + ">";
             }
 
             updateString += "</orgSettings>";
@@ -65,10 +69,10 @@ namespace LinkeD365.OrgSettings
                 Message = "Updating Config",
                 Work = (worker, args) =>
                 {
-                    Entity orgEntity = new Entity("organization", orgGuid);
+                    Entity orgEntity = new Entity("organization", _orgGuid);
                     //orgEntity["organizationid"] = orgGuid.ToString();
                     orgEntity["orgdborgsettings"] = updateString;
-                    Service.Update(orgEntity);
+                    connection.ServiceClient.Update(orgEntity);
                 },
                 PostWorkCallBack = (args) =>
                 {
@@ -79,14 +83,106 @@ namespace LinkeD365.OrgSettings
                     }
                 }
             });
+            LoadAllConfigs();
+            //  ExecuteMethod(LoadAllConfigs());
+        }
 
-            ExecuteMethod(LoadConfig);
+        private void LoadSingleConfig()
+        {
+            LoadConfig(ConnectionDetail, _primaryOrgSettings);
+            UpdateGroups();
+
+            // LoadXml();
+        }
+        private void LoadAllConfigs()
+        {
+            LoadConfig(ConnectionDetail, _primaryOrgSettings);
+
+            foreach (var connectionDetail in AdditionalConnectionDetails)
+            {
+                LoadConfig(connectionDetail, _secondaryOrgSettings,true);
+
+
+            }
+            UpdateGroups();
+
+        }
+
+
+
+        private void LoadXml()
+        {
+            if (this._smneXml == null)
+            {
+                string xmlSeanMcNe = new WebClient().DownloadString(
+                    @"https://raw.githubusercontent.com/seanmcne/OrgDbOrgSettings/master/mspfedyn_/OrgDbOrgSettings/Settings.xml");
+                _smneXml = new XmlDocument();
+                _smneXml.LoadXml(xmlSeanMcNe);
+            }
+
+            _fullList.Clear();
+
+            _fullList.AddRange(from XmlNode childNode in _smneXml.SelectSingleNode("defaultOrgSettings")
+                              where childNode.Name == "orgSetting" && childNode.Attributes["isOrganizationAttribute"].Value == "false"
+                              select new OrgSetting()
+                              {
+                                  Name = childNode.Attributes["name"].Value,
+                                  Description = childNode.Attributes["description"].Value,
+                                  MinVersion = childNode.Attributes["minSupportedVersion"].Value,
+                                  MaxVersion = childNode.Attributes["maxSupportedVersion"].Value,
+                                  OrgAttribute = Convert.ToBoolean(childNode.Attributes["isOrganizationAttribute"].Value),
+                                  MinValue = childNode.Attributes["min"].Value,
+                                  MaxValue = childNode.Attributes["max"].Value,
+                                  DefaultValue = String.IsNullOrEmpty(childNode.Attributes["defaultValue"].Value)
+                                    ? ""
+                                    : childNode.Attributes["defaultValue"].Value,
+                                  Type = childNode.Attributes["settingType"].Value,
+                                  Url = childNode.Attributes["supportUrl"].Value,
+                                  UrlTitle = childNode.Attributes["urlTitle"].Value,
+                                  CurrentSetting = _primaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
+                                    ? ""
+                                    : _primaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting,
+                                  SecondaryCurrentSetting = _secondaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
+                                      ? ""
+                                      : _secondaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting
+                              });
+
+            try
+            {
+                if (_linkeD365Xml == null)
+                {
+#if DEBUG
+
+                    _linkeD365Xml = new XmlDocument();
+                    _linkeD365Xml.Load("E:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
+#else
+                        string xmlLinkeD365 =
+ new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
+                        linkeD365XML = new XmlDocument();
+                        linkeD365XML.LoadXml(xmlLinkeD365);
+#endif
+                }
+
+                foreach (XmlNode childNode in _linkeD365Xml.SelectSingleNode("orgSettings").ChildNodes)
+                {
+                    OrgSetting orgSetting = _fullList.Find(os => os.Name == childNode.Attributes["name"].Value);
+                    if (orgSetting != null)
+                    {
+                        orgSetting.LinkeD365Description = childNode.Attributes["description"].Value;
+                        orgSetting.LinkeD365Url = childNode.Attributes["url"].Value;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                LogError("Can not retrieve LinkeD365 data", err.Message);
+            }
         }
 
         /// <summary>
         /// Retrieves Sean McNellis file & displays. If file from LinkeD365 contains descirption, adds this
         /// </summary>
-        private void LoadConfig()
+        private void LoadConfig(ConnectionDetail connection, List<OrgSetting> orgSettings,  bool secondary = false)
         {
             WorkAsync(new WorkAsyncInfo
             {
@@ -94,10 +190,8 @@ namespace LinkeD365.OrgSettings
                 Work = (worker, args) =>
                 {
                     QueryExpression qe = new QueryExpression("organization") { ColumnSet = new ColumnSet("orgdborgsettings") };
-                    args.Result = Service.RetrieveMultiple(qe);
-                    //{
-                    //    TopCount = 50
-                    //});
+                    args.Result = connection.ServiceClient.RetrieveMultiple(qe);
+
                 },
                 PostWorkCallBack = (args) =>
                 {
@@ -109,103 +203,62 @@ namespace LinkeD365.OrgSettings
                     if (result == null) return;
 
                     var orgRow = result.Entities.First();
-                    orgGuid = orgRow.Id;
+                    _orgGuid = orgRow.Id;
                     string orgString = orgRow.GetAttributeValue<string>("orgdborgsettings");
                     txtCurrentXml.Text = orgString;
-                    if (String.IsNullOrEmpty(orgString)) curOrgSettings = new List<OrgSetting>();
+                    orgSettings.Clear();
+                    if (string.IsNullOrEmpty(orgString)) orgSettings.Clear();
                     else
                     {
-                        XmlDocument orgXML = new XmlDocument();
-                        orgXML.LoadXml(orgString);
-                        curOrgSettings = (from XmlNode childNode in orgXML.ChildNodes[0].ChildNodes
-                                          let orgValue = new OrgSetting() { name = childNode.Name, currentSetting = childNode.InnerText }
-                                          select orgValue).ToList();
+                        XmlDocument orgXml = new XmlDocument();
+                        orgXml.LoadXml(orgString);
+                        orgSettings.AddRange(from XmlNode childNode in orgXml.ChildNodes[0].ChildNodes
+                                             let orgValue = new OrgSetting()
+                                             { Name = childNode.Name, CurrentSetting = childNode.InnerText }
+                                             select orgValue);
                     }
-                    string xmlSeanMcNe = new WebClient().DownloadString(@"https://raw.githubusercontent.com/seanmcne/OrgDbOrgSettings/master/mspfedyn_/OrgDbOrgSettings/Settings.xml");
-                    XmlDocument smneXML = new XmlDocument();
-                    smneXML.LoadXml(xmlSeanMcNe);
 
-                    List<OrgSetting> fullList = new List<OrgSetting>();
-
-                    fullList.AddRange(from XmlNode childNode in smneXML.SelectSingleNode("defaultOrgSettings")
-                                      where childNode.Name == "orgSetting" && childNode.Attributes["isOrganizationAttribute"].Value == "false"
-                                      select new OrgSetting()
-                                      {
-                                          name = childNode.Attributes["name"].Value,
-                                          description = childNode.Attributes["description"].Value,
-                                          minVersion = childNode.Attributes["minSupportedVersion"].Value,
-                                          maxVersion = childNode.Attributes["maxSupportedVersion"].Value,
-                                          orgAttribute = Convert.ToBoolean(childNode.Attributes["isOrganizationAttribute"].Value),
-                                          minValue = childNode.Attributes["min"].Value,
-                                          maxValue = childNode.Attributes["max"].Value,
-                                          defaultValue = String.IsNullOrEmpty(childNode.Attributes["defaultValue"].Value)
-                                            ? ""
-                                            : childNode.Attributes["defaultValue"].Value,
-                                          type = childNode.Attributes["settingType"].Value,
-                                          url = childNode.Attributes["supportUrl"].Value,
-                                          urlTitle = childNode.Attributes["urlTitle"].Value,
-                                          currentSetting = curOrgSettings.FindIndex(os => os.name.ToString() == childNode.Attributes["name"].Value) == -1
-                                            ? ""
-                                            : curOrgSettings.Find(os => os.name.ToString() == childNode.Attributes["name"].Value).currentSetting,
-                                          newSetting = ""
-                                      });
-
-                    try
-                    {
-#if DEBUG
-
-                        XmlDocument linkeD365XML = new XmlDocument();
-                        linkeD365XML.Load("E:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
-#else
-                        string xmlLinkeD365 = new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
-                        XmlDocument linkeD365XML = new XmlDocument();
-                        linkeD365XML.LoadXml(xmlLinkeD365);
-#endif
-
-                        foreach (XmlNode childNode in linkeD365XML.SelectSingleNode("orgSettings").ChildNodes)
-                        {
-                            OrgSetting orgSetting = fullList.Find(os => os.name == childNode.Attributes["name"].Value);
-                            if (orgSetting != null)
-                            {
-                                orgSetting.linkeD365Description = childNode.Attributes["description"].Value;
-                                orgSetting.linkeD365Url = childNode.Attributes["url"].Value;
-                            }
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        LogError("Can not retrieve LinkeD365 data", err.Message);
-                    }
-                    filteredList = new List<OrgSetting>();
+                    LoadXml();
+                    _filteredList.Clear();
                     //int[] orgVersion = ConnectionDetail.OrganizationVersion.Split('.').Select(int.Parse).ToArray();
-                    double orgVersion = double.Parse(string.Join("", ConnectionDetail.OrganizationVersion.Split('.').Select(ov => int.Parse(ov).ToString("D6"))));
-                    foreach (OrgSetting os in fullList)
+                    double orgVersion = double.Parse(string.Join("", connection.OrganizationVersion.Split('.').Select(ov => int.Parse(ov).ToString("D6"))));
+                    foreach (OrgSetting os in _fullList)
                     {
-                        double max = double.Parse(string.Join("", os.maxVersion.Split('.').Select(osmax => int.Parse(osmax).ToString("D6"))));
-                        double min = double.Parse(string.Join("", os.minVersion.Split('.').Select(osmin => int.Parse(osmin).ToString("D6"))));
+                        double max = double.Parse(string.Join("", os.MaxVersion.Split('.').Select(osmax => int.Parse(osmax).ToString("D6"))));
+                        double min = double.Parse(string.Join("", os.MinVersion.Split('.').Select(osmin => int.Parse(osmin).ToString("D6"))));
 
-                        if (min <= orgVersion && max >= orgVersion) filteredList.Add(os);
+                        if (min <= orgVersion && max >= orgVersion) _filteredList.Add(os);
                     }
 
-                    gvSettings.DataSource = null;
-                    gvSettings.DataSource = filteredList;
+                    //if (secondary)
+                    //{
+                    //    gvSecondary.DataSource = null;
+                    //    gvSecondary.DataSource = filteredList;
 
-                    InitGridView();
+                    //    InitGridView(gvSecondary, true);
+                    //}
+                    //else
+                    //{
+                        gvSettings.DataSource = null;
+                        gvSettings.DataSource = _filteredList;
+
+                        InitGridView();
+                    //}
                 }
             });
         }
 
-        private void UpdateManualComplete()
+        private void UpdateManualComplete(ConnectionDetail connection)
         {
             try
             {
-                ExecuteMethod(ClearConfig);
-                Entity orgEntity = new Entity("organization", orgGuid);
+                ClearConfig(connection);
+                Entity orgEntity = new Entity("organization", _orgGuid);
 
                 orgEntity["orgdborgsettings"] = txtOverride.Text;
-                Service.Update(orgEntity);
+                connection.ServiceClient.Update(orgEntity);
 
-                ExecuteMethod(LoadConfig);
+                LoadAllConfigs();
 
                 ShowInfoNotification("Manual override of configuration has been complete", null);
 
