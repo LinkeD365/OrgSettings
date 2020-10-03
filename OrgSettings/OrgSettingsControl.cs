@@ -46,6 +46,7 @@ namespace LinkeD365.OrgSettings
         private void OrgSettingsControl_Load(object sender, EventArgs e)
         {
             ShowInfoNotification("NOTE: You should NOT change any setting without having a specific reason to do.\r\nPlease ensure you have a back up of the current settings prior to changing them, available in Manual tab", null);
+            ExecuteMethod(LoadSingleConfig);
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
@@ -53,7 +54,7 @@ namespace LinkeD365.OrgSettings
             CloseTool();
         }
 
-        private void tsbSample_Click(object sender, EventArgs e)
+        private void btnConnect_Click(object sender, EventArgs e)
         {
             btnConnectSecondary.Enabled = false;
             // The ExecuteMethod method handles connecting to an
@@ -61,6 +62,7 @@ namespace LinkeD365.OrgSettings
             txtSearch.Text = string.Empty;
             if (AdditionalConnectionDetails.Any()) RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
             ExecuteMethod(LoadSingleConfig);
+            if (ConnectionDetail != null) btnConnectSecondary.Enabled = true;
             // LoadSingleConfig();
         }
 

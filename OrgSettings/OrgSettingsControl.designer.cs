@@ -30,15 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrgSettingsControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnConnect = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnConnectSecondary = new System.Windows.Forms.ToolStripButton();
+            this.btnClone = new System.Windows.Forms.ToolStripButton();
+            this.btnSecondaryCommit = new System.Windows.Forms.ToolStripButton();
             this.gvSettings = new System.Windows.Forms.DataGridView();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.splitSettings = new System.Windows.Forms.SplitContainer();
@@ -106,9 +109,6 @@
             this.tabLinkeD365 = new System.Windows.Forms.TabPage();
             this.webLinkeD365 = new System.Windows.Forms.WebBrowser();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnSecondaryCommit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnClone = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -206,7 +206,7 @@
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(86, 40);
             this.btnConnect.Text = "Refresh";
-            this.btnConnect.Click += new System.EventHandler(this.tsbSample_Click);
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // btnSave
             // 
@@ -217,6 +217,11 @@
             this.btnSave.Size = new System.Drawing.Size(91, 40);
             this.btnSave.Text = "Commit";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
             // 
             // btnConnectSecondary
             // 
@@ -229,30 +234,51 @@
             this.btnConnectSecondary.Text = "Connect to secondary Environment";
             this.btnConnectSecondary.Click += new System.EventHandler(this.btnConnectSecondary_Click);
             // 
+            // btnClone
+            // 
+            this.btnClone.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnClone.Enabled = false;
+            this.btnClone.Image = ((System.Drawing.Image)(resources.GetObject("btnClone.Image")));
+            this.btnClone.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClone.Name = "btnClone";
+            this.btnClone.Size = new System.Drawing.Size(36, 40);
+            this.btnClone.Text = "Copy";
+            this.btnClone.Click += new System.EventHandler(this.btnClone_Click);
+            // 
+            // btnSecondaryCommit
+            // 
+            this.btnSecondaryCommit.Enabled = false;
+            this.btnSecondaryCommit.Image = ((System.Drawing.Image)(resources.GetObject("btnSecondaryCommit.Image")));
+            this.btnSecondaryCommit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSecondaryCommit.Name = "btnSecondaryCommit";
+            this.btnSecondaryCommit.Size = new System.Drawing.Size(145, 40);
+            this.btnSecondaryCommit.Text = "Secondary Commit";
+            this.btnSecondaryCommit.Click += new System.EventHandler(this.btnSecondaryCommit_Click);
+            // 
             // gvSettings
             // 
             this.gvSettings.AllowUserToAddRows = false;
             this.gvSettings.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle3;
             this.gvSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvSettings.Location = new System.Drawing.Point(0, 0);
             this.gvSettings.Name = "gvSettings";
@@ -575,7 +601,7 @@
             this.grpSecAttribute.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpSecAttribute.Location = new System.Drawing.Point(0, 0);
             this.grpSecAttribute.Name = "grpSecAttribute";
-            this.grpSecAttribute.Size = new System.Drawing.Size(506, 124);
+            this.grpSecAttribute.Size = new System.Drawing.Size(150, 46);
             this.grpSecAttribute.TabIndex = 3;
             this.grpSecAttribute.TabStop = false;
             this.grpSecAttribute.Text = "Select an Attribute";
@@ -734,7 +760,7 @@
             this.tabManual.Location = new System.Drawing.Point(4, 22);
             this.tabManual.Name = "tabManual";
             this.tabManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManual.Size = new System.Drawing.Size(522, 233);
+            this.tabManual.Size = new System.Drawing.Size(512, 259);
             this.tabManual.TabIndex = 1;
             this.tabManual.Text = "Manual";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -753,8 +779,8 @@
             // splitManual.Panel2
             // 
             this.splitManual.Panel2.Controls.Add(this.splitManualEditor);
-            this.splitManual.Size = new System.Drawing.Size(516, 227);
-            this.splitManual.SplitterDistance = 110;
+            this.splitManual.Size = new System.Drawing.Size(506, 253);
+            this.splitManual.SplitterDistance = 122;
             this.splitManual.TabIndex = 0;
             // 
             // groupBox1
@@ -763,7 +789,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(516, 110);
+            this.groupBox1.Size = new System.Drawing.Size(506, 122);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Config";
@@ -775,7 +801,7 @@
             this.txtCurrentXml.Multiline = true;
             this.txtCurrentXml.Name = "txtCurrentXml";
             this.txtCurrentXml.ReadOnly = true;
-            this.txtCurrentXml.Size = new System.Drawing.Size(510, 91);
+            this.txtCurrentXml.Size = new System.Drawing.Size(500, 103);
             this.txtCurrentXml.TabIndex = 0;
             // 
             // splitManualEditor
@@ -795,7 +821,7 @@
             // splitManualEditor.Panel2
             // 
             this.splitManualEditor.Panel2.Controls.Add(this.txtOverride);
-            this.splitManualEditor.Size = new System.Drawing.Size(516, 113);
+            this.splitManualEditor.Size = new System.Drawing.Size(506, 127);
             this.splitManualEditor.SplitterDistance = 43;
             this.splitManualEditor.TabIndex = 2;
             // 
@@ -825,7 +851,7 @@
             this.txtOverride.Location = new System.Drawing.Point(0, 0);
             this.txtOverride.Multiline = true;
             this.txtOverride.Name = "txtOverride";
-            this.txtOverride.Size = new System.Drawing.Size(516, 66);
+            this.txtOverride.Size = new System.Drawing.Size(506, 80);
             this.txtOverride.TabIndex = 1;
             // 
             // splitMainLower
@@ -1010,7 +1036,7 @@
             this.tabLinkeD365.Location = new System.Drawing.Point(4, 22);
             this.tabLinkeD365.Name = "tabLinkeD365";
             this.tabLinkeD365.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLinkeD365.Size = new System.Drawing.Size(522, 363);
+            this.tabLinkeD365.Size = new System.Drawing.Size(512, 450);
             this.tabLinkeD365.TabIndex = 1;
             this.tabLinkeD365.Text = "LinkeD365 Description";
             this.tabLinkeD365.UseVisualStyleBackColor = true;
@@ -1021,39 +1047,13 @@
             this.webLinkeD365.Location = new System.Drawing.Point(3, 3);
             this.webLinkeD365.MinimumSize = new System.Drawing.Size(20, 20);
             this.webLinkeD365.Name = "webLinkeD365";
-            this.webLinkeD365.Size = new System.Drawing.Size(516, 357);
+            this.webLinkeD365.Size = new System.Drawing.Size(506, 444);
             this.webLinkeD365.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // btnSecondaryCommit
-            // 
-            this.btnSecondaryCommit.Enabled = false;
-            this.btnSecondaryCommit.Image = ((System.Drawing.Image)(resources.GetObject("btnSecondaryCommit.Image")));
-            this.btnSecondaryCommit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSecondaryCommit.Name = "btnSecondaryCommit";
-            this.btnSecondaryCommit.Size = new System.Drawing.Size(145, 40);
-            this.btnSecondaryCommit.Text = "Secondary Commit";
-            this.btnSecondaryCommit.Click += new System.EventHandler(this.btnSecondaryCommit_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
-            // 
-            // btnClone
-            // 
-            this.btnClone.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnClone.Enabled = false;
-            this.btnClone.Image = ((System.Drawing.Image)(resources.GetObject("btnClone.Image")));
-            this.btnClone.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClone.Name = "btnClone";
-            this.btnClone.Size = new System.Drawing.Size(36, 40);
-            this.btnClone.Text = "Copy";
-            this.btnClone.Click += new System.EventHandler(this.btnClone_Click);
             // 
             // OrgSettingsControl
             // 
