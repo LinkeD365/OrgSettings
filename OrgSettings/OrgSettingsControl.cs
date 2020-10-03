@@ -28,7 +28,6 @@ namespace LinkeD365.OrgSettings
         private List<OrgSetting> _filteredList = new List<OrgSetting>();
 
         private List<OrgSetting> _fullList = new List<OrgSetting>();
-        private DataView _dv;
         private Guid _orgGuid;
         private TabControl _hidden = new TabControl();
 

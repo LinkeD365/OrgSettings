@@ -108,7 +108,6 @@ namespace LinkeD365.OrgSettings
         /// <returns></returns>
         public int Compare(OrgSetting os1, OrgSetting os2)
         {
-            int returnValue;
             switch (_colName)
             {
                 case "name":
@@ -121,7 +120,6 @@ namespace LinkeD365.OrgSettings
                         return  os2.Name.CompareTo(os1.Name);
                     }
 
-                    break;
                 case "currentSetting":
                     if (_sortOrder == SortOrder.Ascending)
                     {
@@ -189,7 +187,6 @@ namespace LinkeD365.OrgSettings
                     {
                         return os2.Name.CompareTo(os1.Name);
                     }
-                    break;
             }
             return 1;
         }

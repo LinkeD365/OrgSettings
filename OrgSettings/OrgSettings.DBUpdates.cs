@@ -158,8 +158,8 @@ namespace LinkeD365.OrgSettings
 #else
                         string xmlLinkeD365 =
  new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
-                        linkeD365XML = new XmlDocument();
-                        linkeD365XML.LoadXml(xmlLinkeD365);
+                        _linkeD365Xml = new XmlDocument();
+                        _linkeD365Xml.LoadXml(xmlLinkeD365);
 #endif
                 }
 
