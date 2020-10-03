@@ -108,87 +108,42 @@ namespace LinkeD365.OrgSettings
         /// <returns></returns>
         public int Compare(OrgSetting os1, OrgSetting os2)
         {
+            string compare1 = string.Empty;
+            string compare2 = string.Empty;
             switch (_colName)
             {
-                case "name":
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        return  os1.Name.CompareTo(os2.Name);
-                    }
-                    else
-                    {
-                        return  os2.Name.CompareTo(os1.Name);
-                    }
-
-                case "currentSetting":
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        return  String.Compare(os1.CurrentSetting, os2.CurrentSetting, StringComparison.Ordinal);
-                    }
-                    else
-                    {
-                        if (os2?.CurrentSetting != null) return os2.CurrentSetting.CompareTo(os1.CurrentSetting);
-                        if (os1?.CurrentSetting == null) return 0;
-
-                    }
+                case "CurrentSetting":
+                    compare1 = os1?.CurrentSetting ?? string.Empty;
+                    compare2 = os2?.CurrentSetting ?? string.Empty;
                     break;
 
-                case "newSetting":
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        if (os1?.NewSetting != null) return  os1.NewSetting.CompareTo(os2.NewSetting);
-                        if (os2?.NewSetting == null) return 0;
-                    }
-                    else
-                    {
-                        if (os2?.NewSetting != null) return  os2.NewSetting.CompareTo(os1.NewSetting);
-                        if (os1?.NewSetting == null) return 0;
-                    }
+                case "NewSetting":
+                    compare1 = os1?.NewSetting ?? string.Empty;
+                    compare2 = os2?.NewSetting ?? string.Empty;
                     break;
-                case "secondaryCurrentSetting":
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        if (os1?.SecondaryCurrentSetting != null)
-                            return os1.SecondaryCurrentSetting.CompareTo(os2.SecondaryCurrentSetting);
-                        if (os2?.NewSetting == null) return 0;
-
-                    }
-                    else
-                    {
-                        if (os2?.SecondaryCurrentSetting != null)
-                            return os2.SecondaryCurrentSetting.CompareTo(os1.SecondaryCurrentSetting);
-                        if ( os1?.NewSetting == null) return 0;
-
-                    }
+                case "SecondaryCurrentSetting":
+                    compare1 = os1?.SecondaryCurrentSetting ?? string.Empty;
+                    compare2 = os2?.SecondaryCurrentSetting ?? string.Empty;
                     break;
-                case "secondaryNewSetting":
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        if (os1?.SecondaryNewSetting != null)
-                            return os1.SecondaryNewSetting.CompareTo(os2.SecondaryNewSetting);
-                        if (os2 != null && os2.NewSetting == null) return 0;
 
-                    }
-                    else
-                    {
-                        if (os2?.SecondaryNewSetting != null)
-                            return os2.SecondaryNewSetting.CompareTo(os1.SecondaryNewSetting);
-                        if (os1?.NewSetting == null) return 0;
-
-                    }
+                case "SecondaryNewSetting":
+                    compare1 = os1?.SecondaryNewSetting ?? string.Empty;
+                    compare2 = os2?.SecondaryNewSetting ?? string.Empty;
                     break;
 
                 default:
-                    if (_sortOrder == SortOrder.Ascending)
-                    {
-                        return os1.Name.CompareTo(os2.Name);
-                    }
-                    else
-                    {
-                        return os2.Name.CompareTo(os1.Name);
-                    }
+                    compare1 = os1?.Name ?? string.Empty;
+                    compare2 = os2?.Name ?? string.Empty;
+                    break;
             }
-            return 1;
+            if (_sortOrder == SortOrder.Ascending)
+            {
+                return compare1.CompareTo(compare2);
+            }
+            else
+            {
+                return compare2.CompareTo(compare1);
+            }
         }
     }
 }

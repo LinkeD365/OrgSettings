@@ -106,7 +106,14 @@ namespace LinkeD365.OrgSettings
         {
             if (args.Action == NotifyCollectionChangedAction.Add || args.Action == NotifyCollectionChangedAction.Replace)
             {
-
+                if (AdditionalConnectionDetails[0].ConnectionName == ConnectionDetail.ConnectionName)
+                {
+                    MessageBox.Show("Please choose a different connection rather than the current primary one",
+                        "Choose different connections", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
+                    AddAdditionalOrganization();
+                    return;
+                }
 
                 LoadConfig(AdditionalConnectionDetails[0], _secondaryOrgSettings, true);
                 UpdateGroups();
@@ -446,6 +453,7 @@ namespace LinkeD365.OrgSettings
             gvSettings.DataSource = _filteredList;
             // customizeDataGridView();
             gvSettings.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = strSortOrder;
+            InitGridView();
         }
 
         /// <summary>
