@@ -80,4 +80,21 @@
   url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#ActivityRollupChildRecordLimit"> </orgSetting>
   <orgSetting name="AddressBookMaterializedViewsEnabled" description="&lt;p&gt;The description doesnt tie up with the title, and when you google it, this setting revolves around a previous setting, Disable MAPI cache, that was around in CRM 2011 and helped improve performance. Not a lot more I can say.&lt;/p&gt;"
   url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#AddressBookMaterializedViewsEnabled"> </orgSetting>
+  <orgSetting name="IdsCountBeforeUsingJoinsForSecurity" description="&lt;p&gt; I can’t find any information on this. Will update when I find out.&lt;/p&gt;"
+    url="https://linked365.blog/2019/10/01/d365-org-db-settings-other/#IdsCountBeforeUsingJoinsForSecurity"> </orgSetting>
+  <orgSetting name="RetrieveMultipleSharingCountThreshold" description="&lt;p&gt; I didnt know this was a thing, but only for CRM 4.0. Basically, you could override what appears at the bottom of a search display.&lt;/p&gt;
+    &lt;p&gt;This setting is for On-premise only, impacting the switching to use a temporary table or CTE (Common Table Expression) to generate the results. I have not got enough data to check if this still has an impact on D365 environments.&lt;/p&gt;
+    &lt;p&gt;The linked paper has a lot of good stuff about optimisations, that thankfully the more modern SAAS environments have taken care of.&lt;/p&gt;"
+              url="https://linked365.blog/2019/10/01/d365-org-db-settings-other/#RetrieveMultipleSharingCountThreshold"> </orgSetting>
+  <orgSetting name="IgnoreCopiedItemsInSSSForMailbox" description="&lt;p&gt; Normally, when an email or meeting or task is synced, it doesn't matter where that content came from. If it appears new, it will be created new, even if it is a copy of another item. This will reduce the amount of synced items but may be a concern for your environment.&lt;/p&gt;"
+              url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#IgnoreCopiedItemsInSSSForMailbox"> </orgSetting>
+  <orgSetting name="DoNotIgnoreInternalEmailToQueues" description="&lt;p&gt;This is used in combination with the  Track emails sent between Dynamics 365 users as two activities available in the system settings&lt;/p&gt;
+              &lt;img src=&quot;https://linked365.blog/wp-content/uploads/2019/09/image-84.png&quot; style=&quot;width:450px;&quot; &gt;
+              &lt;p&gt;If you enable the Track as a separate option, normally any email from internal user to a queue mailbox will be ignored. 
+              This seems a weird consequence, but they have provided you with an override so that these internal mails are not ignored.&lt;/p&gt;"
+              url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#DoNotIgnoreInternalEmailToQueues"> </orgSetting>
+  <orgSetting name="DistinctPhysicalAndLogicalDeletesForExchangeSync " description="&lt;p&gt; This is another where security takes over and users expectations can differ from the way Microsoft thinks it should work.&lt;/p&gt;
+    &lt;p&gt;If a user has been invited to a meeting, and it is recorded in D365, a copy of that exists within D365 and Exchange. If, for whatever reason, the user loses access (reas access) to that meeting in D365, the default behaviour would be to delete the copy in Exchange. Makes sense, to keep those in sync.&lt;/p&gt;
+    &lt;p&gt;With the DistinctPhysicalAndLogicalDeletesForExchangeSync set to true, lose of access to any activity does not mean that the activity is deleted in Exchange. Use this with DisableImplicitSharingOfCommunicationActivities to fully get control of activity access.&lt;/p&gt;"
+              url="https://linked365.blog/2019/10/01/d365-org-db-settings-email/#DistinctPhysicalAndLogicalDeletesForExchangeSync"> </orgSetting>
 </orgSettings>

@@ -165,12 +165,17 @@ namespace LinkeD365.OrgSettings
 
                 foreach (XmlNode childNode in _linkeD365Xml.SelectSingleNode("orgSettings").ChildNodes)
                 {
-                    OrgSetting orgSetting = _fullList.Find(os => os.Name == childNode.Attributes["name"].Value);
-                    if (orgSetting != null)
+                    foreach (var orgSetting in _fullList.Where(os => os.Name == childNode.Attributes["name"].Value))
                     {
                         orgSetting.LinkeD365Description = childNode.Attributes["description"].Value;
                         orgSetting.LinkeD365Url = childNode.Attributes["url"].Value;
                     }
+                    //OrgSetting orgSetting = _fullList.Find(os => os.Name == childNode.Attributes["name"].Value);
+                    //if (orgSetting != null)
+                    //{
+                    //    orgSetting.LinkeD365Description = childNode.Attributes["description"].Value;
+                    //    orgSetting.LinkeD365Url = childNode.Attributes["url"].Value;
+                    //}
                 }
             }
             catch (Exception err)
