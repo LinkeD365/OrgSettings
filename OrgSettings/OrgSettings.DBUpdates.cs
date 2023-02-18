@@ -154,7 +154,7 @@ namespace LinkeD365.OrgSettings
 #if DEBUG
 
                     _linkeD365Xml = new XmlDocument();
-                    _linkeD365Xml.Load("E:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
+                    _linkeD365Xml.Load("F:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
 #else
                         string xmlLinkeD365 =
  new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
@@ -168,7 +168,7 @@ namespace LinkeD365.OrgSettings
                     foreach (var orgSetting in _fullList.Where(os => os.Name == childNode.Attributes["name"].Value))
                     {
                         orgSetting.LinkeD365Description = childNode.Attributes["description"].Value;
-                        orgSetting.LinkeD365Url = childNode.Attributes["url"].Value;
+                        orgSetting.LinkeD365Url = childNode.Attributes["url"].Value.ToLower();
                     }
                     //OrgSetting orgSetting = _fullList.Find(os => os.Name == childNode.Attributes["name"].Value);
                     //if (orgSetting != null)
