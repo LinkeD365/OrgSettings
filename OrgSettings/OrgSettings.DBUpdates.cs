@@ -114,8 +114,9 @@ namespace LinkeD365.OrgSettings
         {
             if (this._smneXml == null)
             {
+            
                 string xmlSeanMcNe = new WebClient().DownloadString(
-                    @"https://raw.githubusercontent.com/seanmcne/OrgDbOrgSettings/master/mspfedyn_/OrgDbOrgSettings/Settings.xml");
+                    @"https://raw.githubusercontent.com/seanmcne/OrgDbOrgSettings/master/mspfedyn_/OrgDbOrgSettings/Solution/WebResources/mspfedyn_/OrgDbOrgSettings/Settings.xml");
                 _smneXml = new XmlDocument();
                 _smneXml.LoadXml(xmlSeanMcNe);
             }
@@ -154,7 +155,7 @@ namespace LinkeD365.OrgSettings
 #if DEBUG
 
                     _linkeD365Xml = new XmlDocument();
-                    _linkeD365Xml.Load("F:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
+                    _linkeD365Xml.Load("C:\\Live\\OrgSettings\\LinkeD65OrgSettings.xml");
 #else
                         string xmlLinkeD365 =
  new WebClient().DownloadString("https://raw.githubusercontent.com/LinkeD365/OrgSettings/master/LinkeD65OrgSettings.xml");
