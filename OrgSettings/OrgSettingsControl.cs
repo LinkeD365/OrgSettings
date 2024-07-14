@@ -56,15 +56,22 @@ namespace LinkeD365.OrgSettings
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            btnConnectSecondary.Enabled = false;
-            // The ExecuteMethod method handles connecting
-            // to an organization if XrmToolBox is not yet connected
-            txtSearch.Text = string.Empty;
-            if (AdditionalConnectionDetails.Any()) RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
-            ExecuteMethod(LoadSingleConfig);
-            if (ConnectionDetail != null) btnConnectSecondary.Enabled = true;
-            // LoadSingleConfig();
+            if (tabGrpBase.SelectedTab == tabPageEnvironment)
+            { ExecuteMethod(LoadEnvironmentConfig); }
+            else
+            {
+                btnConnectSecondary.Enabled = false;
+                // The ExecuteMethod method handles connecting
+                // to an organization if XrmToolBox is not yet connected
+                txtSearch.Text = string.Empty;
+                if (AdditionalConnectionDetails.Any()) RemoveAdditionalOrganization(AdditionalConnectionDetails[0]);
+                ExecuteMethod(LoadSingleConfig);
+                if (ConnectionDetail != null) btnConnectSecondary.Enabled = true;
+                // LoadSingleConfig();
+            }
         }
+
+
 
         private void InitGridView()
         {

@@ -9,12 +9,14 @@ using System.Windows.Forms;
 using System.Xml;
 using McTools.Xrm.Connection;
 using XrmToolBox.Extensibility;
+using System.Net.Http;
 
 namespace LinkeD365.OrgSettings
 {
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
     {
         private XmlDocument _smneXml;
+        private HttpClient bapClient;
 
         private XmlDocument _linkeD365Xml;
         private void RemoveConfig(ConnectionDetail connection, List<OrgSetting> curOrgSettings)
@@ -100,7 +102,7 @@ namespace LinkeD365.OrgSettings
 
             foreach (var connectionDetail in AdditionalConnectionDetails)
             {
-                LoadConfig(connectionDetail, _secondaryOrgSettings,true);
+                LoadConfig(connectionDetail, _secondaryOrgSettings, true);
 
 
             }
@@ -114,7 +116,7 @@ namespace LinkeD365.OrgSettings
         {
             if (this._smneXml == null)
             {
-            
+
                 string xmlSeanMcNe = new WebClient().DownloadString(
                     @"https://raw.githubusercontent.com/seanmcne/OrgDbOrgSettings/master/mspfedyn_/OrgDbOrgSettings/Solution/WebResources/mspfedyn_/OrgDbOrgSettings/Settings.xml");
                 _smneXml = new XmlDocument();
@@ -124,29 +126,29 @@ namespace LinkeD365.OrgSettings
             _fullList.Clear();
 
             _fullList.AddRange(from XmlNode childNode in _smneXml.SelectSingleNode("defaultOrgSettings")
-                              where childNode.Name == "orgSetting" && childNode.Attributes["isOrganizationAttribute"].Value == "false"
-                              select new OrgSetting()
-                              {
-                                  Name = childNode.Attributes["name"].Value,
-                                  Description = childNode.Attributes["description"].Value,
-                                  MinVersion = childNode.Attributes["minSupportedVersion"].Value,
-                                  MaxVersion = childNode.Attributes["maxSupportedVersion"].Value,
-                                  OrgAttribute = Convert.ToBoolean(childNode.Attributes["isOrganizationAttribute"].Value),
-                                  MinValue = childNode.Attributes["min"].Value,
-                                  MaxValue = childNode.Attributes["max"].Value,
-                                  DefaultValue = String.IsNullOrEmpty(childNode.Attributes["defaultValue"].Value)
-                                    ? ""
-                                    : childNode.Attributes["defaultValue"].Value,
-                                  Type = childNode.Attributes["settingType"].Value,
-                                  Url = childNode.Attributes["supportUrl"].Value,
-                                  UrlTitle = childNode.Attributes["urlTitle"].Value,
-                                  CurrentSetting = _primaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
-                                    ? ""
-                                    : _primaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting,
-                                  SecondaryCurrentSetting = _secondaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
-                                      ? ""
-                                      : _secondaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting
-                              });
+                               where childNode.Name == "orgSetting" && childNode.Attributes["isOrganizationAttribute"].Value == "false"
+                               select new OrgSetting()
+                               {
+                                   Name = childNode.Attributes["name"].Value,
+                                   Description = childNode.Attributes["description"].Value,
+                                   MinVersion = childNode.Attributes["minSupportedVersion"].Value,
+                                   MaxVersion = childNode.Attributes["maxSupportedVersion"].Value,
+                                   OrgAttribute = Convert.ToBoolean(childNode.Attributes["isOrganizationAttribute"].Value),
+                                   MinValue = childNode.Attributes["min"].Value,
+                                   MaxValue = childNode.Attributes["max"].Value,
+                                   DefaultValue = String.IsNullOrEmpty(childNode.Attributes["defaultValue"].Value)
+                                     ? ""
+                                     : childNode.Attributes["defaultValue"].Value,
+                                   Type = childNode.Attributes["settingType"].Value,
+                                   Url = childNode.Attributes["supportUrl"].Value,
+                                   UrlTitle = childNode.Attributes["urlTitle"].Value,
+                                   CurrentSetting = _primaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
+                                     ? ""
+                                     : _primaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting,
+                                   SecondaryCurrentSetting = _secondaryOrgSettings.FindIndex(os => os.Name.ToString() == childNode.Attributes["name"].Value) == -1
+                                       ? ""
+                                       : _secondaryOrgSettings.Find(os => os.Name.ToString() == childNode.Attributes["name"].Value).CurrentSetting
+                               });
 
             try
             {
@@ -185,10 +187,11 @@ namespace LinkeD365.OrgSettings
             }
         }
 
+
         /// <summary>
         /// Retrieves Sean McNellis file & displays. If file from LinkeD365 contains descirption, adds this
         /// </summary>
-        private void LoadConfig(ConnectionDetail connection, List<OrgSetting> orgSettings,  bool secondary = false)
+        private void LoadConfig(ConnectionDetail connection, List<OrgSetting> orgSettings, bool secondary = false)
         {
             WorkAsync(new WorkAsyncInfo
             {
@@ -245,10 +248,10 @@ namespace LinkeD365.OrgSettings
                     //}
                     //else
                     //{
-                        gvSettings.DataSource = null;
-                        gvSettings.DataSource = _filteredList;
+                    gvSettings.DataSource = null;
+                    gvSettings.DataSource = _filteredList;
 
-                        InitGridView();
+                    InitGridView();
                     //}
                 }
             });

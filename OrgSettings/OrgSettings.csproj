@@ -242,8 +242,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConnection\ApiConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApiConnection\ApiConnection.Designer.cs">
+      <DependentUpon>ApiConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\APIConn.cs" />
     <Compile Include="OrgSettings.cs" />
     <Compile Include="OrgSettings.DBUpdates.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OrgSettings.Environment.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="OrgSettingsControl.cs">
@@ -266,6 +276,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ApiConnection\ApiConnection.resx">
+      <DependentUpon>ApiConnection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrgSettingsControl.resx">
       <DependentUpon>OrgSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
