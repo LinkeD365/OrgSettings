@@ -1,0 +1,60 @@
+{
+  "Properties": [
+    {
+      "Label": "Name",
+      "Type": "Text",
+      "Path": "properties.displayName",
+      "Editable": true
+    },
+    {
+      "Label": "Type",
+      "Path": "properties.environmentSku",
+      "Editable": false
+    },
+    {
+      "Label": "Retention Period",
+      "Path": "properties.retentionPeriod",
+      "Editable": true,
+      "ManagedEditable": true
+    },
+    {
+      "Label": "Managed",
+      "Type": "Toggle",
+      "Group": "Managed",
+      "Path": "properties.governanceConfiguration.protectionLevel",
+      "UpdatePath": "ProtectionLevel",
+      "Editable": true,
+      "Options": [
+        {
+          "Label": "Enabled",
+          "Value": "Standard"
+        },
+        {
+          "Label": "Disabled",
+          "Value": "Basic"
+        }
+      ]
+    },
+    {
+      "Label": "Update Frequency",
+      "Path": "properties.updateCadence.id",
+      "Type": "Choice",
+      "Editable": true,
+      "Options": [
+        {
+          "Label": "Daily",
+          "Value": "Daily"
+        },
+        {
+          "Label": "Weekly",
+          "Value": "P7D"
+        },
+        {
+          "Label": "Monthly",
+          "Value": "Monthly"
+        }
+      ]
+    }
+
+  ]
+}

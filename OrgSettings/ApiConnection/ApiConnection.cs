@@ -37,7 +37,7 @@ namespace LinkeD365.OrgSettings
             InitializeComponent();
             //  if (graph) this.graphConn = (GraphConn)aPIConn;
             //else
-            this.bapConn = apiConn;
+            bapConn = apiConn;
             Graph = graph;
         }
 
@@ -68,14 +68,14 @@ namespace LinkeD365.OrgSettings
             //{
             if (apiConns.bapConns.Any())
             {
-                cboGraphConns.Items.AddRange(apiConns.bapConns.ToArray());
-                cboGraphConns.SelectedIndex = 0;
+                cboBAPConns.Items.AddRange(apiConns.bapConns.ToArray());
+                cboBAPConns.SelectedIndex = 0;
             }
             else
             {
                 EnableControls();
-                cboGraphConns.Enabled = false;
-                chkGraphDev.CheckedChanged += ChkGraphDev_CheckedChanged;
+                cboBAPConns.Enabled = false;
+                chkUseDevApp.CheckedChanged += ChkUseDevApp_CheckedChanged;
             }
             //}
             panelGraph.Visible = Graph;
@@ -89,7 +89,7 @@ namespace LinkeD365.OrgSettings
             panelGraph.Controls.OfType<TextBox>().ToList().ForEach(ctl => ctl.Enabled = Graph);
 
             chkUseDevApp.Enabled = false;
-            cboFlowConns.Enabled = false;
+            cboBAPConns.Enabled = false;
         }
 
         public HttpClient GetClient()
@@ -123,18 +123,19 @@ namespace LinkeD365.OrgSettings
                 //}
                 //else
                 //{
-                bapConn = apiConns.bapConns.FirstOrDefault(grph => grph.Id == (int)lblGraphName.Tag);
+                bapConn = apiConns.bapConns.FirstOrDefault(grph => grph.Id == (int)lblName.Tag);
                 if (bapConn == null)
                 {
                     bapConn = new APIConn();
                 }
 
-                bapConn.Id = (int)lblGraphName.Tag;
-                bapConn.TenantId = txtGraphTenant.Text;
-                bapConn.ReturnURL = txtGraphReturnURL.Text;
-                bapConn.AppId = txtGraphApp.Text;
-                bapConn.UseDev = chkGraphDev.Checked;
-                bapConn.Name = txtGraphName.Text;
+                bapConn.Id = (int)lblName.Tag;
+                bapConn.Environment = txtEnvironment.Text;
+                bapConn.TenantId = txtTenant.Text;
+                bapConn.ReturnURL = txtReturnURL.Text;
+                bapConn.AppId = txtAppId.Text;
+                bapConn.UseDev = chkUseDevApp.Checked;
+                bapConn.Name = txtName.Text;
                 var grpIndex = apiConns.bapConns.IndexOf(bapConn);
                 if (grpIndex == -1)
                 {
@@ -166,7 +167,7 @@ namespace LinkeD365.OrgSettings
             // AuthenticationContext ac = new AuthenticationContext($"https://login.microsoftonline.com/{(Graph ? graphConn.TenantId : flowConn.TenantId)}");
             AuthenticationContext ac = new AuthenticationContext($"https://login.microsoftonline.com/{bapConn.TenantId}");
             //string serviceURL = Graph ? "https://graph.microsoft.com" : "https://service.flow.microsoft.com/";
-            string serviceURL = "https://api.bap..microsoft.com/";
+            string serviceURL = "https://api.bap.microsoft.com/";
             //string appId = Graph ? graphConn.AppId : flowConn.AppId;
             string appId = bapConn.AppId;
 
@@ -283,7 +284,7 @@ namespace LinkeD365.OrgSettings
         private void cboFlowConns_SelectedIndexChanged(object sender, EventArgs e)
         {
             chkUseDevApp.CheckedChanged -= ChkUseDevApp_CheckedChanged;
-            var selectedConn = cboFlowConns.SelectedItem as APIConn;
+            var selectedConn = cboBAPConns.SelectedItem as APIConn;
             lblName.Tag = selectedConn.Id;
 
             txtTenant.Text = selectedConn.TenantId;
@@ -339,36 +340,36 @@ namespace LinkeD365.OrgSettings
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (cboFlowConns.SelectedItem == null)
+            if (cboBAPConns.SelectedItem == null)
             {
                 return;
             }
 
-            APIConn removeFlow = (APIConn)cboFlowConns.SelectedItem;
+            APIConn removeFlow = (APIConn)cboBAPConns.SelectedItem;
             if (MessageBox.Show("Remove the Power Automate Connection '" + removeFlow.Name + "' ?",
                     "Remove Flow Connection", MessageBoxButtons.YesNo) !=
                 DialogResult.Yes)
             {
                 return;
             }
-            cboFlowConns.Items.Clear();
+            cboBAPConns.Items.Clear();
 
             apiConns.bapConns.Remove(removeFlow);
             if (apiConns.bapConns.Any())
             {
-                cboFlowConns.Items.AddRange(apiConns.bapConns.ToArray());
-                cboFlowConns.SelectedIndex = 0;
+                cboBAPConns.Items.AddRange(apiConns.bapConns.ToArray());
+                cboBAPConns.SelectedIndex = 0;
             }
             else
             {
-                cboFlowConns.ResetText();
+                cboBAPConns.ResetText();
                 txtEnvironment.Text = environmentText;
                 txtTenant.Text = tenantText;
                 txtAppId.Text = appText;
                 txtReturnURL.Text = returnText;
                 chkUseDevApp.Checked = false;
                 txtName.Text = labelText;
-                cboFlowConns.Enabled = false;
+                cboBAPConns.Enabled = false;
                 panelFlow.Controls.OfType<TextBox>().ToList().ForEach(txt => txt.Enabled = false);
                 chkUseDevApp.Enabled = false;
             }
@@ -447,7 +448,7 @@ namespace LinkeD365.OrgSettings
         {
             public RichTextLabel(string text)
             {
-                this.Text = text;
+                Text = text;
             }
         }
     }

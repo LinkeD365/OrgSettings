@@ -16,7 +16,7 @@ namespace LinkeD365.OrgSettings
     public partial class OrgSettingsControl : MultipleConnectionsPluginControlBase
     {
         private XmlDocument _smneXml;
-        private HttpClient bapClient;
+        
 
         private XmlDocument _linkeD365Xml;
         private void RemoveConfig(ConnectionDetail connection, List<OrgSetting> curOrgSettings)
@@ -114,7 +114,7 @@ namespace LinkeD365.OrgSettings
 
         private void LoadXml()
         {
-            if (this._smneXml == null)
+            if (_smneXml == null)
             {
 
                 string xmlSeanMcNe = new WebClient().DownloadString(

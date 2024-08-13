@@ -63,7 +63,7 @@
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnFlowAdd = new System.Windows.Forms.Button();
-            this.cboFlowConns = new System.Windows.Forms.ComboBox();
+            this.cboBAPConns = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
             this.toolTipAPI = new System.Windows.Forms.ToolTip(this.components);
@@ -87,7 +87,7 @@
             // 
             this.txtAppId.ForeColor = System.Drawing.Color.Silver;
             this.txtAppId.Location = new System.Drawing.Point(135, 69);
-            this.txtAppId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAppId.Margin = new System.Windows.Forms.Padding(4);
             this.txtAppId.Name = "txtAppId";
             this.txtAppId.Size = new System.Drawing.Size(363, 22);
             this.txtAppId.TabIndex = 25;
@@ -101,7 +101,7 @@
             // 
             this.txtEnvironment.ForeColor = System.Drawing.Color.Silver;
             this.txtEnvironment.Location = new System.Drawing.Point(135, 132);
-            this.txtEnvironment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnvironment.Margin = new System.Windows.Forms.Padding(4);
             this.txtEnvironment.Name = "txtEnvironment";
             this.txtEnvironment.Size = new System.Drawing.Size(363, 22);
             this.txtEnvironment.TabIndex = 35;
@@ -130,7 +130,7 @@
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(325, 267);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(100, 28);
             this.btnOK.TabIndex = 100;
@@ -146,7 +146,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(433, 267);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 105;
@@ -158,7 +158,7 @@
             // 
             this.txtTenant.ForeColor = System.Drawing.Color.Silver;
             this.txtTenant.Location = new System.Drawing.Point(135, 101);
-            this.txtTenant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTenant.Margin = new System.Windows.Forms.Padding(4);
             this.txtTenant.Name = "txtTenant";
             this.txtTenant.Size = new System.Drawing.Size(363, 22);
             this.txtTenant.TabIndex = 30;
@@ -184,7 +184,7 @@
             // 
             this.txtReturnURL.ForeColor = System.Drawing.Color.Silver;
             this.txtReturnURL.Location = new System.Drawing.Point(135, 164);
-            this.txtReturnURL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtReturnURL.Margin = new System.Windows.Forms.Padding(4);
             this.txtReturnURL.Name = "txtReturnURL";
             this.txtReturnURL.Size = new System.Drawing.Size(363, 22);
             this.txtReturnURL.TabIndex = 40;
@@ -211,7 +211,7 @@
             this.chkUseDevApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkUseDevApp.AutoSize = true;
             this.chkUseDevApp.Location = new System.Drawing.Point(337, 198);
-            this.chkUseDevApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkUseDevApp.Margin = new System.Windows.Forms.Padding(4);
             this.chkUseDevApp.Name = "chkUseDevApp";
             this.chkUseDevApp.Size = new System.Drawing.Size(151, 20);
             this.chkUseDevApp.TabIndex = 45;
@@ -224,7 +224,7 @@
             this.flowMain.Controls.Add(this.panelGraph);
             this.flowMain.Controls.Add(this.panelFlow);
             this.flowMain.Location = new System.Drawing.Point(-1, 10);
-            this.flowMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowMain.Margin = new System.Windows.Forms.Padding(4);
             this.flowMain.Name = "flowMain";
             this.flowMain.Size = new System.Drawing.Size(535, 242);
             this.flowMain.TabIndex = 11;
@@ -247,7 +247,7 @@
             this.panelGraph.Controls.Add(this.lblSubscription);
             this.panelGraph.Controls.Add(this.txtSubscriptionId);
             this.panelGraph.Location = new System.Drawing.Point(4, 4);
-            this.panelGraph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelGraph.Margin = new System.Windows.Forms.Padding(4);
             this.panelGraph.Name = "panelGraph";
             this.panelGraph.Size = new System.Drawing.Size(516, 231);
             this.panelGraph.TabIndex = 12;
@@ -255,7 +255,7 @@
             // btnRemoveGraph
             // 
             this.btnRemoveGraph.Location = new System.Drawing.Point(485, 2);
-            this.btnRemoveGraph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveGraph.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveGraph.Name = "btnRemoveGraph";
             this.btnRemoveGraph.Size = new System.Drawing.Size(23, 28);
             this.btnRemoveGraph.TabIndex = 10;
@@ -279,7 +279,7 @@
             // 
             this.txtGraphName.ForeColor = System.Drawing.Color.Silver;
             this.txtGraphName.Location = new System.Drawing.Point(135, 37);
-            this.txtGraphName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGraphName.Margin = new System.Windows.Forms.Padding(4);
             this.txtGraphName.Name = "txtGraphName";
             this.txtGraphName.Size = new System.Drawing.Size(363, 22);
             this.txtGraphName.TabIndex = 15;
@@ -292,7 +292,7 @@
             // btnAddGraph
             // 
             this.btnAddGraph.Location = new System.Drawing.Point(459, 2);
-            this.btnAddGraph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddGraph.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddGraph.Name = "btnAddGraph";
             this.btnAddGraph.Size = new System.Drawing.Size(23, 28);
             this.btnAddGraph.TabIndex = 5;
@@ -306,7 +306,7 @@
             this.cboGraphConns.DisplayMember = "Name";
             this.cboGraphConns.FormattingEnabled = true;
             this.cboGraphConns.Location = new System.Drawing.Point(135, 4);
-            this.cboGraphConns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboGraphConns.Margin = new System.Windows.Forms.Padding(4);
             this.cboGraphConns.Name = "cboGraphConns";
             this.cboGraphConns.Size = new System.Drawing.Size(320, 24);
             this.cboGraphConns.TabIndex = 1;
@@ -329,7 +329,7 @@
             this.chkGraphDev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkGraphDev.AutoSize = true;
             this.chkGraphDev.Location = new System.Drawing.Point(347, 198);
-            this.chkGraphDev.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkGraphDev.Margin = new System.Windows.Forms.Padding(4);
             this.chkGraphDev.Name = "chkGraphDev";
             this.chkGraphDev.Size = new System.Drawing.Size(151, 20);
             this.chkGraphDev.TabIndex = 40;
@@ -341,7 +341,7 @@
             // 
             this.txtGraphReturnURL.ForeColor = System.Drawing.Color.Silver;
             this.txtGraphReturnURL.Location = new System.Drawing.Point(135, 165);
-            this.txtGraphReturnURL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGraphReturnURL.Margin = new System.Windows.Forms.Padding(4);
             this.txtGraphReturnURL.Name = "txtGraphReturnURL";
             this.txtGraphReturnURL.Size = new System.Drawing.Size(363, 22);
             this.txtGraphReturnURL.TabIndex = 35;
@@ -366,7 +366,7 @@
             // 
             this.txtGraphApp.ForeColor = System.Drawing.Color.Silver;
             this.txtGraphApp.Location = new System.Drawing.Point(135, 101);
-            this.txtGraphApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGraphApp.Margin = new System.Windows.Forms.Padding(4);
             this.txtGraphApp.Name = "txtGraphApp";
             this.txtGraphApp.Size = new System.Drawing.Size(363, 22);
             this.txtGraphApp.TabIndex = 25;
@@ -392,7 +392,7 @@
             // 
             this.txtGraphTenant.ForeColor = System.Drawing.Color.Silver;
             this.txtGraphTenant.Location = new System.Drawing.Point(135, 133);
-            this.txtGraphTenant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGraphTenant.Margin = new System.Windows.Forms.Padding(4);
             this.txtGraphTenant.Name = "txtGraphTenant";
             this.txtGraphTenant.Size = new System.Drawing.Size(363, 22);
             this.txtGraphTenant.TabIndex = 30;
@@ -430,7 +430,7 @@
             // 
             this.txtSubscriptionId.ForeColor = System.Drawing.Color.Silver;
             this.txtSubscriptionId.Location = new System.Drawing.Point(135, 69);
-            this.txtSubscriptionId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubscriptionId.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubscriptionId.Name = "txtSubscriptionId";
             this.txtSubscriptionId.Size = new System.Drawing.Size(363, 22);
             this.txtSubscriptionId.TabIndex = 20;
@@ -447,7 +447,7 @@
             this.panelFlow.Controls.Add(this.lblName);
             this.panelFlow.Controls.Add(this.txtName);
             this.panelFlow.Controls.Add(this.btnFlowAdd);
-            this.panelFlow.Controls.Add(this.cboFlowConns);
+            this.panelFlow.Controls.Add(this.cboBAPConns);
             this.panelFlow.Controls.Add(this.label1);
             this.panelFlow.Controls.Add(this.txtReturnURL);
             this.panelFlow.Controls.Add(this.lblClientId);
@@ -459,7 +459,7 @@
             this.panelFlow.Controls.Add(this.txtTenant);
             this.panelFlow.Controls.Add(this.lblTenant);
             this.panelFlow.Location = new System.Drawing.Point(4, 243);
-            this.panelFlow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelFlow.Margin = new System.Windows.Forms.Padding(4);
             this.panelFlow.Name = "panelFlow";
             this.panelFlow.Size = new System.Drawing.Size(516, 230);
             this.panelFlow.TabIndex = 12;
@@ -467,7 +467,7 @@
             // btnRemove
             // 
             this.btnRemove.Location = new System.Drawing.Point(485, 1);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(23, 28);
             this.btnRemove.TabIndex = 15;
@@ -491,7 +491,7 @@
             // 
             this.txtName.ForeColor = System.Drawing.Color.Silver;
             this.txtName.Location = new System.Drawing.Point(135, 37);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(363, 22);
             this.txtName.TabIndex = 20;
@@ -504,7 +504,7 @@
             // btnFlowAdd
             // 
             this.btnFlowAdd.Location = new System.Drawing.Point(459, 1);
-            this.btnFlowAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFlowAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnFlowAdd.Name = "btnFlowAdd";
             this.btnFlowAdd.Size = new System.Drawing.Size(23, 28);
             this.btnFlowAdd.TabIndex = 10;
@@ -513,17 +513,17 @@
             this.btnFlowAdd.UseVisualStyleBackColor = true;
             this.btnFlowAdd.Click += new System.EventHandler(this.btnFlowAdd_Click);
             // 
-            // cboFlowConns
+            // cboBAPConns
             // 
-            this.cboFlowConns.DisplayMember = "Name";
-            this.cboFlowConns.FormattingEnabled = true;
-            this.cboFlowConns.Location = new System.Drawing.Point(135, 4);
-            this.cboFlowConns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cboFlowConns.Name = "cboFlowConns";
-            this.cboFlowConns.Size = new System.Drawing.Size(320, 24);
-            this.cboFlowConns.TabIndex = 5;
-            this.toolTipAPI.SetToolTip(this.cboFlowConns, "Select the saved Power Automate API Connection");
-            this.cboFlowConns.SelectedIndexChanged += new System.EventHandler(this.cboFlowConns_SelectedIndexChanged);
+            this.cboBAPConns.DisplayMember = "Name";
+            this.cboBAPConns.FormattingEnabled = true;
+            this.cboBAPConns.Location = new System.Drawing.Point(135, 4);
+            this.cboBAPConns.Margin = new System.Windows.Forms.Padding(4);
+            this.cboBAPConns.Name = "cboBAPConns";
+            this.cboBAPConns.Size = new System.Drawing.Size(320, 24);
+            this.cboBAPConns.TabIndex = 5;
+            this.toolTipAPI.SetToolTip(this.cboBAPConns, "Select the saved Power Automate API Connection");
+            this.cboBAPConns.SelectedIndexChanged += new System.EventHandler(this.cboFlowConns_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -542,7 +542,7 @@
             this.btnHelp.AccessibleName = "Help Button";
             this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHelp.Location = new System.Drawing.Point(16, 267);
-            this.btnHelp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHelp.Margin = new System.Windows.Forms.Padding(4);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(100, 28);
             this.btnHelp.TabIndex = 110;
@@ -569,7 +569,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ApiConnection";
@@ -615,7 +615,7 @@
         private System.Windows.Forms.ComboBox cboGraphConns;
         private System.Windows.Forms.Label lblGraphSelect;
         private System.Windows.Forms.Button btnFlowAdd;
-        private System.Windows.Forms.ComboBox cboFlowConns;
+        private System.Windows.Forms.ComboBox cboBAPConns;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;

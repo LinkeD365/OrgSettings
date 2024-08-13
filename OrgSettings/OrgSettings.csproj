@@ -249,6 +249,8 @@
       <DependentUpon>ApiConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\APIConn.cs" />
+    <Compile Include="Classes\Environment.cs" />
+    <Compile Include="Classes\GridViewCellDyanmic.cs" />
     <Compile Include="OrgSettings.cs" />
     <Compile Include="OrgSettings.DBUpdates.cs">
       <SubType>UserControl</SubType>

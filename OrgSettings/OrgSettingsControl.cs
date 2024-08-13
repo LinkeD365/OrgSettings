@@ -45,6 +45,14 @@ namespace LinkeD365.OrgSettings
 
         private void OrgSettingsControl_Load(object sender, EventArgs e)
         {
+            // Loads or creates the settings for the plugin
+            if (!SettingsManager.Instance.TryLoad(GetType(), out apiConns))
+            {
+                apiConns = new APIConns();
+
+                LogWarning("Settings not found => a new settings file has been created!");
+            }
+
             ShowInfoNotification("NOTE: You should NOT change any setting without having a specific reason to do.\r\nPlease ensure you have a back up of the current settings prior to changing them, available in Manual tab", null);
             ExecuteMethod(LoadSingleConfig);
         }
@@ -483,12 +491,21 @@ namespace LinkeD365.OrgSettings
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_primaryOrgSettings == null || _primaryOrgSettings.FindIndex(os => !String.IsNullOrEmpty(os.NewSetting)) == -1) return;
+            if (tabGrpBase.SelectedTab == tabPageEnvironment)
+            {
+                UpdateEnvConfig();
 
-            if (MessageBox.Show("Commit " +
-                _primaryOrgSettings.FindAll(os => !String.IsNullOrEmpty(os.NewSetting)).Count + " changes to your Org Settings?",
-                "Commit Changes?", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-            UpdateConfig(ConnectionDetail, _primaryOrgSettings);
+            }
+            else
+            {
+
+                if (_primaryOrgSettings == null || _primaryOrgSettings.FindIndex(os => !String.IsNullOrEmpty(os.NewSetting)) == -1) return;
+
+                if (MessageBox.Show("Commit " +
+                    _primaryOrgSettings.FindAll(os => !String.IsNullOrEmpty(os.NewSetting)).Count + " changes to your Org Settings?",
+                    "Commit Changes?", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+                UpdateConfig(ConnectionDetail, _primaryOrgSettings);
+            }
         }
 
         /// <summary>
@@ -705,6 +722,19 @@ namespace LinkeD365.OrgSettings
 
             gvSettings.DataSource = _fullList;
             InitGridView();
+        }
+
+        private void gridEnv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (gridEnv.Columns[e.ColumnIndex].Name == "colNewValue")
+            //{
+            //    var envProp = (EnvProp)gridEnv.Rows[e.RowIndex].DataBoundItem;
+            //    switch (envProp.Type)
+            //    {
+            //        case "Toggle":
+                    
+            //    }
+            //}
         }
     }
 }
