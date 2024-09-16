@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrgSettingsControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -111,8 +111,32 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabGrpBase = new System.Windows.Forms.TabControl();
             this.tabPageEnvironment = new System.Windows.Forms.TabPage();
+            this.splitEnvMain = new System.Windows.Forms.SplitContainer();
             this.gridEnv = new System.Windows.Forms.DataGridView();
+            this.splitEnvRight = new System.Windows.Forms.SplitContainer();
+            this.grpEnvSetting = new System.Windows.Forms.GroupBox();
+            this.splitEnvDropDown = new System.Windows.Forms.SplitContainer();
+            this.grpEnvDropOld = new System.Windows.Forms.GroupBox();
+            this.txtEnvDropOld = new System.Windows.Forms.TextBox();
+            this.grpEnvDropNew = new System.Windows.Forms.GroupBox();
+            this.cboEnvDropNew = new System.Windows.Forms.ComboBox();
+            this.splitEnvNumber = new System.Windows.Forms.SplitContainer();
+            this.grpEnvNumberOld = new System.Windows.Forms.GroupBox();
+            this.numEnvOld = new System.Windows.Forms.NumericUpDown();
+            this.grpEnvNumberNew = new System.Windows.Forms.GroupBox();
+            this.numEnvNew = new System.Windows.Forms.NumericUpDown();
+            this.splitEnvText = new System.Windows.Forms.SplitContainer();
+            this.grpEnvTextCurrent = new System.Windows.Forms.GroupBox();
+            this.txtEnvTextOld = new System.Windows.Forms.TextBox();
+            this.grpEnvTextNew = new System.Windows.Forms.GroupBox();
+            this.txtEnvTextNew = new System.Windows.Forms.TextBox();
+            this.panelToggle = new System.Windows.Forms.Panel();
+            this.radioEnvToggleTrue = new System.Windows.Forms.RadioButton();
+            this.radioEnvToggleFalse = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabPageOrgSettings = new System.Windows.Forms.TabPage();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -172,7 +196,36 @@
             this.tabLinkeD365.SuspendLayout();
             this.tabGrpBase.SuspendLayout();
             this.tabPageEnvironment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvMain)).BeginInit();
+            this.splitEnvMain.Panel1.SuspendLayout();
+            this.splitEnvMain.Panel2.SuspendLayout();
+            this.splitEnvMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridEnv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvRight)).BeginInit();
+            this.splitEnvRight.Panel1.SuspendLayout();
+            this.splitEnvRight.SuspendLayout();
+            this.grpEnvSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvDropDown)).BeginInit();
+            this.splitEnvDropDown.Panel1.SuspendLayout();
+            this.splitEnvDropDown.Panel2.SuspendLayout();
+            this.splitEnvDropDown.SuspendLayout();
+            this.grpEnvDropOld.SuspendLayout();
+            this.grpEnvDropNew.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvNumber)).BeginInit();
+            this.splitEnvNumber.Panel1.SuspendLayout();
+            this.splitEnvNumber.Panel2.SuspendLayout();
+            this.splitEnvNumber.SuspendLayout();
+            this.grpEnvNumberOld.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numEnvOld)).BeginInit();
+            this.grpEnvNumberNew.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numEnvNew)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvText)).BeginInit();
+            this.splitEnvText.Panel1.SuspendLayout();
+            this.splitEnvText.Panel2.SuspendLayout();
+            this.splitEnvText.SuspendLayout();
+            this.grpEnvTextCurrent.SuspendLayout();
+            this.grpEnvTextNew.SuspendLayout();
+            this.panelToggle.SuspendLayout();
             this.tabPageOrgSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,7 +243,7 @@
             this.btnSecondaryCommit});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
-            this.toolStripMenu.Size = new System.Drawing.Size(2520, 43);
+            this.toolStripMenu.Size = new System.Drawing.Size(1890, 43);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -267,32 +320,31 @@
             // 
             this.gvSettings.AllowUserToAddRows = false;
             this.gvSettings.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.gvSettings.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvSettings.DefaultCellStyle = dataGridViewCellStyle3;
             this.gvSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvSettings.Location = new System.Drawing.Point(0, 0);
-            this.gvSettings.Margin = new System.Windows.Forms.Padding(4);
             this.gvSettings.Name = "gvSettings";
             this.gvSettings.RowHeadersWidth = 51;
-            this.gvSettings.Size = new System.Drawing.Size(1975, 1421);
+            this.gvSettings.Size = new System.Drawing.Size(1347, 1140);
             this.gvSettings.TabIndex = 5;
             this.gvSettings.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gvSettings_CellFormatting);
             this.gvSettings.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gvSettings_ColumnHeaderMouseClick);
@@ -303,8 +355,7 @@
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitMain.IsSplitterFixed = true;
-            this.splitMain.Location = new System.Drawing.Point(4, 4);
-            this.splitMain.Margin = new System.Windows.Forms.Padding(4);
+            this.splitMain.Location = new System.Drawing.Point(3, 3);
             this.splitMain.Name = "splitMain";
             // 
             // splitMain.Panel1
@@ -317,9 +368,8 @@
             this.splitMain.Panel2.Controls.Add(this.splitMainRight);
             this.splitMain.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitMain.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitMain.Size = new System.Drawing.Size(2504, 1451);
-            this.splitMain.SplitterDistance = 1975;
-            this.splitMain.SplitterWidth = 5;
+            this.splitMain.Size = new System.Drawing.Size(1876, 1169);
+            this.splitMain.SplitterDistance = 1347;
             this.splitMain.TabIndex = 6;
             // 
             // splitSettings
@@ -328,7 +378,6 @@
             this.splitSettings.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitSettings.IsSplitterFixed = true;
             this.splitSettings.Location = new System.Drawing.Point(0, 0);
-            this.splitSettings.Margin = new System.Windows.Forms.Padding(4);
             this.splitSettings.Name = "splitSettings";
             this.splitSettings.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -342,9 +391,8 @@
             // 
             this.splitSettings.Panel2.Controls.Add(this.gvSettings);
             this.splitSettings.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitSettings.Size = new System.Drawing.Size(1975, 1451);
+            this.splitSettings.Size = new System.Drawing.Size(1347, 1169);
             this.splitSettings.SplitterDistance = 25;
-            this.splitSettings.SplitterWidth = 5;
             this.splitSettings.TabIndex = 6;
             // 
             // splitSearch
@@ -353,7 +401,6 @@
             this.splitSearch.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitSearch.IsSplitterFixed = true;
             this.splitSearch.Location = new System.Drawing.Point(0, 0);
-            this.splitSearch.Margin = new System.Windows.Forms.Padding(4);
             this.splitSearch.Name = "splitSearch";
             // 
             // splitSearch.Panel1
@@ -365,16 +412,14 @@
             // 
             this.splitSearch.Panel2.Controls.Add(this.txtSearch);
             this.splitSearch.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitSearch.Size = new System.Drawing.Size(1975, 25);
+            this.splitSearch.Size = new System.Drawing.Size(1347, 25);
             this.splitSearch.SplitterDistance = 60;
-            this.splitSearch.SplitterWidth = 5;
             this.splitSearch.TabIndex = 1;
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(19, 4);
-            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearch.Location = new System.Drawing.Point(14, 3);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(46, 15);
             this.lblSearch.TabIndex = 0;
@@ -384,9 +429,8 @@
             // 
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.Location = new System.Drawing.Point(0, 0);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(1910, 20);
+            this.txtSearch.Size = new System.Drawing.Size(1283, 20);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -396,7 +440,6 @@
             this.splitMainRight.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitMainRight.IsSplitterFixed = true;
             this.splitMainRight.Location = new System.Drawing.Point(0, 0);
-            this.splitMainRight.Margin = new System.Windows.Forms.Padding(4);
             this.splitMainRight.Name = "splitMainRight";
             this.splitMainRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -409,9 +452,8 @@
             // 
             this.splitMainRight.Panel2.Controls.Add(this.splitMainLower);
             this.splitMainRight.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitMainRight.Size = new System.Drawing.Size(524, 1451);
+            this.splitMainRight.Size = new System.Drawing.Size(525, 1169);
             this.splitMainRight.SplitterDistance = 285;
-            this.splitMainRight.SplitterWidth = 5;
             this.splitMainRight.TabIndex = 1;
             // 
             // tabGrpMain
@@ -420,20 +462,18 @@
             this.tabGrpMain.Controls.Add(this.tabManual);
             this.tabGrpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabGrpMain.Location = new System.Drawing.Point(0, 0);
-            this.tabGrpMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabGrpMain.Name = "tabGrpMain";
             this.tabGrpMain.SelectedIndex = 0;
-            this.tabGrpMain.Size = new System.Drawing.Size(524, 285);
+            this.tabGrpMain.Size = new System.Drawing.Size(525, 285);
             this.tabGrpMain.TabIndex = 7;
             // 
             // tabSet
             // 
             this.tabSet.Controls.Add(this.splitSet);
-            this.tabSet.Location = new System.Drawing.Point(4, 25);
-            this.tabSet.Margin = new System.Windows.Forms.Padding(4);
+            this.tabSet.Location = new System.Drawing.Point(4, 22);
             this.tabSet.Name = "tabSet";
-            this.tabSet.Padding = new System.Windows.Forms.Padding(4);
-            this.tabSet.Size = new System.Drawing.Size(516, 256);
+            this.tabSet.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSet.Size = new System.Drawing.Size(517, 259);
             this.tabSet.TabIndex = 0;
             this.tabSet.Text = "Set";
             this.tabSet.UseVisualStyleBackColor = true;
@@ -441,8 +481,7 @@
             // splitSet
             // 
             this.splitSet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitSet.Location = new System.Drawing.Point(4, 4);
-            this.splitSet.Margin = new System.Windows.Forms.Padding(4);
+            this.splitSet.Location = new System.Drawing.Point(3, 3);
             this.splitSet.Name = "splitSet";
             this.splitSet.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -456,9 +495,8 @@
             this.splitSet.Panel2.Controls.Add(this.grpSecAttribute);
             this.splitSet.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitSet.Panel2Collapsed = true;
-            this.splitSet.Size = new System.Drawing.Size(508, 248);
+            this.splitSet.Size = new System.Drawing.Size(511, 253);
             this.splitSet.SplitterDistance = 125;
-            this.splitSet.SplitterWidth = 5;
             this.splitSet.TabIndex = 3;
             // 
             // grpAttribute
@@ -471,10 +509,8 @@
             this.grpAttribute.Controls.Add(this.grpBool);
             this.grpAttribute.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpAttribute.Location = new System.Drawing.Point(0, 0);
-            this.grpAttribute.Margin = new System.Windows.Forms.Padding(4);
             this.grpAttribute.Name = "grpAttribute";
-            this.grpAttribute.Padding = new System.Windows.Forms.Padding(4);
-            this.grpAttribute.Size = new System.Drawing.Size(508, 248);
+            this.grpAttribute.Size = new System.Drawing.Size(511, 253);
             this.grpAttribute.TabIndex = 2;
             this.grpAttribute.TabStop = false;
             this.grpAttribute.Text = "Select an Attribute";
@@ -482,11 +518,9 @@
             // grpCurrent
             // 
             this.grpCurrent.Controls.Add(this.txtCurrentValue);
-            this.grpCurrent.Location = new System.Drawing.Point(0, 25);
-            this.grpCurrent.Margin = new System.Windows.Forms.Padding(4);
+            this.grpCurrent.Location = new System.Drawing.Point(0, 20);
             this.grpCurrent.Name = "grpCurrent";
-            this.grpCurrent.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCurrent.Size = new System.Drawing.Size(267, 123);
+            this.grpCurrent.Size = new System.Drawing.Size(200, 100);
             this.grpCurrent.TabIndex = 9;
             this.grpCurrent.TabStop = false;
             this.grpCurrent.Text = "Current Value";
@@ -494,20 +528,18 @@
             // txtCurrentValue
             // 
             this.txtCurrentValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCurrentValue.Location = new System.Drawing.Point(4, 17);
-            this.txtCurrentValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCurrentValue.Location = new System.Drawing.Point(3, 16);
             this.txtCurrentValue.Multiline = true;
             this.txtCurrentValue.Name = "txtCurrentValue";
             this.txtCurrentValue.ReadOnly = true;
-            this.txtCurrentValue.Size = new System.Drawing.Size(259, 102);
+            this.txtCurrentValue.Size = new System.Drawing.Size(194, 81);
             this.txtCurrentValue.TabIndex = 5;
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(556, 23);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRemove.Location = new System.Drawing.Point(417, 19);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(100, 60);
+            this.btnRemove.Size = new System.Drawing.Size(75, 49);
             this.btnRemove.TabIndex = 7;
             this.btnRemove.Text = "Remove Value";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -516,11 +548,9 @@
             // grpDouble
             // 
             this.grpDouble.Controls.Add(this.decimalNewValue);
-            this.grpDouble.Location = new System.Drawing.Point(271, 25);
-            this.grpDouble.Margin = new System.Windows.Forms.Padding(4);
+            this.grpDouble.Location = new System.Drawing.Point(203, 20);
             this.grpDouble.Name = "grpDouble";
-            this.grpDouble.Padding = new System.Windows.Forms.Padding(4);
-            this.grpDouble.Size = new System.Drawing.Size(267, 123);
+            this.grpDouble.Size = new System.Drawing.Size(200, 100);
             this.grpDouble.TabIndex = 10;
             this.grpDouble.TabStop = false;
             this.grpDouble.Text = "New Value";
@@ -528,15 +558,14 @@
             // decimalNewValue
             // 
             this.decimalNewValue.DecimalPlaces = 2;
-            this.decimalNewValue.Location = new System.Drawing.Point(8, 23);
-            this.decimalNewValue.Margin = new System.Windows.Forms.Padding(4);
+            this.decimalNewValue.Location = new System.Drawing.Point(6, 19);
             this.decimalNewValue.Maximum = new decimal(new int[] {
             1316134912,
             2328,
             0,
             0});
             this.decimalNewValue.Name = "decimalNewValue";
-            this.decimalNewValue.Size = new System.Drawing.Size(241, 20);
+            this.decimalNewValue.Size = new System.Drawing.Size(181, 20);
             this.decimalNewValue.TabIndex = 0;
             this.decimalNewValue.ValueChanged += new System.EventHandler(this.decimalNewValue_ValueChanged);
             this.decimalNewValue.Validated += new System.EventHandler(this.decimalNewValue_Validated);
@@ -544,11 +573,9 @@
             // grpString
             // 
             this.grpString.Controls.Add(this.txtStringValue);
-            this.grpString.Location = new System.Drawing.Point(271, 25);
-            this.grpString.Margin = new System.Windows.Forms.Padding(4);
+            this.grpString.Location = new System.Drawing.Point(203, 20);
             this.grpString.Name = "grpString";
-            this.grpString.Padding = new System.Windows.Forms.Padding(4);
-            this.grpString.Size = new System.Drawing.Size(257, 123);
+            this.grpString.Size = new System.Drawing.Size(193, 100);
             this.grpString.TabIndex = 8;
             this.grpString.TabStop = false;
             this.grpString.Text = "New Value";
@@ -556,11 +583,10 @@
             // txtStringValue
             // 
             this.txtStringValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtStringValue.Location = new System.Drawing.Point(4, 17);
-            this.txtStringValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtStringValue.Location = new System.Drawing.Point(3, 16);
             this.txtStringValue.Multiline = true;
             this.txtStringValue.Name = "txtStringValue";
-            this.txtStringValue.Size = new System.Drawing.Size(249, 102);
+            this.txtStringValue.Size = new System.Drawing.Size(187, 81);
             this.txtStringValue.TabIndex = 7;
             this.txtStringValue.TextChanged += new System.EventHandler(this.txtStringValue_TextChanged);
             // 
@@ -569,11 +595,9 @@
             this.grpNumber.Controls.Add(this.lblMinNumber);
             this.grpNumber.Controls.Add(this.lblMaxNumber);
             this.grpNumber.Controls.Add(this.numberNew);
-            this.grpNumber.Location = new System.Drawing.Point(271, 23);
-            this.grpNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.grpNumber.Location = new System.Drawing.Point(203, 19);
             this.grpNumber.Name = "grpNumber";
-            this.grpNumber.Padding = new System.Windows.Forms.Padding(4);
-            this.grpNumber.Size = new System.Drawing.Size(267, 124);
+            this.grpNumber.Size = new System.Drawing.Size(200, 101);
             this.grpNumber.TabIndex = 6;
             this.grpNumber.TabStop = false;
             this.grpNumber.Text = "New Value";
@@ -581,8 +605,7 @@
             // lblMinNumber
             // 
             this.lblMinNumber.AutoSize = true;
-            this.lblMinNumber.Location = new System.Drawing.Point(20, 58);
-            this.lblMinNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMinNumber.Location = new System.Drawing.Point(15, 47);
             this.lblMinNumber.Name = "lblMinNumber";
             this.lblMinNumber.Size = new System.Drawing.Size(31, 15);
             this.lblMinNumber.TabIndex = 7;
@@ -591,8 +614,7 @@
             // lblMaxNumber
             // 
             this.lblMaxNumber.AutoSize = true;
-            this.lblMaxNumber.Location = new System.Drawing.Point(121, 58);
-            this.lblMaxNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMaxNumber.Location = new System.Drawing.Point(91, 47);
             this.lblMaxNumber.Name = "lblMaxNumber";
             this.lblMaxNumber.Size = new System.Drawing.Size(37, 15);
             this.lblMaxNumber.TabIndex = 6;
@@ -600,10 +622,9 @@
             // 
             // numberNew
             // 
-            this.numberNew.Location = new System.Drawing.Point(8, 23);
-            this.numberNew.Margin = new System.Windows.Forms.Padding(4);
+            this.numberNew.Location = new System.Drawing.Point(6, 19);
             this.numberNew.Name = "numberNew";
-            this.numberNew.Size = new System.Drawing.Size(241, 20);
+            this.numberNew.Size = new System.Drawing.Size(181, 20);
             this.numberNew.TabIndex = 5;
             this.numberNew.ValueChanged += new System.EventHandler(this.numberNew_ValueChanged);
             // 
@@ -611,11 +632,9 @@
             // 
             this.grpBool.Controls.Add(this.radioFalse);
             this.grpBool.Controls.Add(this.radioTrue);
-            this.grpBool.Location = new System.Drawing.Point(271, 23);
-            this.grpBool.Margin = new System.Windows.Forms.Padding(4);
+            this.grpBool.Location = new System.Drawing.Point(203, 19);
             this.grpBool.Name = "grpBool";
-            this.grpBool.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBool.Size = new System.Drawing.Size(267, 124);
+            this.grpBool.Size = new System.Drawing.Size(200, 101);
             this.grpBool.TabIndex = 2;
             this.grpBool.TabStop = false;
             this.grpBool.Text = "New Value";
@@ -623,8 +642,7 @@
             // radioFalse
             // 
             this.radioFalse.AutoSize = true;
-            this.radioFalse.Location = new System.Drawing.Point(8, 52);
-            this.radioFalse.Margin = new System.Windows.Forms.Padding(4);
+            this.radioFalse.Location = new System.Drawing.Point(6, 42);
             this.radioFalse.Name = "radioFalse";
             this.radioFalse.Size = new System.Drawing.Size(58, 19);
             this.radioFalse.TabIndex = 2;
@@ -636,8 +654,7 @@
             // radioTrue
             // 
             this.radioTrue.AutoSize = true;
-            this.radioTrue.Location = new System.Drawing.Point(8, 23);
-            this.radioTrue.Margin = new System.Windows.Forms.Padding(4);
+            this.radioTrue.Location = new System.Drawing.Point(6, 19);
             this.radioTrue.Name = "radioTrue";
             this.radioTrue.Size = new System.Drawing.Size(53, 19);
             this.radioTrue.TabIndex = 0;
@@ -656,9 +673,7 @@
             this.grpSecAttribute.Controls.Add(this.grpSecBool);
             this.grpSecAttribute.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpSecAttribute.Location = new System.Drawing.Point(0, 0);
-            this.grpSecAttribute.Margin = new System.Windows.Forms.Padding(4);
             this.grpSecAttribute.Name = "grpSecAttribute";
-            this.grpSecAttribute.Padding = new System.Windows.Forms.Padding(4);
             this.grpSecAttribute.Size = new System.Drawing.Size(150, 46);
             this.grpSecAttribute.TabIndex = 3;
             this.grpSecAttribute.TabStop = false;
@@ -667,11 +682,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.txtSecCurrentValue);
-            this.groupBox4.Location = new System.Drawing.Point(0, 25);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Location = new System.Drawing.Point(0, 20);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(267, 123);
+            this.groupBox4.Size = new System.Drawing.Size(200, 100);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Current Value";
@@ -679,20 +692,18 @@
             // txtSecCurrentValue
             // 
             this.txtSecCurrentValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSecCurrentValue.Location = new System.Drawing.Point(4, 17);
-            this.txtSecCurrentValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSecCurrentValue.Location = new System.Drawing.Point(3, 16);
             this.txtSecCurrentValue.Multiline = true;
             this.txtSecCurrentValue.Name = "txtSecCurrentValue";
             this.txtSecCurrentValue.ReadOnly = true;
-            this.txtSecCurrentValue.Size = new System.Drawing.Size(259, 102);
+            this.txtSecCurrentValue.Size = new System.Drawing.Size(194, 81);
             this.txtSecCurrentValue.TabIndex = 5;
             // 
             // btnSecRemove
             // 
-            this.btnSecRemove.Location = new System.Drawing.Point(556, 23);
-            this.btnSecRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSecRemove.Location = new System.Drawing.Point(417, 19);
             this.btnSecRemove.Name = "btnSecRemove";
-            this.btnSecRemove.Size = new System.Drawing.Size(100, 60);
+            this.btnSecRemove.Size = new System.Drawing.Size(75, 49);
             this.btnSecRemove.TabIndex = 7;
             this.btnSecRemove.Text = "Remove Value";
             this.btnSecRemove.UseVisualStyleBackColor = true;
@@ -701,11 +712,9 @@
             // grpSecDouble
             // 
             this.grpSecDouble.Controls.Add(this.decimalSecNewValue);
-            this.grpSecDouble.Location = new System.Drawing.Point(271, 25);
-            this.grpSecDouble.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSecDouble.Location = new System.Drawing.Point(203, 20);
             this.grpSecDouble.Name = "grpSecDouble";
-            this.grpSecDouble.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSecDouble.Size = new System.Drawing.Size(267, 123);
+            this.grpSecDouble.Size = new System.Drawing.Size(200, 100);
             this.grpSecDouble.TabIndex = 10;
             this.grpSecDouble.TabStop = false;
             this.grpSecDouble.Text = "New Value";
@@ -713,15 +722,14 @@
             // decimalSecNewValue
             // 
             this.decimalSecNewValue.DecimalPlaces = 2;
-            this.decimalSecNewValue.Location = new System.Drawing.Point(8, 23);
-            this.decimalSecNewValue.Margin = new System.Windows.Forms.Padding(4);
+            this.decimalSecNewValue.Location = new System.Drawing.Point(6, 19);
             this.decimalSecNewValue.Maximum = new decimal(new int[] {
             1316134912,
             2328,
             0,
             0});
             this.decimalSecNewValue.Name = "decimalSecNewValue";
-            this.decimalSecNewValue.Size = new System.Drawing.Size(241, 20);
+            this.decimalSecNewValue.Size = new System.Drawing.Size(181, 20);
             this.decimalSecNewValue.TabIndex = 0;
             this.decimalSecNewValue.ValueChanged += new System.EventHandler(this.decimalNewValue_ValueChanged);
             this.decimalSecNewValue.Validated += new System.EventHandler(this.decimalNewValue_Validated);
@@ -729,11 +737,9 @@
             // grpSecString
             // 
             this.grpSecString.Controls.Add(this.txtSecString);
-            this.grpSecString.Location = new System.Drawing.Point(271, 25);
-            this.grpSecString.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSecString.Location = new System.Drawing.Point(203, 20);
             this.grpSecString.Name = "grpSecString";
-            this.grpSecString.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSecString.Size = new System.Drawing.Size(257, 123);
+            this.grpSecString.Size = new System.Drawing.Size(193, 100);
             this.grpSecString.TabIndex = 8;
             this.grpSecString.TabStop = false;
             this.grpSecString.Text = "New Value";
@@ -741,11 +747,10 @@
             // txtSecString
             // 
             this.txtSecString.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSecString.Location = new System.Drawing.Point(4, 17);
-            this.txtSecString.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSecString.Location = new System.Drawing.Point(3, 16);
             this.txtSecString.Multiline = true;
             this.txtSecString.Name = "txtSecString";
-            this.txtSecString.Size = new System.Drawing.Size(249, 102);
+            this.txtSecString.Size = new System.Drawing.Size(187, 81);
             this.txtSecString.TabIndex = 7;
             this.txtSecString.TextChanged += new System.EventHandler(this.txtStringValue_TextChanged);
             // 
@@ -754,11 +759,9 @@
             this.grpSecNumber.Controls.Add(this.lblSecMinNumber);
             this.grpSecNumber.Controls.Add(this.lblSecMaxNumber);
             this.grpSecNumber.Controls.Add(this.numberSecNew);
-            this.grpSecNumber.Location = new System.Drawing.Point(271, 23);
-            this.grpSecNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSecNumber.Location = new System.Drawing.Point(203, 19);
             this.grpSecNumber.Name = "grpSecNumber";
-            this.grpSecNumber.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSecNumber.Size = new System.Drawing.Size(267, 124);
+            this.grpSecNumber.Size = new System.Drawing.Size(200, 101);
             this.grpSecNumber.TabIndex = 6;
             this.grpSecNumber.TabStop = false;
             this.grpSecNumber.Text = "New Value";
@@ -766,8 +769,7 @@
             // lblSecMinNumber
             // 
             this.lblSecMinNumber.AutoSize = true;
-            this.lblSecMinNumber.Location = new System.Drawing.Point(20, 58);
-            this.lblSecMinNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSecMinNumber.Location = new System.Drawing.Point(15, 47);
             this.lblSecMinNumber.Name = "lblSecMinNumber";
             this.lblSecMinNumber.Size = new System.Drawing.Size(31, 15);
             this.lblSecMinNumber.TabIndex = 7;
@@ -776,8 +778,7 @@
             // lblSecMaxNumber
             // 
             this.lblSecMaxNumber.AutoSize = true;
-            this.lblSecMaxNumber.Location = new System.Drawing.Point(121, 58);
-            this.lblSecMaxNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSecMaxNumber.Location = new System.Drawing.Point(91, 47);
             this.lblSecMaxNumber.Name = "lblSecMaxNumber";
             this.lblSecMaxNumber.Size = new System.Drawing.Size(37, 15);
             this.lblSecMaxNumber.TabIndex = 6;
@@ -785,10 +786,9 @@
             // 
             // numberSecNew
             // 
-            this.numberSecNew.Location = new System.Drawing.Point(8, 23);
-            this.numberSecNew.Margin = new System.Windows.Forms.Padding(4);
+            this.numberSecNew.Location = new System.Drawing.Point(6, 19);
             this.numberSecNew.Name = "numberSecNew";
-            this.numberSecNew.Size = new System.Drawing.Size(241, 20);
+            this.numberSecNew.Size = new System.Drawing.Size(181, 20);
             this.numberSecNew.TabIndex = 5;
             this.numberSecNew.ValueChanged += new System.EventHandler(this.numberNew_ValueChanged);
             // 
@@ -796,11 +796,9 @@
             // 
             this.grpSecBool.Controls.Add(this.radioSecNo);
             this.grpSecBool.Controls.Add(this.radioSecTrue);
-            this.grpSecBool.Location = new System.Drawing.Point(271, 23);
-            this.grpSecBool.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSecBool.Location = new System.Drawing.Point(203, 19);
             this.grpSecBool.Name = "grpSecBool";
-            this.grpSecBool.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSecBool.Size = new System.Drawing.Size(267, 124);
+            this.grpSecBool.Size = new System.Drawing.Size(200, 101);
             this.grpSecBool.TabIndex = 2;
             this.grpSecBool.TabStop = false;
             this.grpSecBool.Text = "New Value";
@@ -808,8 +806,7 @@
             // radioSecNo
             // 
             this.radioSecNo.AutoSize = true;
-            this.radioSecNo.Location = new System.Drawing.Point(8, 52);
-            this.radioSecNo.Margin = new System.Windows.Forms.Padding(4);
+            this.radioSecNo.Location = new System.Drawing.Point(6, 42);
             this.radioSecNo.Name = "radioSecNo";
             this.radioSecNo.Size = new System.Drawing.Size(58, 19);
             this.radioSecNo.TabIndex = 2;
@@ -821,8 +818,7 @@
             // radioSecTrue
             // 
             this.radioSecTrue.AutoSize = true;
-            this.radioSecTrue.Location = new System.Drawing.Point(8, 23);
-            this.radioSecTrue.Margin = new System.Windows.Forms.Padding(4);
+            this.radioSecTrue.Location = new System.Drawing.Point(6, 19);
             this.radioSecTrue.Name = "radioSecTrue";
             this.radioSecTrue.Size = new System.Drawing.Size(53, 19);
             this.radioSecTrue.TabIndex = 0;
@@ -834,11 +830,10 @@
             // tabManual
             // 
             this.tabManual.Controls.Add(this.splitManual);
-            this.tabManual.Location = new System.Drawing.Point(4, 25);
-            this.tabManual.Margin = new System.Windows.Forms.Padding(4);
+            this.tabManual.Location = new System.Drawing.Point(4, 22);
             this.tabManual.Name = "tabManual";
-            this.tabManual.Padding = new System.Windows.Forms.Padding(4);
-            this.tabManual.Size = new System.Drawing.Size(516, 256);
+            this.tabManual.Padding = new System.Windows.Forms.Padding(3);
+            this.tabManual.Size = new System.Drawing.Size(517, 259);
             this.tabManual.TabIndex = 1;
             this.tabManual.Text = "Manual";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -846,8 +841,7 @@
             // splitManual
             // 
             this.splitManual.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitManual.Location = new System.Drawing.Point(4, 4);
-            this.splitManual.Margin = new System.Windows.Forms.Padding(4);
+            this.splitManual.Location = new System.Drawing.Point(3, 3);
             this.splitManual.Name = "splitManual";
             this.splitManual.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -860,9 +854,8 @@
             // 
             this.splitManual.Panel2.Controls.Add(this.splitManualEditor);
             this.splitManual.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitManual.Size = new System.Drawing.Size(508, 248);
-            this.splitManual.SplitterDistance = 117;
-            this.splitManual.SplitterWidth = 5;
+            this.splitManual.Size = new System.Drawing.Size(511, 253);
+            this.splitManual.SplitterDistance = 119;
             this.splitManual.TabIndex = 0;
             // 
             // groupBox1
@@ -870,10 +863,8 @@
             this.groupBox1.Controls.Add(this.txtCurrentXml);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(508, 117);
+            this.groupBox1.Size = new System.Drawing.Size(511, 119);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current Config";
@@ -881,12 +872,11 @@
             // txtCurrentXml
             // 
             this.txtCurrentXml.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCurrentXml.Location = new System.Drawing.Point(4, 17);
-            this.txtCurrentXml.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCurrentXml.Location = new System.Drawing.Point(3, 16);
             this.txtCurrentXml.Multiline = true;
             this.txtCurrentXml.Name = "txtCurrentXml";
             this.txtCurrentXml.ReadOnly = true;
-            this.txtCurrentXml.Size = new System.Drawing.Size(500, 96);
+            this.txtCurrentXml.Size = new System.Drawing.Size(505, 100);
             this.txtCurrentXml.TabIndex = 0;
             // 
             // splitManualEditor
@@ -895,7 +885,6 @@
             this.splitManualEditor.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitManualEditor.IsSplitterFixed = true;
             this.splitManualEditor.Location = new System.Drawing.Point(0, 0);
-            this.splitManualEditor.Margin = new System.Windows.Forms.Padding(4);
             this.splitManualEditor.Name = "splitManualEditor";
             this.splitManualEditor.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -909,17 +898,15 @@
             // 
             this.splitManualEditor.Panel2.Controls.Add(this.txtOverride);
             this.splitManualEditor.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitManualEditor.Size = new System.Drawing.Size(508, 126);
+            this.splitManualEditor.Size = new System.Drawing.Size(511, 130);
             this.splitManualEditor.SplitterDistance = 43;
-            this.splitManualEditor.SplitterWidth = 5;
             this.splitManualEditor.TabIndex = 2;
             // 
             // btnUpdateManual
             // 
-            this.btnUpdateManual.Location = new System.Drawing.Point(361, 12);
-            this.btnUpdateManual.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateManual.Location = new System.Drawing.Point(271, 10);
             this.btnUpdateManual.Name = "btnUpdateManual";
-            this.btnUpdateManual.Size = new System.Drawing.Size(123, 28);
+            this.btnUpdateManual.Size = new System.Drawing.Size(92, 23);
             this.btnUpdateManual.TabIndex = 1;
             this.btnUpdateManual.Text = "Update Settings Manually";
             this.btnUpdateManual.UseVisualStyleBackColor = true;
@@ -927,10 +914,9 @@
             // 
             // btnCopyCurrent
             // 
-            this.btnCopyCurrent.Location = new System.Drawing.Point(172, 12);
-            this.btnCopyCurrent.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCopyCurrent.Location = new System.Drawing.Point(129, 10);
             this.btnCopyCurrent.Name = "btnCopyCurrent";
-            this.btnCopyCurrent.Size = new System.Drawing.Size(123, 28);
+            this.btnCopyCurrent.Size = new System.Drawing.Size(92, 23);
             this.btnCopyCurrent.TabIndex = 0;
             this.btnCopyCurrent.Text = "Copy Current";
             this.btnCopyCurrent.UseVisualStyleBackColor = true;
@@ -940,10 +926,9 @@
             // 
             this.txtOverride.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOverride.Location = new System.Drawing.Point(0, 0);
-            this.txtOverride.Margin = new System.Windows.Forms.Padding(4);
             this.txtOverride.Multiline = true;
             this.txtOverride.Name = "txtOverride";
-            this.txtOverride.Size = new System.Drawing.Size(508, 78);
+            this.txtOverride.Size = new System.Drawing.Size(511, 83);
             this.txtOverride.TabIndex = 1;
             // 
             // splitMainLower
@@ -951,7 +936,6 @@
             this.splitMainLower.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitMainLower.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitMainLower.Location = new System.Drawing.Point(0, 0);
-            this.splitMainLower.Margin = new System.Windows.Forms.Padding(4);
             this.splitMainLower.Name = "splitMainLower";
             this.splitMainLower.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -975,15 +959,13 @@
             // 
             this.splitMainLower.Panel2.Controls.Add(this.tabWeb);
             this.splitMainLower.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitMainLower.Size = new System.Drawing.Size(524, 1161);
-            this.splitMainLower.SplitterWidth = 5;
+            this.splitMainLower.Size = new System.Drawing.Size(525, 880);
             this.splitMainLower.TabIndex = 1;
             // 
             // lblLinkedD365URL
             // 
             this.lblLinkedD365URL.AutoSize = true;
-            this.lblLinkedD365URL.Location = new System.Drawing.Point(468, 34);
-            this.lblLinkedD365URL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLinkedD365URL.Location = new System.Drawing.Point(351, 28);
             this.lblLinkedD365URL.Name = "lblLinkedD365URL";
             this.lblLinkedD365URL.Size = new System.Drawing.Size(98, 15);
             this.lblLinkedD365URL.TabIndex = 11;
@@ -992,8 +974,7 @@
             // linkLinkeD365
             // 
             this.linkLinkeD365.AutoSize = true;
-            this.linkLinkeD365.Location = new System.Drawing.Point(592, 33);
-            this.linkLinkeD365.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLinkeD365.Location = new System.Drawing.Point(444, 27);
             this.linkLinkeD365.Name = "linkLinkeD365";
             this.linkLinkeD365.Size = new System.Drawing.Size(64, 15);
             this.linkLinkeD365.TabIndex = 10;
@@ -1005,8 +986,7 @@
             // 
             this.lblTypeValue.AutoSize = true;
             this.lblTypeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeValue.Location = new System.Drawing.Point(84, 34);
-            this.lblTypeValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTypeValue.Location = new System.Drawing.Point(63, 28);
             this.lblTypeValue.Name = "lblTypeValue";
             this.lblTypeValue.Size = new System.Drawing.Size(70, 17);
             this.lblTypeValue.TabIndex = 9;
@@ -1015,8 +995,7 @@
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(17, 34);
-            this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblType.Location = new System.Drawing.Point(13, 28);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(39, 15);
             this.lblType.TabIndex = 8;
@@ -1026,8 +1005,7 @@
             // 
             this.lblMax.AutoSize = true;
             this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMax.Location = new System.Drawing.Point(293, 33);
-            this.lblMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMax.Location = new System.Drawing.Point(220, 27);
             this.lblMax.Name = "lblMax";
             this.lblMax.Size = new System.Drawing.Size(70, 17);
             this.lblMax.TabIndex = 7;
@@ -1036,8 +1014,7 @@
             // lblMaxVersion
             // 
             this.lblMaxVersion.AutoSize = true;
-            this.lblMaxVersion.Location = new System.Drawing.Point(199, 33);
-            this.lblMaxVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMaxVersion.Location = new System.Drawing.Point(149, 27);
             this.lblMaxVersion.Name = "lblMaxVersion";
             this.lblMaxVersion.Size = new System.Drawing.Size(84, 15);
             this.lblMaxVersion.TabIndex = 6;
@@ -1047,8 +1024,7 @@
             // 
             this.lblMin.AutoSize = true;
             this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMin.Location = new System.Drawing.Point(293, 11);
-            this.lblMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMin.Location = new System.Drawing.Point(220, 9);
             this.lblMin.Name = "lblMin";
             this.lblMin.Size = new System.Drawing.Size(70, 17);
             this.lblMin.TabIndex = 5;
@@ -1057,8 +1033,7 @@
             // lblMinVersion
             // 
             this.lblMinVersion.AutoSize = true;
-            this.lblMinVersion.Location = new System.Drawing.Point(199, 11);
-            this.lblMinVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMinVersion.Location = new System.Drawing.Point(149, 9);
             this.lblMinVersion.Name = "lblMinVersion";
             this.lblMinVersion.Size = new System.Drawing.Size(81, 15);
             this.lblMinVersion.TabIndex = 4;
@@ -1068,8 +1043,7 @@
             // 
             this.lblDefaultValue.AutoSize = true;
             this.lblDefaultValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDefaultValue.Location = new System.Drawing.Point(84, 11);
-            this.lblDefaultValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDefaultValue.Location = new System.Drawing.Point(63, 9);
             this.lblDefaultValue.Name = "lblDefaultValue";
             this.lblDefaultValue.Size = new System.Drawing.Size(70, 17);
             this.lblDefaultValue.TabIndex = 3;
@@ -1078,8 +1052,7 @@
             // lblDefault
             // 
             this.lblDefault.AutoSize = true;
-            this.lblDefault.Location = new System.Drawing.Point(17, 11);
-            this.lblDefault.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDefault.Location = new System.Drawing.Point(13, 9);
             this.lblDefault.Name = "lblDefault";
             this.lblDefault.Size = new System.Drawing.Size(52, 15);
             this.lblDefault.TabIndex = 2;
@@ -1088,8 +1061,7 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(541, 9);
-            this.lblUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUrl.Location = new System.Drawing.Point(406, 7);
             this.lblUrl.Name = "lblUrl";
             this.lblUrl.Size = new System.Drawing.Size(38, 15);
             this.lblUrl.TabIndex = 1;
@@ -1098,8 +1070,7 @@
             // linkURL
             // 
             this.linkURL.AutoSize = true;
-            this.linkURL.Location = new System.Drawing.Point(592, 9);
-            this.linkURL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkURL.Location = new System.Drawing.Point(444, 7);
             this.linkURL.Name = "linkURL";
             this.linkURL.Size = new System.Drawing.Size(64, 15);
             this.linkURL.TabIndex = 0;
@@ -1113,20 +1084,18 @@
             this.tabWeb.Controls.Add(this.tabLinkeD365);
             this.tabWeb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabWeb.Location = new System.Drawing.Point(0, 0);
-            this.tabWeb.Margin = new System.Windows.Forms.Padding(4);
             this.tabWeb.Name = "tabWeb";
             this.tabWeb.SelectedIndex = 0;
-            this.tabWeb.Size = new System.Drawing.Size(524, 1106);
+            this.tabWeb.Size = new System.Drawing.Size(525, 826);
             this.tabWeb.TabIndex = 1;
             // 
             // tabMSDescription
             // 
             this.tabMSDescription.Controls.Add(this.webDescription);
-            this.tabMSDescription.Location = new System.Drawing.Point(4, 25);
-            this.tabMSDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.tabMSDescription.Location = new System.Drawing.Point(4, 22);
             this.tabMSDescription.Name = "tabMSDescription";
-            this.tabMSDescription.Padding = new System.Windows.Forms.Padding(4);
-            this.tabMSDescription.Size = new System.Drawing.Size(516, 1077);
+            this.tabMSDescription.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMSDescription.Size = new System.Drawing.Size(517, 800);
             this.tabMSDescription.TabIndex = 0;
             this.tabMSDescription.Text = "MS Description";
             this.tabMSDescription.UseVisualStyleBackColor = true;
@@ -1134,21 +1103,19 @@
             // webDescription
             // 
             this.webDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webDescription.Location = new System.Drawing.Point(4, 4);
-            this.webDescription.Margin = new System.Windows.Forms.Padding(4);
-            this.webDescription.MinimumSize = new System.Drawing.Size(27, 25);
+            this.webDescription.Location = new System.Drawing.Point(3, 3);
+            this.webDescription.MinimumSize = new System.Drawing.Size(20, 20);
             this.webDescription.Name = "webDescription";
-            this.webDescription.Size = new System.Drawing.Size(508, 1069);
+            this.webDescription.Size = new System.Drawing.Size(511, 794);
             this.webDescription.TabIndex = 0;
             // 
             // tabLinkeD365
             // 
             this.tabLinkeD365.Controls.Add(this.webLinkeD365);
-            this.tabLinkeD365.Location = new System.Drawing.Point(4, 25);
-            this.tabLinkeD365.Margin = new System.Windows.Forms.Padding(4);
+            this.tabLinkeD365.Location = new System.Drawing.Point(4, 22);
             this.tabLinkeD365.Name = "tabLinkeD365";
-            this.tabLinkeD365.Padding = new System.Windows.Forms.Padding(4);
-            this.tabLinkeD365.Size = new System.Drawing.Size(516, 1077);
+            this.tabLinkeD365.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLinkeD365.Size = new System.Drawing.Size(517, 800);
             this.tabLinkeD365.TabIndex = 1;
             this.tabLinkeD365.Text = "LinkeD365 Description";
             this.tabLinkeD365.UseVisualStyleBackColor = true;
@@ -1156,11 +1123,10 @@
             // webLinkeD365
             // 
             this.webLinkeD365.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webLinkeD365.Location = new System.Drawing.Point(4, 4);
-            this.webLinkeD365.Margin = new System.Windows.Forms.Padding(4);
-            this.webLinkeD365.MinimumSize = new System.Drawing.Size(27, 25);
+            this.webLinkeD365.Location = new System.Drawing.Point(3, 3);
+            this.webLinkeD365.MinimumSize = new System.Drawing.Size(20, 20);
             this.webLinkeD365.Name = "webLinkeD365";
-            this.webLinkeD365.Size = new System.Drawing.Size(508, 1069);
+            this.webLinkeD365.Size = new System.Drawing.Size(511, 794);
             this.webLinkeD365.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -1175,57 +1141,318 @@
             this.tabGrpBase.Controls.Add(this.tabPageOrgSettings);
             this.tabGrpBase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabGrpBase.Location = new System.Drawing.Point(0, 43);
-            this.tabGrpBase.Margin = new System.Windows.Forms.Padding(4);
             this.tabGrpBase.Name = "tabGrpBase";
             this.tabGrpBase.SelectedIndex = 0;
-            this.tabGrpBase.Size = new System.Drawing.Size(2520, 1488);
+            this.tabGrpBase.Size = new System.Drawing.Size(1890, 1201);
             this.tabGrpBase.TabIndex = 7;
             // 
             // tabPageEnvironment
             // 
-            this.tabPageEnvironment.Controls.Add(this.gridEnv);
-            this.tabPageEnvironment.Location = new System.Drawing.Point(4, 25);
-            this.tabPageEnvironment.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageEnvironment.Controls.Add(this.splitEnvMain);
+            this.tabPageEnvironment.Location = new System.Drawing.Point(4, 22);
             this.tabPageEnvironment.Name = "tabPageEnvironment";
-            this.tabPageEnvironment.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageEnvironment.Size = new System.Drawing.Size(2512, 1459);
+            this.tabPageEnvironment.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEnvironment.Size = new System.Drawing.Size(1882, 1175);
             this.tabPageEnvironment.TabIndex = 0;
             this.tabPageEnvironment.Text = "Environment";
             this.tabPageEnvironment.UseVisualStyleBackColor = true;
             // 
+            // splitEnvMain
+            // 
+            this.splitEnvMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitEnvMain.Location = new System.Drawing.Point(3, 3);
+            this.splitEnvMain.Name = "splitEnvMain";
+            // 
+            // splitEnvMain.Panel1
+            // 
+            this.splitEnvMain.Panel1.Controls.Add(this.gridEnv);
+            // 
+            // splitEnvMain.Panel2
+            // 
+            this.splitEnvMain.Panel2.Controls.Add(this.splitEnvRight);
+            this.splitEnvMain.Size = new System.Drawing.Size(1876, 1169);
+            this.splitEnvMain.SplitterDistance = 625;
+            this.splitEnvMain.TabIndex = 1;
+            // 
             // gridEnv
             // 
             this.gridEnv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridEnv.Location = new System.Drawing.Point(25, 62);
+            this.gridEnv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridEnv.Location = new System.Drawing.Point(0, 0);
+            this.gridEnv.Margin = new System.Windows.Forms.Padding(2);
             this.gridEnv.MultiSelect = false;
             this.gridEnv.Name = "gridEnv";
             this.gridEnv.RowHeadersWidth = 51;
             this.gridEnv.RowTemplate.Height = 24;
-            this.gridEnv.Size = new System.Drawing.Size(851, 570);
+            this.gridEnv.Size = new System.Drawing.Size(625, 1169);
             this.gridEnv.TabIndex = 0;
             this.gridEnv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridEnv_CellFormatting);
+            this.gridEnv.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEnv_RowEnter);
+            // 
+            // splitEnvRight
+            // 
+            this.splitEnvRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitEnvRight.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitEnvRight.Location = new System.Drawing.Point(0, 0);
+            this.splitEnvRight.Name = "splitEnvRight";
+            this.splitEnvRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitEnvRight.Panel1
+            // 
+            this.splitEnvRight.Panel1.Controls.Add(this.grpEnvSetting);
+            this.splitEnvRight.Size = new System.Drawing.Size(1247, 1169);
+            this.splitEnvRight.SplitterDistance = 326;
+            this.splitEnvRight.TabIndex = 0;
+            // 
+            // grpEnvSetting
+            // 
+            this.grpEnvSetting.Controls.Add(this.splitEnvDropDown);
+            this.grpEnvSetting.Controls.Add(this.splitEnvNumber);
+            this.grpEnvSetting.Controls.Add(this.splitEnvText);
+            this.grpEnvSetting.Controls.Add(this.panelToggle);
+            this.grpEnvSetting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvSetting.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvSetting.Name = "grpEnvSetting";
+            this.grpEnvSetting.Size = new System.Drawing.Size(1247, 326);
+            this.grpEnvSetting.TabIndex = 0;
+            this.grpEnvSetting.TabStop = false;
+            this.grpEnvSetting.Text = "Select Setting";
+            // 
+            // splitEnvDropDown
+            // 
+            this.splitEnvDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitEnvDropDown.Location = new System.Drawing.Point(3, 16);
+            this.splitEnvDropDown.Name = "splitEnvDropDown";
+            // 
+            // splitEnvDropDown.Panel1
+            // 
+            this.splitEnvDropDown.Panel1.Controls.Add(this.grpEnvDropOld);
+            // 
+            // splitEnvDropDown.Panel2
+            // 
+            this.splitEnvDropDown.Panel2.Controls.Add(this.grpEnvDropNew);
+            this.splitEnvDropDown.Size = new System.Drawing.Size(1241, 307);
+            this.splitEnvDropDown.SplitterDistance = 656;
+            this.splitEnvDropDown.TabIndex = 4;
+            // 
+            // grpEnvDropOld
+            // 
+            this.grpEnvDropOld.Controls.Add(this.txtEnvDropOld);
+            this.grpEnvDropOld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvDropOld.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvDropOld.Name = "grpEnvDropOld";
+            this.grpEnvDropOld.Size = new System.Drawing.Size(656, 307);
+            this.grpEnvDropOld.TabIndex = 0;
+            this.grpEnvDropOld.TabStop = false;
+            this.grpEnvDropOld.Text = "Old Value";
+            // 
+            // txtEnvDropOld
+            // 
+            this.txtEnvDropOld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEnvDropOld.Location = new System.Drawing.Point(3, 16);
+            this.txtEnvDropOld.Multiline = true;
+            this.txtEnvDropOld.Name = "txtEnvDropOld";
+            this.txtEnvDropOld.ReadOnly = true;
+            this.txtEnvDropOld.Size = new System.Drawing.Size(650, 288);
+            this.txtEnvDropOld.TabIndex = 1;
+            // 
+            // grpEnvDropNew
+            // 
+            this.grpEnvDropNew.Controls.Add(this.cboEnvDropNew);
+            this.grpEnvDropNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvDropNew.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvDropNew.Name = "grpEnvDropNew";
+            this.grpEnvDropNew.Size = new System.Drawing.Size(581, 307);
+            this.grpEnvDropNew.TabIndex = 1;
+            this.grpEnvDropNew.TabStop = false;
+            this.grpEnvDropNew.Text = "New Value";
+            // 
+            // cboEnvDropNew
+            // 
+            this.cboEnvDropNew.FormattingEnabled = true;
+            this.cboEnvDropNew.Location = new System.Drawing.Point(23, 47);
+            this.cboEnvDropNew.Name = "cboEnvDropNew";
+            this.cboEnvDropNew.Size = new System.Drawing.Size(121, 21);
+            this.cboEnvDropNew.TabIndex = 0;
+            this.cboEnvDropNew.SelectionChangeCommitted += new System.EventHandler(this.cboEnvDropNew_SelectionChangeCommitted);
+            // 
+            // splitEnvNumber
+            // 
+            this.splitEnvNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitEnvNumber.Location = new System.Drawing.Point(3, 16);
+            this.splitEnvNumber.Name = "splitEnvNumber";
+            // 
+            // splitEnvNumber.Panel1
+            // 
+            this.splitEnvNumber.Panel1.Controls.Add(this.grpEnvNumberOld);
+            // 
+            // splitEnvNumber.Panel2
+            // 
+            this.splitEnvNumber.Panel2.Controls.Add(this.grpEnvNumberNew);
+            this.splitEnvNumber.Size = new System.Drawing.Size(1241, 307);
+            this.splitEnvNumber.SplitterDistance = 594;
+            this.splitEnvNumber.TabIndex = 3;
+            // 
+            // grpEnvNumberOld
+            // 
+            this.grpEnvNumberOld.Controls.Add(this.numEnvOld);
+            this.grpEnvNumberOld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvNumberOld.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvNumberOld.Name = "grpEnvNumberOld";
+            this.grpEnvNumberOld.Size = new System.Drawing.Size(594, 307);
+            this.grpEnvNumberOld.TabIndex = 0;
+            this.grpEnvNumberOld.TabStop = false;
+            this.grpEnvNumberOld.Text = "Old Value";
+            // 
+            // numEnvOld
+            // 
+            this.numEnvOld.Location = new System.Drawing.Point(40, 40);
+            this.numEnvOld.Name = "numEnvOld";
+            this.numEnvOld.ReadOnly = true;
+            this.numEnvOld.Size = new System.Drawing.Size(120, 20);
+            this.numEnvOld.TabIndex = 1;
+            // 
+            // grpEnvNumberNew
+            // 
+            this.grpEnvNumberNew.Controls.Add(this.numEnvNew);
+            this.grpEnvNumberNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvNumberNew.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvNumberNew.Name = "grpEnvNumberNew";
+            this.grpEnvNumberNew.Size = new System.Drawing.Size(643, 307);
+            this.grpEnvNumberNew.TabIndex = 1;
+            this.grpEnvNumberNew.TabStop = false;
+            this.grpEnvNumberNew.Text = "New Value";
+            // 
+            // numEnvNew
+            // 
+            this.numEnvNew.Location = new System.Drawing.Point(20, 46);
+            this.numEnvNew.Name = "numEnvNew";
+            this.numEnvNew.Size = new System.Drawing.Size(120, 20);
+            this.numEnvNew.TabIndex = 0;
+            this.numEnvNew.ValueChanged += new System.EventHandler(this.numEnvNew_ValueChanged);
+            // 
+            // splitEnvText
+            // 
+            this.splitEnvText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitEnvText.Location = new System.Drawing.Point(3, 16);
+            this.splitEnvText.Name = "splitEnvText";
+            // 
+            // splitEnvText.Panel1
+            // 
+            this.splitEnvText.Panel1.Controls.Add(this.grpEnvTextCurrent);
+            // 
+            // splitEnvText.Panel2
+            // 
+            this.splitEnvText.Panel2.Controls.Add(this.grpEnvTextNew);
+            this.splitEnvText.Size = new System.Drawing.Size(1241, 307);
+            this.splitEnvText.SplitterDistance = 627;
+            this.splitEnvText.TabIndex = 1;
+            // 
+            // grpEnvTextCurrent
+            // 
+            this.grpEnvTextCurrent.Controls.Add(this.txtEnvTextOld);
+            this.grpEnvTextCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvTextCurrent.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvTextCurrent.Name = "grpEnvTextCurrent";
+            this.grpEnvTextCurrent.Size = new System.Drawing.Size(627, 307);
+            this.grpEnvTextCurrent.TabIndex = 0;
+            this.grpEnvTextCurrent.TabStop = false;
+            this.grpEnvTextCurrent.Text = "Current Value";
+            // 
+            // txtEnvTextOld
+            // 
+            this.txtEnvTextOld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEnvTextOld.Location = new System.Drawing.Point(3, 16);
+            this.txtEnvTextOld.Multiline = true;
+            this.txtEnvTextOld.Name = "txtEnvTextOld";
+            this.txtEnvTextOld.ReadOnly = true;
+            this.txtEnvTextOld.Size = new System.Drawing.Size(621, 288);
+            this.txtEnvTextOld.TabIndex = 0;
+            // 
+            // grpEnvTextNew
+            // 
+            this.grpEnvTextNew.Controls.Add(this.txtEnvTextNew);
+            this.grpEnvTextNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEnvTextNew.Location = new System.Drawing.Point(0, 0);
+            this.grpEnvTextNew.Name = "grpEnvTextNew";
+            this.grpEnvTextNew.Size = new System.Drawing.Size(610, 307);
+            this.grpEnvTextNew.TabIndex = 0;
+            this.grpEnvTextNew.TabStop = false;
+            this.grpEnvTextNew.Text = "New Value";
+            // 
+            // txtEnvTextNew
+            // 
+            this.txtEnvTextNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEnvTextNew.Location = new System.Drawing.Point(3, 16);
+            this.txtEnvTextNew.Multiline = true;
+            this.txtEnvTextNew.Name = "txtEnvTextNew";
+            this.txtEnvTextNew.Size = new System.Drawing.Size(604, 288);
+            this.txtEnvTextNew.TabIndex = 1;
+            this.txtEnvTextNew.TextChanged += new System.EventHandler(this.txtEnvTextNew_TextChanged);
+            // 
+            // panelToggle
+            // 
+            this.panelToggle.Controls.Add(this.radioEnvToggleTrue);
+            this.panelToggle.Controls.Add(this.radioEnvToggleFalse);
+            this.panelToggle.Controls.Add(this.button2);
+            this.panelToggle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelToggle.Location = new System.Drawing.Point(3, 16);
+            this.panelToggle.Name = "panelToggle";
+            this.panelToggle.Size = new System.Drawing.Size(1241, 307);
+            this.panelToggle.TabIndex = 0;
+            // 
+            // radioEnvToggleTrue
+            // 
+            this.radioEnvToggleTrue.AutoSize = true;
+            this.radioEnvToggleTrue.Checked = true;
+            this.radioEnvToggleTrue.Location = new System.Drawing.Point(19, 14);
+            this.radioEnvToggleTrue.Name = "radioEnvToggleTrue";
+            this.radioEnvToggleTrue.Size = new System.Drawing.Size(53, 19);
+            this.radioEnvToggleTrue.TabIndex = 2;
+            this.radioEnvToggleTrue.TabStop = true;
+            this.radioEnvToggleTrue.Text = "True";
+            this.radioEnvToggleTrue.UseVisualStyleBackColor = true;
+            this.radioEnvToggleTrue.CheckedChanged += new System.EventHandler(this.radioEnvToggle_CheckedChanged);
+            // 
+            // radioEnvToggleFalse
+            // 
+            this.radioEnvToggleFalse.AutoSize = true;
+            this.radioEnvToggleFalse.Location = new System.Drawing.Point(19, 39);
+            this.radioEnvToggleFalse.Name = "radioEnvToggleFalse";
+            this.radioEnvToggleFalse.Size = new System.Drawing.Size(58, 19);
+            this.radioEnvToggleFalse.TabIndex = 3;
+            this.radioEnvToggleFalse.Text = "False";
+            this.radioEnvToggleFalse.UseVisualStyleBackColor = true;
+            this.radioEnvToggleFalse.CheckedChanged += new System.EventHandler(this.radioEnvToggle_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(102, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(8, 8);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // tabPageOrgSettings
             // 
             this.tabPageOrgSettings.Controls.Add(this.splitMain);
-            this.tabPageOrgSettings.Location = new System.Drawing.Point(4, 25);
-            this.tabPageOrgSettings.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageOrgSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageOrgSettings.Name = "tabPageOrgSettings";
-            this.tabPageOrgSettings.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageOrgSettings.Size = new System.Drawing.Size(2512, 1459);
+            this.tabPageOrgSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageOrgSettings.Size = new System.Drawing.Size(1882, 1175);
             this.tabPageOrgSettings.TabIndex = 1;
             this.tabPageOrgSettings.Text = "OrgSettings";
             this.tabPageOrgSettings.UseVisualStyleBackColor = true;
             // 
             // OrgSettingsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabGrpBase);
             this.Controls.Add(this.toolStripMenu);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "OrgSettingsControl";
-            this.Size = new System.Drawing.Size(2520, 1531);
+            this.Size = new System.Drawing.Size(1890, 1244);
             this.Load += new System.EventHandler(this.OrgSettingsControl_Load);
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
@@ -1300,7 +1527,40 @@
             this.tabLinkeD365.ResumeLayout(false);
             this.tabGrpBase.ResumeLayout(false);
             this.tabPageEnvironment.ResumeLayout(false);
+            this.splitEnvMain.Panel1.ResumeLayout(false);
+            this.splitEnvMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvMain)).EndInit();
+            this.splitEnvMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridEnv)).EndInit();
+            this.splitEnvRight.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvRight)).EndInit();
+            this.splitEnvRight.ResumeLayout(false);
+            this.grpEnvSetting.ResumeLayout(false);
+            this.splitEnvDropDown.Panel1.ResumeLayout(false);
+            this.splitEnvDropDown.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvDropDown)).EndInit();
+            this.splitEnvDropDown.ResumeLayout(false);
+            this.grpEnvDropOld.ResumeLayout(false);
+            this.grpEnvDropOld.PerformLayout();
+            this.grpEnvDropNew.ResumeLayout(false);
+            this.splitEnvNumber.Panel1.ResumeLayout(false);
+            this.splitEnvNumber.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvNumber)).EndInit();
+            this.splitEnvNumber.ResumeLayout(false);
+            this.grpEnvNumberOld.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numEnvOld)).EndInit();
+            this.grpEnvNumberNew.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numEnvNew)).EndInit();
+            this.splitEnvText.Panel1.ResumeLayout(false);
+            this.splitEnvText.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitEnvText)).EndInit();
+            this.splitEnvText.ResumeLayout(false);
+            this.grpEnvTextCurrent.ResumeLayout(false);
+            this.grpEnvTextCurrent.PerformLayout();
+            this.grpEnvTextNew.ResumeLayout(false);
+            this.grpEnvTextNew.PerformLayout();
+            this.panelToggle.ResumeLayout(false);
+            this.panelToggle.PerformLayout();
             this.tabPageOrgSettings.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1388,5 +1648,29 @@
         private System.Windows.Forms.TabPage tabPageEnvironment;
         private System.Windows.Forms.TabPage tabPageOrgSettings;
         private System.Windows.Forms.DataGridView gridEnv;
+        private System.Windows.Forms.SplitContainer splitEnvMain;
+        private System.Windows.Forms.SplitContainer splitEnvRight;
+        private System.Windows.Forms.GroupBox grpEnvSetting;
+        private System.Windows.Forms.Panel panelToggle;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton radioEnvToggleFalse;
+        private System.Windows.Forms.RadioButton radioEnvToggleTrue;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.SplitContainer splitEnvText;
+        private System.Windows.Forms.GroupBox grpEnvTextCurrent;
+        private System.Windows.Forms.TextBox txtEnvTextOld;
+        private System.Windows.Forms.GroupBox grpEnvTextNew;
+        private System.Windows.Forms.TextBox txtEnvTextNew;
+        private System.Windows.Forms.NumericUpDown numEnvNew;
+        private System.Windows.Forms.SplitContainer splitEnvNumber;
+        private System.Windows.Forms.GroupBox grpEnvNumberOld;
+        private System.Windows.Forms.NumericUpDown numEnvOld;
+        private System.Windows.Forms.GroupBox grpEnvNumberNew;
+        private System.Windows.Forms.SplitContainer splitEnvDropDown;
+        private System.Windows.Forms.GroupBox grpEnvDropOld;
+        private System.Windows.Forms.TextBox txtEnvDropOld;
+        private System.Windows.Forms.GroupBox grpEnvDropNew;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.ComboBox cboEnvDropNew;
     }
 }

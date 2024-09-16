@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,6 @@ namespace LinkeD365.OrgSettings
     // And the corresponding Cell type
     public class OptionalDropdownCell : DataGridViewTextBoxCell
     {
-
         public OptionalDropdownCell()
             : base()
         {
@@ -61,8 +61,13 @@ namespace LinkeD365.OrgSettings
                     ctl.DropDownStyle = ComboBoxStyle.DropDownList;
                     break;
                 case "Toggle":
-                    CheckBoxEditingControl ctlChk = (CheckBoxEditingControl)DataGridView.EditingControl;
-                    ctlChk.Checked = (Value != null) && (bool)Value;
+                    ToggleSwitchEditingControl toggle = (ToggleSwitchEditingControl)DataGridView.EditingControl;
+                    toggle.ButtonValue = dataItem.Options.FirstOrDefault(opt => opt.Value == dataItem.Old).IntValue;
+                    toggle.OffText = dataItem.Options.FirstOrDefault(opt => opt.IntValue == 0).Label;
+                    toggle.OnText = dataItem.Options.FirstOrDefault(opt => opt.IntValue == 1).Label;
+                    //NumUpDownEditingControl ctlChk = (NumUpDownEditingControl)DataGridView.EditingControl;
+                    //ctlChk.Value = 17;
+                    //ctlChk.Checked = (Value != null) && (bool)Value;
                     break;
                 default:
                     DataGridViewTextBoxEditingControl ctl2 = (DataGridViewTextBoxEditingControl)DataGridView.EditingControl;
@@ -72,6 +77,7 @@ namespace LinkeD365.OrgSettings
 
         }
 
+       
         public override Type EditType
         {
             get
@@ -82,7 +88,7 @@ namespace LinkeD365.OrgSettings
                     case "Choice":
                         return typeof(DataGridViewComboBoxEditingControl);
                     case "Toggle":
-                        return typeof(CheckBoxEditingControl);
+                        return typeof(ToggleSwitchEditingControl);
                     default:
                         return typeof(DataGridViewTextBoxEditingControl);
                 }
@@ -96,6 +102,23 @@ namespace LinkeD365.OrgSettings
                 }
             }
         }
+
+
+        public override Type ValueType
+        {
+            get
+            {
+                // Return the type of the value that CalendarCell contains.
+                //EnvProp dataItem = (EnvProp)OwningRow.DataBoundItem;
+                //switch (dataItem.Type)
+                //{
+                //    case "Choice":
+                //        return typeof(string);
+                //}
+                return typeof(string);
+            }
+        }
+
     }
 
     class CheckBoxEditingControl : CheckBox, IDataGridViewEditingControl

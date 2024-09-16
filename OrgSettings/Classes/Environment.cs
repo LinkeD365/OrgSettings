@@ -12,8 +12,16 @@ namespace LinkeD365.OrgSettings
         public string EnvId { get; set; }
         public List<EnvProp> Properties { get; set; }
     }
-    internal class EnvProp
+    public class EnvProp
     {
+        /// <summary>
+        /// Name of Property
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Data type of displayed attribute
+        /// </summary>
         public string Type { get; set; }
         public string Group { get; set; }
         public string Label { get; set; }
@@ -24,28 +32,70 @@ namespace LinkeD365.OrgSettings
         public string UpdatePath { get; set; }
 
         [Browsable(false)]
-        public string Editable { get; set; }
+        public bool Editable { get; set; }
 
+        [Browsable(false)]
+        public string EditableLink { get; set; }
+
+      //  [Browsable(false)]
+        public bool Enabled { get; set; }
+        /// <summary>
+        /// Value that is present from the API call
+        /// </summary>
         [Browsable(false)]
         public string OldValue { get; set; }
 
+        /// <summary>
+        /// Valkue to be set to the API
+        /// </summary>
         [Browsable(false)]
         public string NewValue { get; set; }
 
+        /// <summary>
+        /// Displayed new value for user
+        /// </summary>
         [DisplayName("New Value")]
-        public string New { get; set; }
+        public string New
+        {
+            get
+            {
+                if (Type == "Toggle")
+                {
+                    return NewValue == null ? string.Empty : Options.FirstOrDefault(opt => opt.Value == NewValue).Label;
+                }
+                return NewValue;
+            }
+        }
 
+        /// <summary>
+        /// Displayed old value for user
+        /// </summary>
         [DisplayName("Old Value")]
-        public string Old { get { return OldValue; } }
+        public string Old
+        {
+            get
+            {
+                if (Type == "Toggle" && !string.IsNullOrEmpty( OldValue ))
+                {
+                    return Options.FirstOrDefault(opt => opt.Value == OldValue).Label;
+                }
+                return OldValue;
+            }
+        }
+        public string Default { get; set; }
 
+        public int MaxValue { get; set; }
+        public int MinValue { get; set; }
 
         [Browsable(false)]
         public List<EnvOption> Options { get; set; }
     }
 
-    internal class EnvOption
+    public class EnvOption
     {
         public string Label { get; set; }
         public string Value { get; set; }
+
+        public int IntValue { get; set; }
     }
 }

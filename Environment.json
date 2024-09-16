@@ -1,23 +1,27 @@
 {
   "Properties": [
     {
-      "Label": "Name",
+      "Name": "Name",
+      "Label": "Environment Name",
       "Type": "Text",
       "Path": "properties.displayName",
       "Editable": true
     },
     {
-      "Label": "Type",
+      "Name": "Type",
+      "Label": "Environment Type",
       "Path": "properties.environmentSku",
       "Editable": false
     },
     {
+      "Name": "RetPeriod",
       "Label": "Retention Period",
       "Path": "properties.retentionPeriod",
       "Editable": true,
       "ManagedEditable": true
     },
     {
+      "Name": "Managed",
       "Label": "Managed",
       "Type": "Toggle",
       "Group": "Managed",
@@ -27,11 +31,186 @@
       "Options": [
         {
           "Label": "Enabled",
-          "Value": "Standard"
+          "Value": "Standard",
+          "IntValue": 1
         },
         {
           "Label": "Disabled",
-          "Value": "Basic"
+          "Value": "Basic",
+          "IntValue": 0
+        }
+      ]
+    },
+    {
+      "Name": "MgdLimitSharing",
+      "Label": "Limit Sharing",
+      "Group": "Managed",
+      "Type": "Toggle",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.limitSharingMode",
+      "UpdatePath": "settings.extendedSettings.limitSharingMode",
+      "EditableLink": "Managed",
+      "Editable": true,
+      "Default": "noLimit",
+      "Options": [
+        {
+          "Label": "Exclude Sharing with Security Groups",
+          "Value": "excludeSharingToSecurityGroups",
+          "IntValue": 1
+        },
+        {
+          "Label": "Disabled",
+          "Value": "noLimit",
+          "IntValue": 0
+        }
+      ]
+    },
+    {
+      "Name": "MgdLimitGroups",
+      "Label": "Limit To Individuals",
+      "Group": "Managed",
+      "Type": "Toggle",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.isGroupSharingDisabled",
+      "UpdatePath": "settings.extendedSettings.isGroupSharingDisabled",
+      "Editable": true,
+      "Default": "false",
+      "EditableLink": "MgdLimitSharing",
+      "Options": [
+        {
+          "Label": "Enabled",
+          "Value": "true",
+          "IntValue": 1
+        },
+        {
+          "Label": "Disabled",
+          "Value": "false",
+          "IntValue": 0
+        }
+      ]
+    },
+    {
+      "Name": "MgdMaxUserSharing",
+      "Label": "Max User Sharing",
+      "Group": "Managed",
+      "Type": "Number",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.maxLimitUserSharing",
+      "UpdatePath": "settings.extendedSettings.maxLimitUserSharing",
+      "Editable": true,
+      "EditableLink": "MgdLimitGroups",
+      "Default": "-1",
+      "MinValue": "-1",
+      "MaxValue": "20"
+    },
+    {
+      "Name": "MgdSolChecker",
+      "Label": "Solution Checker Enforcement",
+      "Group": "Managed",
+      "Type": "Choice",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.solutionCheckerMode",
+      "UpdatePath": "settings.extendedSettings.solutionCheckerMode",
+      "Editable": true,
+      "Default": "none",
+      "Options": [
+        {
+          "Label": "None",
+          "Value": "none",
+          "IntValue": 0
+        },
+        {
+          "Label": "Warn",
+          "Value": "warn",
+          "IntValue": 1
+        },
+        {
+          "Label": "Block",
+          "Value": "block",
+          "IntValue": 2
+        }
+      ]
+    },
+    {
+      "Name": "MgdSolCheckSuppWarnings",
+      "Label": "Solution Checker Suppress Warnings",
+      "Group": "Managed",
+      "Type": "Toggle",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.suppressValidationEmails",
+      "UpdatePath": "settings.extendedSettings.suppressValidationEmails",
+      "Editable": true,
+      "EditableLink": "MgdSolChecker",
+      "Default": "false",
+      "Options": [
+        {
+          "Label": "Blocked & Warnings",
+          "Value": "true",
+          "IntValue": 1
+        },
+        {
+          "Label": "Blocked Only",
+          "Value": "false",
+          "IntValue": 0
+        }
+      ]
+    },
+    {
+      "Name": "MgdSolCheckOverrideRules",
+      "Label": "Solution Checker Override Rules",
+      "Group": "Managed",
+      "Type": "Text",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.solutionCheckerRuleOverrides",
+      "UpdatePath": "settings.extendedSettings.solutionCheckerRuleOverrides",
+      "Editable": true,
+      "EditableLink": "MgdSolChecker",
+      "Default": ""
+    },
+    {
+      "Name": "MgdExcludeFromAnalysis",
+      "Label": "Exclude From Usage Insights",
+      "Group": "Managed",
+      "Type": "Toggle",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.excludeEnvironmentFromAnalysis",
+      "UpdatePath": "settings.extendedSettings.excludeEnvironmentFromAnalysis",
+      "Editable": true,
+      "Default": "false",
+      "Options": [
+        {
+          "Label": "Exclude",
+          "Value": "true",
+          "IntValue": 1
+        },
+        {
+          "Label": "Include",
+          "Value": "false",
+          "IntValue": 0
+        }
+      ]
+    },
+    {
+      "Name": "MgdMkrMrkDown",
+      "Label": "Maker Message",
+      "Group": "Managed",
+      "Type": "Text",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.makerOnboardingMarkdown",
+      "UpdatePath": "settings.extendedSettings.makerOnboardingMarkdown",
+      "Editable": true
+    },
+    {
+      "Name": "DisableAIDesciptions",
+      "Label": "Disable AI-generated App descriptions",
+      "Group": "Managed",
+      "Type": "Toggle",
+      "path": "properties.governanceConfiguration.settings.extendedSettings.disableAiGeneratedDescriptions",
+      "UpdatePath": "settings.extendedSettings.disableAiGeneratedDescriptions",
+      "Editable": true,
+      "Default": "false",
+      "Options": [
+        {
+          "Label": "Exclude",
+          "Value": "true",
+          "IntValue": 1
+        },
+        {
+          "Label": "Include",
+          "Value": "false",
+          "IntValue": 0
         }
       ]
     },
@@ -39,6 +218,7 @@
       "Label": "Update Frequency",
       "Path": "properties.updateCadence.id",
       "Type": "Choice",
+
       "Editable": true,
       "Options": [
         {

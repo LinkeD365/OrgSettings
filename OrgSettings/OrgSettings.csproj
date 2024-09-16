@@ -249,8 +249,41 @@
       <DependentUpon>ApiConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\APIConn.cs" />
+    <Compile Include="Classes\DataGridViewNumberUpDown.cs" />
     <Compile Include="Classes\Environment.cs" />
     <Compile Include="Classes\GridViewCellDyanmic.cs" />
+    <Compile Include="Controls\NumUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NumUpDown.Designer.cs">
+      <DependentUpon>NumUpDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToggleSwitch\GraphicsExtensionMethods.cs" />
+    <Compile Include="Controls\ToggleSwitch\ImageHelper.cs" />
+    <Compile Include="Controls\ToggleSwitch\RendererChangedEventArgs.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchBrushedMetalRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchCarbonRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchFancyRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchIOS5Renderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchIphoneRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchMetroRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchModernRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchOSXRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchPlainAndSimpleRenderer.cs" />
+    <Compile Include="Controls\ToggleSwitch\Renderers\ToggleSwitchRendererBase.cs" />
+    <Compile Include="Controls\ToggleSwitch\ToggleSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToggleSwitch\ToggleSwitchEditngControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToggleSwitch\ToggleSwitchEditngControl.Designer.cs">
+      <DependentUpon>ToggleSwitchEditngControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrgSettings.cs" />
     <Compile Include="OrgSettings.DBUpdates.cs">
       <SubType>UserControl</SubType>
